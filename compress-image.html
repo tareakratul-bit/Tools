@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compress Image – Reduce JPG, PNG and WEBP Size Free</title>
+<meta name="description" content="Compress JPG, PNG and WEBP images online for free. Choose the quality, resize large photos and download them one by one or as a ZIP. Files never leave your device.">
+<link rel="canonical" href="https://YOUR-DOMAIN.com/compress-image.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>/* SiteName – shared styles for every page */
+:root{
+  --bg:#f6f7fb; --card:#ffffff; --text:#1c2230; --muted:#5d6577;
+  --line:#e3e6ee; --brand:#e5322d; --brand-dark:#c21f1a; --brand-soft:#fdecec;
+  --blue:#2563eb; --blue-soft:#e8effd; --green:#16a34a; --green-soft:#e6f6ec;
+  --ok:#16a34a; --radius:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#11141b; --card:#1a1f2a; --text:#e8ebf2; --muted:#9aa3b5;
+    --line:#2a3140; --brand:#ff5a52; --brand-dark:#ff7a73; --brand-soft:#2a1b1d;
+    --blue:#6b9bff; --blue-soft:#1a2236; --green:#3ccf74; --green-soft:#16271d;
+    color-scheme: dark;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+a{color:var(--brand)}
+img{max-width:100%}
+
+/* header & footer */
+header{background:var(--card);border-bottom:1px solid var(--line)}
+.nav{max-width:1040px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-weight:700;font-size:20px;text-decoration:none;color:var(--text);white-space:nowrap}
+.logo span{color:var(--brand)}
+.nav-links{display:flex;gap:16px;font-size:15px}
+.nav-links a{color:var(--text);text-decoration:none}
+.nav-links a:hover{color:var(--brand)}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:28px 16px}
+footer a{color:var(--muted)}
+
+main{max-width:1040px;margin:0 auto;padding:16px}
+h1{font-size:clamp(24px,5vw,34px);margin:16px 0 4px;text-align:center;text-wrap:balance}
+.sub{text-align:center;color:var(--muted);margin:0 0 20px}
+
+/* ad placeholders – replace inner text with AdSense code later */
+.ad-slot{background:repeating-linear-gradient(45deg,transparent,transparent 8px,rgba(127,127,127,.06) 8px,rgba(127,127,127,.06) 16px);
+  border:1px dashed var(--line);border-radius:10px;color:var(--muted);font-size:13px;
+  display:flex;align-items:center;justify-content:center;min-height:90px;margin:16px 0;text-align:center}
+.ad-tall{min-height:250px}
+
+/* tool box */
+.tool{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.drop{border:2px dashed var(--brand);background:var(--brand-soft);border-radius:var(--radius);
+  padding:32px 16px;text-align:center;cursor:pointer;transition:transform .15s}
+.drop.over{transform:scale(1.01);border-style:solid}
+.drop:focus-visible{outline:3px solid var(--brand);outline-offset:3px}
+.drop strong{display:block;font-size:18px;margin-bottom:4px}
+.btn{appearance:none;border:0;border-radius:10px;padding:12px 22px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
+.btn:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.btn-primary{background:var(--brand);color:#fff}
+.btn-primary:hover{background:var(--brand-dark)}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.hidden{display:none!important}
+
+/* file thumbnails */
+.list{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin:18px 0}
+.item{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--bg);min-width:0}
+.item img{width:100%;height:140px;object-fit:contain;display:block;background:#fff}
+.item .doc{height:140px;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:8px;text-align:center;font-size:13px;color:var(--muted);word-break:break-word}
+.item .doc b{font-size:28px;color:var(--brand)}
+.item .meta{font-size:12px;color:var(--muted);padding:2px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item .bar{display:flex;justify-content:space-between;align-items:center;padding:4px 6px}
+.item .bar button{border:0;background:transparent;color:var(--text);cursor:pointer;font-size:16px;padding:2px 6px;border-radius:6px}
+.item .bar button:hover{background:var(--line)}
+.num{position:absolute;top:6px;left:6px;background:var(--brand);color:#fff;font-size:12px;border-radius:999px;padding:0 8px}
+
+/* options */
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 18px}
+.opts label{font-size:14px;color:var(--muted);display:block;margin-bottom:4px}
+.opts select,.opts input[type=range]{width:100%}
+.opts select{padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);font:inherit}
+
+/* progress & result */
+.progress-wrap{text-align:center;padding:10px 0}
+.progress{height:10px;background:var(--line);border-radius:999px;overflow:hidden;margin:12px auto;max-width:420px}
+.progress div{height:100%;width:0;background:var(--brand);transition:width .2s}
+.done{text-align:center;padding:10px 0}
+.done .tick{font-size:44px;color:var(--ok);line-height:1.2}
+.results{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;margin:14px 0;text-align:left}
+.res{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--bg)}
+.res img{width:48px;height:48px;object-fit:cover;border-radius:6px;flex:none;background:#fff}
+.res .info{flex:1;min-width:0;font-size:14px}
+.res .info div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.res .save{color:var(--green);font-weight:600;font-variant-numeric:tabular-nums}
+.res button{flex:none;padding:8px 14px}
+.privacy{font-size:13px;color:var(--muted);text-align:center;margin-top:12px}
+
+/* article / guide */
+article{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-top:20px}
+article h2{font-size:22px;margin-top:0}
+article h3{font-size:17px;margin-bottom:4px}
+article ol,article ul{padding-left:20px}
+article p,article li{max-width:70ch}
+
+/* homepage */
+.hero{text-align:center;padding:28px 0 8px}
+.hero h1{font-size:clamp(28px,6vw,44px);margin:0 0 8px}
+.hero p{color:var(--muted);font-size:17px;margin:0 auto;max-width:560px}
+.cat{margin:28px 0 10px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.card{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;text-decoration:none;color:var(--text);transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--brand);transform:translateY(-2px)}
+.card:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.ico{flex:none;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.ico.pdf{background:var(--brand-soft);color:var(--brand)}
+.ico.img{background:var(--blue-soft);color:var(--blue)}
+.card h3{margin:0 0 2px;font-size:16px}
+.card p{margin:0;font-size:14px;color:var(--muted)}
+.trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:32px}
+.trust div{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.trust b{display:block;margin-bottom:2px}
+.trust span{color:var(--muted);font-size:14px}
+
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+@media (max-width:480px){.nav-links{gap:12px;font-size:14px}}
+</style>
+<!-- AdSense script goes here after approval -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"Are my images uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Images are compressed inside your browser and never leave your device."}},
+ {"@type":"Question","name":"What quality should I choose?","acceptedAnswer":{"@type":"Answer","text":"75% is a good balance for most photos. The file gets much smaller and the difference is hard to see."}},
+ {"@type":"Question","name":"Why did my PNG barely shrink?","acceptedAnswer":{"@type":"Answer","text":"PNG keeps every pixel exactly, so quality has no effect. Choose WEBP or JPG as the output format, or reduce the width, to make it much smaller."}}
+]}
+</script>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="./">Site<span>Name</span></a>
+    <nav class="nav-links"><a href="./">All tools</a></nav>
+  </div>
+</header>
+
+<main>
+  <h1>Compress Image</h1>
+  <p class="sub">Make JPG, PNG and WEBP images smaller without visible quality loss.</p>
+
+  <div class="ad-slot">Ad slot – top</div>
+
+  <section class="tool">
+    <div id="stepPick">
+      <div class="drop" id="drop" tabindex="0" role="button" aria-label="Select images">
+        <strong>Select images</strong>
+        <span>or drop them here (JPG, PNG, WEBP)</span>
+      </div>
+      <input type="file" id="file" accept="image/jpeg,image/png,image/webp" multiple hidden>
+      <div class="list" id="list"></div>
+
+      <div id="settings" class="hidden">
+        <div class="opts">
+          <div>
+            <label for="q">Quality: <b id="qv">75%</b></label>
+            <input type="range" id="q" min="10" max="100" step="5" value="75">
+          </div>
+          <div>
+            <label for="maxw">Max width</label>
+            <select id="maxw">
+              <option value="0">Keep original size</option>
+              <option value="2560">2560 px</option>
+              <option value="1920">1920 px (Full HD)</option>
+              <option value="1280">1280 px</option>
+              <option value="800">800 px</option>
+            </select>
+          </div>
+          <div>
+            <label for="fmt">Output format</label>
+            <select id="fmt">
+              <option value="same">Same as original</option>
+              <option value="image/jpeg">JPG</option>
+              <option value="image/webp">WEBP (smallest)</option>
+            </select>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-ghost" id="addMore">+ Add more</button>
+          <button class="btn btn-primary" id="convert">Compress images</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="stepWork" class="hidden">
+      <div class="progress-wrap">
+        <strong id="workText">Compressing…</strong>
+        <div class="progress"><div id="bar"></div></div>
+      </div>
+      <div class="ad-slot ad-tall">Ad slot – processing</div>
+    </div>
+
+    <div id="stepDone" class="hidden">
+      <div class="done">
+        <div class="tick">✓</div>
+        <strong id="doneTitle">Done!</strong>
+        <p id="doneInfo" class="sub" style="margin:4px 0 14px"></p>
+        <div class="actions">
+          <button class="btn btn-primary" id="dlAll">Download all</button>
+          <button class="btn btn-ghost" id="again">Start over</button>
+        </div>
+      </div>
+      <div class="results" id="results"></div>
+      <div class="ad-slot">Ad slot – after download</div>
+    </div>
+
+    <p id="err" class="privacy hidden" style="color:var(--brand)"></p>
+    <p class="privacy">🔒 Your images are never uploaded. Everything runs in your browser.</p>
+  </section>
+
+  <article>
+    <h2>How to compress images</h2>
+    <ol>
+      <li><b>Select images:</b> choose one or more JPG, PNG or WEBP files.</li>
+      <li><b>Pick settings:</b> set the quality, and reduce the width for big phone photos.</li>
+      <li><b>Compress:</b> click “Compress images”, then download each file or all of them as a ZIP.</li>
+    </ol>
+    <h2>Frequently asked questions</h2>
+    <h3>Are my images uploaded?</h3>
+    <p>No. Images are compressed inside your browser and never leave your device.</p>
+    <h3>What quality should I choose?</h3>
+    <p>75% is a good balance for most photos. The file gets much smaller and the difference is hard to see.</p>
+    <h3>Why did my PNG barely shrink?</h3>
+    <p>PNG keeps every pixel exactly, so quality has no effect. Choose WEBP or JPG as the output format, or reduce the width, to make it much smaller.</p>
+  </article>
+
+  <div class="ad-slot">Ad slot – bottom</div>
+</main>
+
+<footer>© <span id="yr"></span> SiteName · <a href="privacy.html">Privacy Policy</a> · <a href="about.html">About</a></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const files = [];   // {file, url}
+  let results = [];   // {name, blob, url, before, after}
+  $('yr').textContent = new Date().getFullYear();
+
+  const input = $('file'), drop = $('drop');
+  drop.onclick = () => input.click();
+  drop.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); } };
+  $('addMore').onclick = () => input.click();
+  input.onchange = () => { add(input.files); input.value = ''; };
+  ['dragenter','dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave','drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('over'); }));
+  drop.addEventListener('drop', e => add(e.dataTransfer.files));
+  $('q').oninput = () => $('qv').textContent = $('q').value + '%';
+
+  const size = n => n < 1048576 ? (n/1024).toFixed(0) + ' KB' : (n/1048576).toFixed(2) + ' MB';
+  const extOf = t => t === 'image/png' ? 'png' : t === 'image/webp' ? 'webp' : 'jpg';
+
+  function add(list){
+    for (const f of list) if (/^image\/(jpeg|png|webp)$/.test(f.type)) files.push({file:f, url:URL.createObjectURL(f)});
+    render();
+  }
+  function render(){
+    const box = $('list'); box.innerHTML = '';
+    files.forEach((it, i) => {
+      const d = document.createElement('div');
+      d.className = 'item';
+      d.innerHTML = `<img alt=""><div class="meta"></div><div class="bar"><span></span><button title="Remove">✕</button><span></span></div>`;
+      d.querySelector('img').src = it.url;
+      d.querySelector('.meta').textContent = size(it.file.size) + ' · ' + it.file.name;
+      d.querySelector('button').onclick = () => { URL.revokeObjectURL(it.url); files.splice(i, 1); render(); };
+      box.appendChild(d);
+    });
+    $('settings').classList.toggle('hidden', !files.length);
+  }
+
+  const loadImg = url => new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = url; });
+  const toBlob = (c, type, q) => new Promise(res => c.toBlob(res, type, q));
+
+  async function compress(it, q, maxw, fmt){
+    const img = await loadImg(it.url);
+    let w = img.naturalWidth, h = img.naturalHeight;
+    if (maxw && w > maxw){ h = Math.round(h * maxw / w); w = maxw; }
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    const ctx = c.getContext('2d');
+    let type = fmt === 'same' ? it.file.type : fmt;
+    if (type === 'image/jpeg'){ ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, w, h); }
+    ctx.drawImage(img, 0, 0, w, h);
+    let blob = await toBlob(c, type, q);
+    if (!blob || blob.type !== type){ type = 'image/jpeg'; ctx.fillStyle = '#fff'; ctx.globalCompositeOperation = 'destination-over'; ctx.fillRect(0, 0, w, h); blob = await toBlob(c, type, q); }
+    const resized = w !== img.naturalWidth;
+    // never hand back a bigger file than the original
+    if (!resized && type === it.file.type && blob.size >= it.file.size) blob = it.file;
+    const base = it.file.name.replace(/\.[^.]+$/, '');
+    return {name: `${base}-compressed.${extOf(blob.type || type)}`, blob, before: it.file.size, after: blob.size, url: URL.createObjectURL(blob)};
+  }
+
+  $('convert').onclick = async () => {
+    if (!files.length) return;
+    $('err').classList.add('hidden');
+    show('stepWork');
+    const q = +$('q').value / 100, maxw = +$('maxw').value, fmt = $('fmt').value;
+    results = [];
+    for (let i = 0; i < files.length; i++){
+      $('workText').textContent = `Compressing ${i+1} of ${files.length}…`;
+      try { results.push(await compress(files[i], q, maxw, fmt)); }
+      catch (e){ console.error(e); }
+      $('bar').style.width = ((i+1)/files.length*100) + '%';
+      await new Promise(r => setTimeout(r, 0));
+    }
+    if (!results.length){ show('stepPick'); $('err').textContent = 'These images could not be read. Please try other files.'; $('err').classList.remove('hidden'); return; }
+    const b = results.reduce((s, r) => s + r.before, 0), a = results.reduce((s, r) => s + r.after, 0);
+    const pct = Math.max(0, Math.round((1 - a/b) * 100));
+    $('doneTitle').textContent = pct > 0 ? `Saved ${pct}%` : 'Your images are already well optimized';
+    $('doneInfo').textContent = `${size(b)} → ${size(a)} · ${results.length} image${results.length > 1 ? 's' : ''}`;
+    $('dlAll').textContent = results.length > 1 ? 'Download all (ZIP)' : 'Download';
+    renderResults();
+    show('stepDone');
+  };
+
+  function renderResults(){
+    const box = $('results'); box.innerHTML = '';
+    results.forEach(r => {
+      const d = document.createElement('div');
+      d.className = 'res';
+      const pct = Math.max(0, Math.round((1 - r.after/r.before) * 100));
+      d.innerHTML = `<img alt=""><div class="info"><div></div><span></span> <span class="save"></span></div><button class="btn btn-ghost">Download</button>`;
+      d.querySelector('img').src = r.url;
+      d.querySelector('.info div').textContent = r.name;
+      d.querySelector('.info span').textContent = `${size(r.before)} → ${size(r.after)}`;
+      d.querySelector('.save').textContent = pct ? `−${pct}%` : '';
+      d.querySelector('button').onclick = () => save(r.blob, r.name);
+      box.appendChild(d);
+    });
+  }
+
+  function save(blob, name){
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  }
+
+  $('dlAll').onclick = async () => {
+    if (results.length === 1) return save(results[0].blob, results[0].name);
+    if (!window.JSZip){ results.forEach(r => save(r.blob, r.name)); return; }
+    const zip = new JSZip(), used = {};
+    results.forEach(r => { let n = r.name; if (used[n]) n = n.replace(/(\.\w+)$/, `-${++used[n]}$1`); else used[n] = 1; zip.file(n, r.blob); });
+    save(await zip.generateAsync({type:'blob'}), 'compressed-images.zip');
+  };
+
+  $('again').onclick = () => {
+    files.forEach(f => URL.revokeObjectURL(f.url)); results.forEach(r => URL.revokeObjectURL(r.url));
+    files.length = 0; results = []; $('bar').style.width = '0'; render(); show('stepPick');
+  };
+  function show(id){ ['stepPick','stepWork','stepDone'].forEach(s => $(s).classList.toggle('hidden', s !== id)); }
+})();
+</script>
+</body>
+</html>
