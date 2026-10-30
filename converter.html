@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>File Converter – PDF, Word, Excel and Image Converter Online</title>
+<meta name="description" content="Free online file converter. Convert PDF to Word, Excel or JPG, and images to PDF, Word, JPG, PNG or WEBP. Pick the formats from the menu. Files never leave your device.">
+<link rel="canonical" href="https://YOUR-DOMAIN.com/converter.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>/* SiteName – shared styles for every page */
+:root{
+  --bg:#f6f7fb; --card:#ffffff; --text:#1c2230; --muted:#5d6577;
+  --line:#e3e6ee; --brand:#e5322d; --brand-dark:#c21f1a; --brand-soft:#fdecec;
+  --blue:#2563eb; --blue-soft:#e8effd; --green:#16a34a; --green-soft:#e6f6ec;
+  --ok:#16a34a; --radius:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#11141b; --card:#1a1f2a; --text:#e8ebf2; --muted:#9aa3b5;
+    --line:#2a3140; --brand:#ff5a52; --brand-dark:#ff7a73; --brand-soft:#2a1b1d;
+    --blue:#6b9bff; --blue-soft:#1a2236; --green:#3ccf74; --green-soft:#16271d;
+    color-scheme: dark;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+a{color:var(--brand)}
+img{max-width:100%}
+
+/* header & footer */
+header{background:var(--card);border-bottom:1px solid var(--line)}
+.nav{max-width:1040px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-weight:700;font-size:20px;text-decoration:none;color:var(--text);white-space:nowrap}
+.logo span{color:var(--brand)}
+.nav-links{display:flex;gap:16px;font-size:15px}
+.nav-links a{color:var(--text);text-decoration:none}
+.nav-links a:hover{color:var(--brand)}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:28px 16px}
+footer a{color:var(--muted)}
+
+main{max-width:1040px;margin:0 auto;padding:16px}
+h1{font-size:clamp(24px,5vw,34px);margin:16px 0 4px;text-align:center;text-wrap:balance}
+.sub{text-align:center;color:var(--muted);margin:0 0 20px}
+
+/* ad placeholders – replace inner text with AdSense code later */
+.ad-slot{background:repeating-linear-gradient(45deg,transparent,transparent 8px,rgba(127,127,127,.06) 8px,rgba(127,127,127,.06) 16px);
+  border:1px dashed var(--line);border-radius:10px;color:var(--muted);font-size:13px;
+  display:flex;align-items:center;justify-content:center;min-height:90px;margin:16px 0;text-align:center}
+.ad-tall{min-height:250px}
+
+/* tool box */
+.tool{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.drop{border:2px dashed var(--brand);background:var(--brand-soft);border-radius:var(--radius);
+  padding:32px 16px;text-align:center;cursor:pointer;transition:transform .15s}
+.drop.over{transform:scale(1.01);border-style:solid}
+.drop:focus-visible{outline:3px solid var(--brand);outline-offset:3px}
+.drop strong{display:block;font-size:18px;margin-bottom:4px}
+.btn{appearance:none;border:0;border-radius:10px;padding:12px 22px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
+.btn:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.btn-primary{background:var(--brand);color:#fff}
+.btn-primary:hover{background:var(--brand-dark)}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.hidden{display:none!important}
+
+/* file thumbnails */
+.list{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin:18px 0}
+.item{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--bg);min-width:0}
+.item img{width:100%;height:140px;object-fit:contain;display:block;background:#fff}
+.item .doc{height:140px;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:8px;text-align:center;font-size:13px;color:var(--muted);word-break:break-word}
+.item .doc b{font-size:28px;color:var(--brand)}
+.item .meta{font-size:12px;color:var(--muted);padding:2px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item .bar{display:flex;justify-content:space-between;align-items:center;padding:4px 6px}
+.item .bar button{border:0;background:transparent;color:var(--text);cursor:pointer;font-size:16px;padding:2px 6px;border-radius:6px}
+.item .bar button:hover{background:var(--line)}
+.num{position:absolute;top:6px;left:6px;background:var(--brand);color:#fff;font-size:12px;border-radius:999px;padding:0 8px}
+
+/* options */
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 18px}
+.opts label{font-size:14px;color:var(--muted);display:block;margin-bottom:4px}
+.opts select,.opts input[type=range]{width:100%}
+.opts select{padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);font:inherit}
+
+/* progress & result */
+.progress-wrap{text-align:center;padding:10px 0}
+.progress{height:10px;background:var(--line);border-radius:999px;overflow:hidden;margin:12px auto;max-width:420px}
+.progress div{height:100%;width:0;background:var(--brand);transition:width .2s}
+.done{text-align:center;padding:10px 0}
+.done .tick{font-size:44px;color:var(--ok);line-height:1.2}
+.results{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;margin:14px 0;text-align:left}
+.res{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--bg)}
+.res img{width:48px;height:48px;object-fit:cover;border-radius:6px;flex:none;background:#fff}
+.res .info{flex:1;min-width:0;font-size:14px}
+.res .info div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.res .save{color:var(--green);font-weight:600;font-variant-numeric:tabular-nums}
+.res button{flex:none;padding:8px 14px}
+.privacy{font-size:13px;color:var(--muted);text-align:center;margin-top:12px}
+
+/* article / guide */
+article{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-top:20px}
+article h2{font-size:22px;margin-top:0}
+article h3{font-size:17px;margin-bottom:4px}
+article ol,article ul{padding-left:20px}
+article p,article li{max-width:70ch}
+
+/* homepage */
+.hero{text-align:center;padding:28px 0 8px}
+.hero h1{font-size:clamp(28px,6vw,44px);margin:0 0 8px}
+.hero p{color:var(--muted);font-size:17px;margin:0 auto;max-width:560px}
+.cat{margin:28px 0 10px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.card{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;text-decoration:none;color:var(--text);transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--brand);transform:translateY(-2px)}
+.card:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.ico{flex:none;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.ico.pdf{background:var(--brand-soft);color:var(--brand)}
+.ico.img{background:var(--blue-soft);color:var(--blue)}
+.card h3{margin:0 0 2px;font-size:16px}
+.card p{margin:0;font-size:14px;color:var(--muted)}
+.trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:32px}
+.trust div{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.trust b{display:block;margin-bottom:2px}
+.trust span{color:var(--muted);font-size:14px}
+
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+@media (max-width:480px){.nav-links{gap:12px;font-size:14px}}
+</style>
+<!-- AdSense script goes here after approval -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"Which conversions are supported?","acceptedAnswer":{"@type":"Answer","text":"PDF to Word, Excel, JPG and PNG. Images (JPG, PNG, WEBP) to PDF, Word, JPG, PNG and WEBP."}},
+ {"@type":"Question","name":"Are my files uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Every conversion runs inside your browser, so your files stay on your device."}},
+ {"@type":"Question","name":"Can it read Bangla text from images?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose Image to Word and set the text language to Bangla or English + Bangla."}}
+]}
+</script>
+<style>
+.pair{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:end;margin-bottom:16px}
+.pair label{display:block;font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.pair select{width:100%;padding:13px 12px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--text);font:inherit;font-weight:600;font-size:16px;cursor:pointer}
+.pair select:focus-visible{outline:none;border-color:var(--brand)}
+.arrow{font-size:22px;color:var(--brand);padding-bottom:12px;font-weight:700}
+@media (max-width:480px){.pair{grid-template-columns:1fr}.arrow{text-align:center;padding:0;transform:rotate(90deg)}}
+.opts input[type=range]{accent-color:var(--brand)}
+.textprev{border:1px solid var(--line);border-radius:10px;background:var(--bg);padding:14px 16px;margin:14px 0;max-height:320px;overflow:auto;font-size:14px;line-height:1.55}
+.textprev p{margin:0 0 8px}.textprev h4{margin:6px 0 8px;font-size:16px}
+.textprev hr{border:0;border-top:1px dashed var(--line);margin:12px 0}
+.tprev{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0;max-height:340px}
+.tprev table{border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums;min-width:100%}
+.tprev td{border:1px solid var(--line);padding:4px 8px;white-space:nowrap;max-width:240px;overflow:hidden;text-overflow:ellipsis}
+.tprev tr:first-child td{background:var(--bg);font-weight:600}
+.tprev td.n{text-align:right}
+.note{font-size:13px;color:var(--muted);margin:-6px 0 14px}
+.supported{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;padding:0;list-style:none}
+.supported li{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg)}
+.supported a{text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="./">Site<span>Name</span></a>
+    <nav class="nav-links"><a href="./">All tools</a></nav>
+  </div>
+</header>
+
+<main>
+  <h1>File Converter</h1>
+  <p class="sub">Choose what you have and what you need. Free, no sign-up.</p>
+
+  <div class="ad-slot">Ad slot – top</div>
+
+  <section class="tool">
+    <div id="stepPick">
+      <div class="pair">
+        <div>
+          <label for="from">Convert from</label>
+          <select id="from"></select>
+        </div>
+        <div class="arrow" aria-hidden="true">→</div>
+        <div>
+          <label for="to">Convert to</label>
+          <select id="to"></select>
+        </div>
+      </div>
+
+      <div class="drop" id="drop" tabindex="0" role="button" aria-label="Select files">
+        <strong id="dropTitle">Select files</strong>
+        <span id="dropHint">or drop them here</span>
+      </div>
+      <input type="file" id="file" hidden>
+      <div class="list" id="list"></div>
+
+      <div id="settings" class="hidden">
+        <div class="opts" id="opts"></div>
+        <p class="note" id="note"></p>
+        <div class="actions">
+          <button class="btn btn-ghost" id="addMore">+ Add more</button>
+          <button class="btn btn-primary" id="convert">Convert</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="stepWork" class="hidden">
+      <div class="progress-wrap">
+        <strong id="workText">Working…</strong>
+        <div class="progress"><div id="bar"></div></div>
+      </div>
+      <div class="ad-slot ad-tall">Ad slot – processing</div>
+    </div>
+
+    <div id="stepDone" class="hidden">
+      <div class="done">
+        <div class="tick">✓</div>
+        <strong id="doneTitle">Done!</strong>
+        <p id="doneInfo" class="sub" style="margin:4px 0 14px"></p>
+        <div class="actions">
+          <button class="btn btn-primary" id="dlMain">Download</button>
+          <button class="btn btn-ghost hidden" id="copy">Copy text</button>
+          <button class="btn btn-ghost" id="again">Convert another file</button>
+        </div>
+      </div>
+      <div id="preview"></div>
+      <div class="results" id="results"></div>
+      <div class="ad-slot">Ad slot – after download</div>
+    </div>
+
+    <p id="err" class="privacy hidden" style="color:var(--brand)"></p>
+    <p class="privacy">🔒 Your files are never uploaded. Everything runs in your browser.</p>
+  </section>
+
+  <article>
+    <h2>Supported conversions</h2>
+    <ul class="supported">
+      <li><a href="#pdf-word">PDF → Word</a><br><span class="note">Editable .docx with paragraphs and headings</span></li>
+      <li><a href="#pdf-excel">PDF → Excel</a><br><span class="note">Tables into rows and columns</span></li>
+      <li><a href="#pdf-jpg">PDF → JPG / PNG</a><br><span class="note">Every page as an image</span></li>
+      <li><a href="#image-pdf">Image → PDF</a><br><span class="note">Many photos into one PDF</span></li>
+      <li><a href="#image-word">Image → Word</a><br><span class="note">Reads English and Bangla text</span></li>
+      <li><a href="#image-webp">Image → JPG / PNG / WEBP</a><br><span class="note">Change format and size</span></li>
+    </ul>
+    <h2>How to use the converter</h2>
+    <ol>
+      <li><b>Choose the formats:</b> pick your file type in “Convert from” and the result in “Convert to”.</li>
+      <li><b>Add your file:</b> click the box or drop the file onto it.</li>
+      <li><b>Convert and download:</b> adjust the options if you like, click “Convert”, then download.</li>
+    </ol>
+    <h2>Frequently asked questions</h2>
+    <h3>Which conversions are supported?</h3>
+    <p>PDF to Word, Excel, JPG and PNG. Images (JPG, PNG, WEBP) to PDF, Word, JPG, PNG and WEBP.</p>
+    <h3>Are my files uploaded?</h3>
+    <p>No. Every conversion runs inside your browser, so your files stay on your device.</p>
+    <h3>Can it read Bangla text from images?</h3>
+    <p>Yes. Choose Image to Word and set the text language to Bangla or English + Bangla.</p>
+  </article>
+
+  <div class="ad-slot">Ad slot – bottom</div>
+</main>
+
+<footer>© <span id="yr"></span> SiteName · <a href="privacy.html">Privacy Policy</a> · <a href="about.html">About</a></footer>
+
+<script>
+/* ===== shared helpers from the single tools ===== */
+function itemsToRows(items){
+  items = items.filter(it => it.str && it.str.trim() !== '');
+  if (!items.length) return [];
+  // 1) group into lines by y
+  items.sort((a, b) => b.y - a.y || a.x - b.x);
+  const lines = [];
+  for (const it of items){
+    const tol = Math.max(2, it.h * 0.45);
+    const line = lines.find(l => Math.abs(l.y - it.y) <= tol);
+    if (line) line.items.push(it); else lines.push({y: it.y, items: [it]});
+  }
+  lines.sort((a, b) => b.y - a.y);
+
+  // 2) inside each line, join close items into cells
+  const rows = lines.map(l => {
+    const its = l.items.sort((a, b) => a.x - b.x);
+    const cells = [];
+    for (const it of its){
+      const last = cells[cells.length - 1];
+      const gap = last ? it.x - last.right : Infinity;
+      if (last && gap < Math.max(3, it.h * 0.9)){
+        last.text += (gap > it.h * 0.12 ? ' ' : '') + it.str;
+        last.right = Math.max(last.right, it.x + it.w);
+      } else {
+        cells.push({text: it.str, left: it.x, right: it.x + it.w});
+      }
+    }
+    cells.forEach(c => c.text = c.text.replace(/\s+/g, ' ').trim());
+    return cells;
+  });
+
+  // 3) find columns from rows that have 2+ cells
+  const spans = [];
+  rows.forEach(r => { if (r.length > 1) r.forEach(c => spans.push([c.left, c.right])); });
+  if (!spans.length) return rows.map(r => r.map(c => c.text));
+  spans.sort((a, b) => a[0] - b[0]);
+  const cols = [];
+  for (const [l, r] of spans){
+    const last = cols[cols.length - 1];
+    if (last && l <= last[1] + 1) last[1] = Math.max(last[1], r);
+    else cols.push([l, r]);
+  }
+
+  // 4) place each cell in its column
+  return rows.map(r => {
+    const out = new Array(cols.length).fill('');
+    r.forEach(c => {
+      if (r.length === 1){ // titles and notes go where they start
+        let i = cols.findIndex(([l, rr]) => c.left >= l - 2 && c.left <= rr);
+        if (i < 0) i = Math.max(0, cols.filter(([l]) => l <= c.left).length - 1);
+        out[i] = out[i] ? out[i] + ' ' + c.text : c.text; return;
+      }
+      let best = -1, bestOv = 0;
+      cols.forEach(([l, rr], i) => {
+        const ov = Math.min(rr, c.right) - Math.max(l, c.left);
+        if (ov > bestOv){ bestOv = ov; best = i; }
+      });
+      if (best < 0){ // no overlap: nearest column by left edge
+        let d = Infinity;
+        cols.forEach(([l], i) => { const dd = Math.abs(l - c.left); if (dd < d){ d = dd; best = i; } });
+      }
+      out[best] = out[best] ? out[best] + ' ' + c.text : c.text;
+    });
+    while (out.length && out[out.length - 1] === '') out.pop();
+    return out;
+  });
+}
+
+function toNumber(s){
+  const t = s.trim();
+  if (!/^\(?[-+]?[$€£৳₹]?\s?\d{1,3}(,\d{3})*(\.\d+)?\)?%?$|^\(?[-+]?[$€£৳₹]?\s?\d+(\.\d+)?\)?%?$/.test(t)) return null;
+  const neg = /^\(.*\)$/.test(t) || t.startsWith('-');
+  const pct = t.endsWith('%');
+  let n = parseFloat(t.replace(/[^\d.]/g, ''));
+  if (isNaN(n)) return null;
+  if (neg) n = -n;
+  if (pct) n = n / 100;
+  return n;
+}
+function pageToLines(items){
+  items = items.filter(it => it.str && it.str.trim() !== '');
+  items.sort((a, b) => b.y - a.y || a.x - b.x);
+  const lines = [];
+  for (const it of items){
+    const line = lines.find(l => Math.abs(l.y - it.y) <= Math.max(2, it.h * 0.45));
+    if (line) line.items.push(it); else lines.push({y: it.y, items: [it]});
+  }
+  lines.sort((a, b) => b.y - a.y);
+  return lines.map(l => {
+    const its = l.items.sort((a, b) => a.x - b.x);
+    let text = '', right = -Infinity;
+    for (const it of its){
+      const gap = it.x - right;
+      if (text){
+        if (gap > it.h * 2.5) text += '\t';
+        else if (gap > it.h * 0.12 && !/\s$/.test(text) && !/^\s/.test(it.str)) text += ' ';
+      }
+      text += it.str;
+      right = Math.max(right, it.x + it.w);
+    }
+    const size = Math.round(Math.max(...its.map(i => i.h)) * 2) / 2;
+    return {y: l.y, left: its[0].x, right, size, text: text.replace(/ {2,}/g, ' ').trim()};
+  });
+}
+
+function buildParagraphs(pages){
+  // the most common text size is the body size
+  const count = {};
+  pages.forEach(p => p.lines.forEach(l => count[l.size] = (count[l.size] || 0) + l.text.length));
+  const body = +Object.keys(count).sort((a, b) => count[b] - count[a])[0] || 11;
+
+  return pages.map(p => {
+    const paras = [];
+    const maxRight = Math.max(...p.lines.map(l => l.right), 0);
+    let cur = null, prev = null;
+    for (const l of p.lines){
+      const heading = l.size >= body * 1.2;
+      const gap = prev ? prev.y - l.y : 0;
+      const sameStyle = cur && cur.heading === heading && Math.abs(cur.size - l.size) < 1;
+      const shortPrev = prev && prev.right < maxRight - Math.max(40, l.size * 4) && /[.:!?।]$/.test(prev.text);
+      const join = cur && sameStyle && gap <= l.size * 1.75 && !shortPrev && !l.text.includes('\t') && !prev.text.includes('\t')
+                   && !/^([•\-–▪◦●]|\d+[.)])\s/.test(l.text);
+      if (join){
+        cur.text = /[A-Za-z]-$/.test(cur.text) ? cur.text.slice(0, -1) + l.text : cur.text + ' ' + l.text;
+      } else {
+        cur = {text: l.text, size: l.size, heading};
+        paras.push(cur);
+      }
+      prev = l;
+    }
+    return paras;
+  });
+}
+
+const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+                 .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F￾￿]/g, '');
+
+function docxXml(paraPages, pageW, pageH){
+  const font = '<w:rFonts w:ascii="Calibri" w:hAnsi="Calibri" w:cs="Nirmala UI" w:eastAsia="Calibri"/>';
+  const run = (text, sz, bold) => text.split('\t').map((part, i) =>
+    (i ? '<w:r><w:tab/></w:r>' : '') +
+    `<w:r><w:rPr>${font}${bold ? '<w:b/>' : ''}<w:sz w:val="${sz}"/><w:szCs w:val="${sz}"/></w:rPr><w:t xml:space="preserve">${esc(part)}</w:t></w:r>`).join('');
+  let body = '';
+  paraPages.forEach((paras, pi) => {
+    paras.forEach((p, i) => {
+      const sz = Math.min(144, Math.max(12, Math.round(p.size * 2)));
+      const brk = pi > 0 && i === 0 ? '<w:pageBreakBefore/>' : '';
+      body += `<w:p><w:pPr>${brk}<w:spacing w:after="${p.heading ? 160 : 120}" w:line="276" w:lineRule="auto"/></w:pPr>${run(p.text, sz, p.heading)}</w:p>`;
+    });
+    if (!paras.length && pi > 0) body += '<w:p><w:pPr><w:pageBreakBefore/></w:pPr></w:p>';
+  });
+  const tw = n => Math.round(n * 20);
+  return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>' + body +
+    `<w:sectPr><w:pgSz w:w="${tw(pageW)}" w:h="${tw(pageH)}"${pageW > pageH ? ' w:orient="landscape"' : ''}/>` +
+    '<w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134" w:header="567" w:footer="567" w:gutter="0"/></w:sectPr>' +
+    '</w:body></w:document>';
+}
+
+const DOCX_PARTS = {
+  '[Content_Types].xml': '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>',
+  '_rels/.rels': '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>'
+};
+function ocrToLines(lines){
+  lines = lines.filter(l => l.text && l.text.trim());
+  if (!lines.length) return [];
+  const hs = lines.map(l => l.bbox.y1 - l.bbox.y0).sort((a, b) => a - b);
+  const bodyH = hs[Math.floor(hs.length / 2)] || 1;
+  const k = 11 / bodyH;   // body text becomes 11 pt
+  return lines.map(l => ({
+    y: -l.bbox.y0 * k, left: l.bbox.x0 * k, right: l.bbox.x1 * k,
+    size: Math.round((l.bbox.y1 - l.bbox.y0) * k * 2) / 2,
+    text: l.text.replace(/\s+/g, ' ').trim()
+  }));
+}
+
+/* ===== converter ===== */
+(function(){
+  const $ = id => document.getElementById(id);
+  $('yr').textContent = new Date().getFullYear();
+
+  const CDN = {
+    pdfjs: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',
+    jspdf: 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
+    xlsx:  'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js',
+    jszip: 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js',
+    tess:  'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js'
+  };
+  const PDF_WORKER = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  const loaded = {};
+  function load(key){
+    if (!loaded[key]) loaded[key] = new Promise((res, rej) => {
+      const s = document.createElement('script');
+      s.src = CDN[key]; s.onload = res;
+      s.onerror = () => { delete loaded[key]; rej(new Error('load')); };
+      document.head.appendChild(s);
+    });
+    return loaded[key];
+  }
+
+  const FROM = {
+    pdf:   {label: 'PDF', accept: 'application/pdf,.pdf', multiple: false, test: f => f.type === 'application/pdf' || /\.pdf$/i.test(f.name)},
+    image: {label: 'Image (JPG, PNG, WEBP)', accept: 'image/jpeg,image/png,image/webp', multiple: true, test: f => /^image\/(jpeg|png|webp)$/.test(f.type)}
+  };
+  const TO = {
+    pdf: {
+      word:  {label: 'Word (.docx)',  libs: ['pdfjs','jszip'], note: 'Text, paragraphs and headings are kept. Images and designs are not copied. Scanned PDFs cannot be read.'},
+      excel: {label: 'Excel (.xlsx)', libs: ['pdfjs','xlsx'],  note: 'Best for bank statements, invoices and reports made by software.'},
+      jpg:   {label: 'JPG images',    libs: ['pdfjs','jszip'], note: 'Every page becomes one image.'},
+      png:   {label: 'PNG images',    libs: ['pdfjs','jszip'], note: 'Every page becomes one image. PNG is sharper for text but larger.'}
+    },
+    image: {
+      pdf:  {label: 'PDF',                      libs: ['jspdf'],         note: 'All images go into one PDF, in the order shown.'},
+      word: {label: 'Word (.docx, reads text)', libs: ['tess','jszip'],  note: 'Each image becomes one page. The first time downloads a language pack of a few MB.'},
+      jpg:  {label: 'JPG',  libs: ['jszip'], note: ''},
+      png:  {label: 'PNG',  libs: ['jszip'], note: ''},
+      webp: {label: 'WEBP', libs: ['jszip'], note: 'WEBP gives the smallest files and works on all modern browsers.'}
+    }
+  };
+  const OPTS = {
+    'pdf-excel':  `<div><label for="o_sheet">Sheets</label><select id="o_sheet"><option value="one">All pages in one sheet</option><option value="each">One sheet per page</option></select></div>`,
+    'pdf-jpg':    `<div><label for="o_scale">Image quality</label><select id="o_scale"><option value="1.5">Normal</option><option value="2" selected>High</option><option value="3">Very high (printing)</option></select></div>`,
+    'image-pdf':  `<div><label for="o_size">Page size</label><select id="o_size"><option value="a4">A4</option><option value="letter">US Letter</option><option value="fit">Same as image</option></select></div>
+                   <div><label for="o_margin">Margin</label><select id="o_margin"><option value="0">None</option><option value="20" selected>Small</option><option value="40">Large</option></select></div>`,
+    'image-word': `<div><label for="o_lang">Text language</label><select id="o_lang"><option value="eng">English</option><option value="ben">Bangla (বাংলা)</option><option value="eng+ben">English + Bangla</option></select></div>`,
+    'image-jpg':  `<div><label for="o_q">Quality: <b id="o_qv">85%</b></label><input type="range" id="o_q" min="10" max="100" step="5" value="85"></div>
+                   <div><label for="o_w">Max width</label><select id="o_w"><option value="0">Keep original size</option><option value="1920">1920 px</option><option value="1280">1280 px</option><option value="800">800 px</option></select></div>`,
+    'image-png':  `<div><label for="o_w">Max width</label><select id="o_w"><option value="0">Keep original size</option><option value="1920">1920 px</option><option value="1280">1280 px</option><option value="800">800 px</option></select></div>`
+  };
+  OPTS['pdf-png'] = OPTS['pdf-jpg'];
+  OPTS['image-webp'] = OPTS['image-jpg'];
+
+  const fromSel = $('from'), toSel = $('to'), input = $('file'), drop = $('drop');
+  let files = [], outputs = [], plain = '';
+
+  Object.entries(FROM).forEach(([k, v]) => fromSel.add(new Option(v.label, k)));
+  function fillTo(keep){
+    toSel.innerHTML = '';
+    Object.entries(TO[fromSel.value]).forEach(([k, v]) => toSel.add(new Option(v.label, k)));
+    if (keep && TO[fromSel.value][keep]) toSel.value = keep;
+  }
+  function key(){ return fromSel.value + '-' + toSel.value; }
+
+  function applyPair(){
+    const f = FROM[fromSel.value], t = TO[fromSel.value][toSel.value];
+    input.accept = f.accept; input.multiple = f.multiple;
+    $('dropTitle').textContent = f.multiple ? 'Select images' : 'Select PDF file';
+    $('dropHint').textContent = f.multiple ? 'or drop them here (JPG, PNG, WEBP)' : 'or drop it here';
+    $('opts').innerHTML = OPTS[key()] || '';
+    $('opts').classList.toggle('hidden', !OPTS[key()]);
+    $('note').textContent = t.note; $('note').classList.toggle('hidden', !t.note);
+    $('convert').textContent = 'Convert to ' + t.label.replace(/ \(.*\)/, '').replace(' images', '');
+    $('addMore').classList.toggle('hidden', !f.multiple);
+    const q = $('o_q'); if (q) q.oninput = () => $('o_qv').textContent = q.value + '%';
+    t.libs.forEach(l => load(l).catch(() => {}));   // start loading early
+    try { history.replaceState(null, '', '#' + key()); } catch (_){}
+  }
+  fromSel.onchange = () => { clearFiles(); fillTo(toSel.value); applyPair(); };
+  toSel.onchange = applyPair;
+
+  // open with a preset like converter.html#pdf-word
+  const h = location.hash.slice(1).split('-');
+  if (FROM[h[0]]) fromSel.value = h[0];
+  fillTo(h[1]); applyPair();
+  window.addEventListener('hashchange', () => {
+    const p = location.hash.slice(1).split('-');
+    if (FROM[p[0]] && TO[p[0]][p[1]] && key() !== p.join('-')){
+      if (p[0] !== fromSel.value){ fromSel.value = p[0]; clearFiles(); }
+      fillTo(p[1]); applyPair(); window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+  });
+
+  /* files */
+  drop.onclick = () => input.click();
+  drop.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); } };
+  $('addMore').onclick = () => input.click();
+  input.onchange = () => { add(input.files); input.value = ''; };
+  ['dragenter','dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave','drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('over'); }));
+  drop.addEventListener('drop', e => add(e.dataTransfer.files));
+
+  const size = n => n < 1048576 ? (n/1024).toFixed(0) + ' KB' : (n/1048576).toFixed(2) + ' MB';
+  function showErr(m){ $('err').textContent = m || ''; $('err').classList.toggle('hidden', !m); }
+
+  function add(list){
+    const f = FROM[fromSel.value];
+    let bad = 0;
+    for (const file of list){
+      if (!f.test(file)){ bad++; continue; }
+      if (!f.multiple) clearFiles();
+      files.push({file, url: f.multiple ? URL.createObjectURL(file) : null});
+    }
+    showErr(bad ? (f.multiple ? 'Some files were skipped. Only JPG, PNG and WEBP images can be used here.' : 'Please choose a PDF file, or change “Convert from”.') : '');
+    render();
+  }
+  function clearFiles(){ files.forEach(x => x.url && URL.revokeObjectURL(x.url)); files = []; render(); }
+  function render(){
+    const box = $('list'); box.innerHTML = '';
+    files.forEach((it, i) => {
+      const d = document.createElement('div');
+      d.className = 'item';
+      d.innerHTML = (files.length > 1 ? `<span class="num">${i+1}</span>` : '') +
+        (it.url ? '<img alt="">' : '<div class="doc"><b>PDF</b><span></span></div>') +
+        `<div class="meta"></div><div class="bar"><button title="Move left" data-a="l">◀</button><button title="Remove" data-a="x">✕</button><button title="Move right" data-a="r">▶</button></div>`;
+      if (it.url) d.querySelector('img').src = it.url; else d.querySelector('.doc span').textContent = it.file.name;
+      d.querySelector('.meta').textContent = size(it.file.size);
+      d.querySelectorAll('button').forEach(b => b.onclick = () => move(i, b.dataset.a));
+      box.appendChild(d);
+    });
+    drop.classList.toggle('hidden', files.length > 0 && !FROM[fromSel.value].multiple);
+    $('settings').classList.toggle('hidden', !files.length);
+  }
+  function move(i, a){
+    if (a === 'x'){ files[i].url && URL.revokeObjectURL(files[i].url); files.splice(i, 1); }
+    else { const j = a === 'l' ? i-1 : i+1; if (j < 0 || j >= files.length) return; [files[i], files[j]] = [files[j], files[i]]; }
+    render();
+  }
+
+  /* progress */
+  const status = t => $('workText').textContent = t;
+  const bar = f => $('bar').style.width = Math.round(Math.min(1, f) * 100) + '%';
+  const tick = () => new Promise(r => setTimeout(r, 0));
+  const baseName = f => f.name.replace(/\.[^.]+$/, '');
+
+  /* ----- PDF helpers ----- */
+  async function openPdf(file){
+    pdfjsLib.GlobalWorkerOptions.workerSrc = PDF_WORKER;
+    return pdfjsLib.getDocument({data: await file.arrayBuffer()}).promise;
+  }
+  async function pdfItems(pdf, onPage){
+    const pages = [];
+    for (let p = 1; p <= pdf.numPages; p++){
+      status(`Reading page ${p} of ${pdf.numPages}…`);
+      const page = await pdf.getPage(p);
+      const tc = await page.getTextContent();
+      pages.push(tc.items.map(it => ({str: it.str, x: it.transform[4], y: it.transform[5], w: it.width,
+        h: Math.abs(it.height || Math.hypot(it.transform[2], it.transform[3])) || 10})));
+      onPage(p / pdf.numPages);
+    }
+    return pages;
+  }
+  const NO_TEXT = 'No text was found. This PDF looks like a scanned image. Try “Image → Word” with a photo of the page instead.';
+
+  async function zipDocx(paraPages, w, h){
+    const zip = new JSZip();
+    Object.entries(DOCX_PARTS).forEach(([n, x]) => zip.file(n, x));
+    zip.file('word/document.xml', docxXml(paraPages, w, h));
+    return zip.generateAsync({type:'blob', mimeType:'application/vnd.openxmlformats-officedocument.wordprocessingml.document', compression:'DEFLATE'});
+  }
+
+  /* ----- converters: each returns {outputs, info, preview} ----- */
+  const RUN = {
+    async 'pdf-word'(){
+      const file = files[0].file, pdf = await openPdf(file);
+      const vp = (await pdf.getPage(1)).getViewport({scale: 1});
+      const items = await pdfItems(pdf, f => bar(f * .9));
+      const pages = items.map(it => ({lines: pageToLines(it)}));
+      if (!pages.some(p => p.lines.length)) throw new Error(NO_TEXT);
+      status('Creating your Word file…');
+      const paras = buildParagraphs(pages);
+      const blob = await zipDocx(paras, vp.width, vp.height);
+      plain = paras.map(ps => ps.map(p => p.text).join('\n\n')).join('\n\n');
+      return {outputs: [{name: baseName(file) + '.docx', blob}], info: `${pdf.numPages} pages · ${size(blob.size)}`, preview: {text: paras}};
+    },
+    async 'pdf-excel'(){
+      const file = files[0].file, pdf = await openPdf(file);
+      const pages = (await pdfItems(pdf, f => bar(f * .9))).map(itemsToRows);
+      const total = pages.reduce((s, r) => s + r.length, 0);
+      if (!total) throw new Error(NO_TEXT);
+      status('Creating your Excel file…');
+      const cell = s => { const n = toNumber(s); return n === null ? s : n; };
+      const wb = XLSX.utils.book_new();
+      const addSheet = (rows, name) => {
+        const ws = XLSX.utils.aoa_to_sheet(rows.map(r => r.map(cell)));
+        const w = []; rows.forEach(r => r.forEach((v, i) => w[i] = Math.min(60, Math.max(w[i] || 8, String(v).length + 2))));
+        ws['!cols'] = w.map(x => ({wch: x}));
+        XLSX.utils.book_append_sheet(wb, ws, name);
+      };
+      let all = [];
+      if ($('o_sheet').value === 'each') pages.forEach((r, i) => addSheet(r.length ? r : [['(empty page)']], 'Page ' + (i+1)));
+      else { pages.forEach((r, i) => { all = all.concat(r); if (i < pages.length - 1 && r.length) all.push([]); }); addSheet(all, 'Sheet1'); }
+      const blob = new Blob([XLSX.write(wb, {bookType:'xlsx', type:'array'})], {type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+      return {outputs: [{name: baseName(file) + '.xlsx', blob}], info: `${pdf.numPages} pages · ${total} rows · ${size(blob.size)}`, preview: {table: all.length ? all : pages[0]}};
+    },
+    async 'pdf-jpg'(type = 'image/jpeg', ext = 'jpg'){
+      const file = files[0].file, pdf = await openPdf(file), scale = +$('o_scale').value, out = [];
+      for (let p = 1; p <= pdf.numPages; p++){
+        status(`Converting page ${p} of ${pdf.numPages}…`);
+        const page = await pdf.getPage(p);
+        let vp = page.getViewport({scale});
+        if (vp.width * vp.height > 16e6) vp = page.getViewport({scale: scale * Math.sqrt(16e6 / (vp.width * vp.height))});
+        const c = document.createElement('canvas'); c.width = Math.floor(vp.width); c.height = Math.floor(vp.height);
+        const ctx = c.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height);
+        await page.render({canvasContext: ctx, viewport: vp}).promise;
+        const blob = await new Promise(r => c.toBlob(r, type, .92));
+        out.push({name: `${baseName(file)}-page-${p}.${ext}`, blob, thumb: true, label: 'Page ' + p, info: `${c.width}×${c.height} · ${size(blob.size)}`});
+        c.width = c.height = 0; page.cleanup(); bar(p / pdf.numPages);
+      }
+      return {outputs: out, info: `${out.length} images · ${size(out.reduce((s, o) => s + o.blob.size, 0))}`};
+    },
+    'pdf-png'(){ return RUN['pdf-jpg']('image/png', 'png'); },
+
+    async 'image-pdf'(){
+      const { jsPDF } = window.jspdf, SIZES = {a4: [595.28, 841.89], letter: [612, 792]};
+      const sz = $('o_size').value, m = +$('o_margin').value;
+      let doc = null;
+      for (let i = 0; i < files.length; i++){
+        status(`Adding image ${i+1} of ${files.length}…`);
+        const j = await drawImage(files[i].url, 3000, 'image/jpeg', .92);
+        let pw, ph;
+        if (sz === 'fit'){ pw = j.w * .75 + m*2; ph = j.h * .75 + m*2; }
+        else { [pw, ph] = SIZES[sz]; if (j.w > j.h) [pw, ph] = [ph, pw]; }
+        const o = pw > ph ? 'l' : 'p';
+        if (!doc) doc = new jsPDF({unit:'pt', format:[pw, ph], orientation:o, compress:true}); else doc.addPage([pw, ph], o);
+        const r = Math.min((pw - m*2) / j.w, (ph - m*2) / j.h), dw = j.w * r, dh = j.h * r;
+        doc.addImage(j.data, 'JPEG', (pw - dw) / 2, (ph - dh) / 2, dw, dh, undefined, 'FAST');
+        bar((i + 1) / files.length); await tick();
+      }
+      const blob = doc.output('blob');
+      const name = files.length === 1 ? baseName(files[0].file) + '.pdf' : 'images.pdf';
+      return {outputs: [{name, blob}], info: `${files.length} pages · ${size(blob.size)}`};
+    },
+    async 'image-word'(){
+      status('Loading the language pack…');
+      let cur = 0;
+      const worker = await Tesseract.createWorker($('o_lang').value, 1, {
+        logger: m => { if (m.status === 'recognizing text'){ status(`Reading image ${cur+1} of ${files.length}…`); bar((cur + (m.progress || 0)) / files.length); } }
+      });
+      const pages = [];
+      try {
+        for (cur = 0; cur < files.length; cur++){
+          const { data } = await worker.recognize(files[cur].file);
+          pages.push({lines: ocrToLines(data.lines || [])});
+        }
+      } finally { await worker.terminate(); }
+      if (!pages.some(p => p.lines.length)) throw new Error('No text was found in these images. Try a clearer photo or check the language.');
+      status('Creating your Word file…');
+      const paras = buildParagraphs(pages);
+      const blob = await zipDocx(paras, 595.28, 841.89);
+      plain = paras.map(ps => ps.map(p => p.text).join('\n\n')).join('\n\n');
+      const name = files.length === 1 ? baseName(files[0].file) + '.docx' : 'images-to-word.docx';
+      return {outputs: [{name, blob}], info: `${files.length} image${files.length > 1 ? 's' : ''} · ${size(blob.size)}`, preview: {text: paras}};
+    },
+    async 'image-jpg'(type = 'image/jpeg', ext = 'jpg'){
+      const q = $('o_q') ? +$('o_q').value / 100 : 1, maxw = +$('o_w').value, out = [];
+      let before = 0, after = 0;
+      for (let i = 0; i < files.length; i++){
+        status(`Converting ${i+1} of ${files.length}…`);
+        const f = files[i].file, j = await drawImage(files[i].url, maxw, type, q, true);
+        before += f.size; after += j.blob.size;
+        out.push({name: `${baseName(f)}.${ext}`, blob: j.blob, thumb: true, label: f.name, info: `${size(f.size)} → ${size(j.blob.size)}`});
+        bar((i + 1) / files.length); await tick();
+      }
+      return {outputs: out, info: `${out.length} image${out.length > 1 ? 's' : ''} · ${size(before)} → ${size(after)}`};
+    },
+    'image-png'(){ return RUN['image-jpg']('image/png', 'png'); },
+    'image-webp'(){ return RUN['image-jpg']('image/webp', 'webp'); }
+  };
+
+  function drawImage(url, maxSide, type, q, widthOnly){
+    return new Promise((res, rej) => {
+      const im = new Image();
+      im.onload = () => {
+        let w = im.naturalWidth, h = im.naturalHeight;
+        const lim = widthOnly ? w : Math.max(w, h);
+        if (maxSide && lim > maxSide){ const s = maxSide / lim; w = Math.round(w * s); h = Math.round(h * s); }
+        const c = document.createElement('canvas'); c.width = w; c.height = h;
+        const ctx = c.getContext('2d');
+        if (type === 'image/jpeg'){ ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, w, h); }
+        ctx.drawImage(im, 0, 0, w, h);
+        if (widthOnly) c.toBlob(b => b ? res({blob: b, w, h}) : rej(new Error('encode')), type, q);
+        else res({data: c.toDataURL(type, q), w, h});
+      };
+      im.onerror = () => rej(new Error('One of the images could not be read. Please try a different image.'));
+      im.src = url;
+    });
+  }
+
+  /* ----- run ----- */
+  $('convert').onclick = async () => {
+    if (!files.length) return;
+    const k = key(), t = TO[fromSel.value][toSel.value];
+    showErr(''); show('stepWork'); bar(0); status('Getting ready…');
+    outputs.forEach(o => o.url && URL.revokeObjectURL(o.url)); outputs = []; plain = '';
+    try {
+      await Promise.all(t.libs.map(load));
+    } catch (_){
+      show('stepPick'); showErr('The converter could not load. Check your internet connection and try again.'); return;
+    }
+    try {
+      const r = await RUN[k]();
+      outputs = r.outputs;
+      outputs.forEach(o => { if (o.thumb) o.url = URL.createObjectURL(o.blob); });
+      $('doneTitle').textContent = 'Your file' + (outputs.length > 1 ? 's are' : ' is') + ' ready!';
+      $('doneInfo').textContent = r.info;
+      $('dlMain').textContent = outputs.length > 1 ? 'Download all (ZIP)' : 'Download ' + outputs[0].name.split('.').pop().toUpperCase();
+      $('copy').classList.toggle('hidden', !plain);
+      renderPreview(r.preview); renderResults();
+      show('stepDone');
+    } catch (e){
+      console.error(e); show('stepPick');
+      showErr(e && e.name === 'PasswordException' ? 'This PDF is password protected. Remove the password first, then try again.'
+        : (e && e.message && e.message.length > 20 ? e.message : 'This file could not be converted. It may be damaged. Please try another file.'));
+    }
+  };
+
+  function renderPreview(p){
+    const box = $('preview'); box.innerHTML = '';
+    if (!p) return;
+    if (p.table){
+      const wrap = document.createElement('div'); wrap.className = 'tprev';
+      const t = document.createElement('table'); wrap.appendChild(t);
+      const rows = p.table.slice(0, 30), max = Math.max(1, ...rows.map(r => r.length));
+      rows.forEach(r => { const tr = t.insertRow(); for (let i = 0; i < max; i++){ const td = tr.insertCell(); td.textContent = r[i] || ''; if (toNumber(td.textContent) !== null) td.className = 'n'; } });
+      box.appendChild(wrap);
+    } else if (p.text){
+      const d = document.createElement('div'); d.className = 'textprev'; let n = 0;
+      p.text.forEach((ps, i) => { if (n > 40) return; if (i) d.appendChild(document.createElement('hr'));
+        ps.forEach(x => { if (n++ > 40) return; const el = document.createElement(x.heading ? 'h4' : 'p'); el.textContent = x.text.replace(/\t/g, '    '); d.appendChild(el); }); });
+      box.appendChild(d);
+    }
+  }
+  function renderResults(){
+    const box = $('results'); box.innerHTML = '';
+    if (outputs.length < 2) return;
+    outputs.forEach(o => {
+      const d = document.createElement('div'); d.className = 'res';
+      d.innerHTML = `<img alt=""><div class="info"><div></div><span></span></div><button class="btn btn-ghost">Download</button>`;
+      d.querySelector('img').src = o.url;
+      d.querySelector('.info div').textContent = o.label || o.name;
+      d.querySelector('.info span').textContent = o.info || size(o.blob.size);
+      d.querySelector('button').onclick = () => save(o.blob, o.name);
+      box.appendChild(d);
+    });
+  }
+
+  function save(blob, name){
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  }
+  $('dlMain').onclick = async () => {
+    if (outputs.length === 1) return save(outputs[0].blob, outputs[0].name);
+    const btn = $('dlMain'); btn.disabled = true; btn.textContent = 'Preparing ZIP…';
+    try {
+      await load('jszip');
+      const zip = new JSZip(), used = {};
+      outputs.forEach(o => { let n = o.name; if (used[n]) n = n.replace(/(\.\w+)$/, `-${++used[n]}$1`); else used[n] = 1; zip.file(n, o.blob); });
+      const base = files.length === 1 ? baseName(files[0].file) : 'converted';
+      save(await zip.generateAsync({type:'blob'}), base + '-' + toSel.value + '.zip');
+    } catch (_){ outputs.forEach(o => save(o.blob, o.name)); }
+    btn.disabled = false; btn.textContent = 'Download all (ZIP)';
+  };
+  $('copy').onclick = async () => {
+    try { await navigator.clipboard.writeText(plain); $('copy').textContent = 'Copied!'; }
+    catch (_){ const r = document.createRange(); r.selectNodeContents($('preview')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); $('copy').textContent = 'Text selected'; }
+    setTimeout(() => $('copy').textContent = 'Copy text', 2000);
+  };
+  $('again').onclick = () => {
+    outputs.forEach(o => o.url && URL.revokeObjectURL(o.url)); outputs = []; plain = '';
+    clearFiles(); bar(0); showErr(''); show('stepPick');
+  };
+  function show(id){ ['stepPick','stepWork','stepDone'].forEach(s => $(s).classList.toggle('hidden', s !== id)); }
+})();
+</script>
+</body>
+</html>
