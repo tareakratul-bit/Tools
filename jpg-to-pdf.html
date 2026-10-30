@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JPG to PDF Converter – Free, No Upload, No Watermark</title>
+<meta name="description" content="Convert JPG, PNG and WEBP images to PDF for free. Files never leave your device – everything runs in your browser. No sign-up, no watermark.">
+<link rel="canonical" href="https://YOUR-DOMAIN.com/jpg-to-pdf">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ===== AdSense: paste the script Google gives you here after approval ===== -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"Are my images uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Everything happens inside your own browser. Your images are never sent anywhere."}},
+    {"@type":"Question","name":"How many images can I convert at once?","acceptedAnswer":{"@type":"Answer","text":"There is no fixed limit. Very large or very many images may take a little longer on older phones."}},
+    {"@type":"Question","name":"Is it really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. No account, no payment, and no watermark on your PDF."}},
+    {"@type":"Question","name":"Which image formats are supported?","acceptedAnswer":{"@type":"Answer","text":"JPG, JPEG, PNG and WEBP."}}
+  ]
+}
+</script>
+
+<style>
+:root{
+  --bg:#f6f7fb; --card:#ffffff; --text:#1c2230; --muted:#5d6577;
+  --line:#e3e6ee; --brand:#e5322d; --brand-dark:#c21f1a; --brand-soft:#fdecec;
+  --ok:#16a34a; --radius:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11141b; --card:#1a1f2a; --text:#e8ebf2; --muted:#9aa3b5;
+    --line:#2a3140; --brand:#ff5a52; --brand-dark:#ff7a73; --brand-soft:#2a1b1d;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Inter",system-ui,sans-serif;line-height:1.6}
+a{color:var(--brand)}
+header{background:var(--card);border-bottom:1px solid var(--line)}
+.nav{max-width:960px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:700;font-size:20px;text-decoration:none;color:var(--text)}
+.logo span{color:var(--brand)}
+main{max-width:960px;margin:0 auto;padding:16px}
+h1{font-size:clamp(24px,5vw,34px);margin:16px 0 4px;text-align:center}
+.sub{text-align:center;color:var(--muted);margin:0 0 20px}
+.ad-slot{background:repeating-linear-gradient(45deg,transparent,transparent 8px,rgba(127,127,127,.06) 8px,rgba(127,127,127,.06) 16px);
+  border:1px dashed var(--line);border-radius:10px;color:var(--muted);font-size:13px;
+  display:flex;align-items:center;justify-content:center;min-height:90px;margin:16px 0;text-align:center}
+.tool{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.drop{border:2px dashed var(--brand);background:var(--brand-soft);border-radius:var(--radius);
+  padding:32px 16px;text-align:center;cursor:pointer;transition:.15s}
+.drop.over{transform:scale(1.01);border-style:solid}
+.drop strong{display:block;font-size:18px;margin-bottom:4px}
+.btn{appearance:none;border:0;border-radius:10px;padding:12px 22px;font:inherit;font-weight:600;cursor:pointer}
+.btn-primary{background:var(--brand);color:#fff}
+.btn-primary:hover{background:var(--brand-dark)}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.list{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin:18px 0}
+.item{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--bg)}
+.item img{width:100%;height:140px;object-fit:contain;display:block;background:#fff}
+.item .bar{display:flex;justify-content:space-between;align-items:center;padding:4px 6px}
+.item .bar button{border:0;background:transparent;color:var(--text);cursor:pointer;font-size:16px;padding:2px 6px;border-radius:6px}
+.item .bar button:hover{background:var(--line)}
+.num{position:absolute;top:6px;left:6px;background:var(--brand);color:#fff;font-size:12px;border-radius:999px;padding:0 8px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 18px}
+.opts label{font-size:14px;color:var(--muted);display:block;margin-bottom:4px}
+.opts select{width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);font:inherit}
+.actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.hidden{display:none!important}
+.progress-wrap{text-align:center;padding:10px 0}
+.progress{height:10px;background:var(--line);border-radius:999px;overflow:hidden;margin:12px auto;max-width:420px}
+.progress div{height:100%;width:0;background:var(--brand);transition:width .2s}
+.done{text-align:center;padding:10px 0}
+.done .tick{font-size:44px;color:var(--ok)}
+.privacy{font-size:13px;color:var(--muted);text-align:center;margin-top:12px}
+article{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-top:20px}
+article h2{font-size:22px;margin-top:0}
+article h3{font-size:17px;margin-bottom:4px}
+article ol{padding-left:20px}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 16px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="/">Site<span>Name</span></a>
+    <a href="/">All tools</a>
+  </div>
+</header>
+
+<main>
+  <h1>JPG to PDF Converter</h1>
+  <p class="sub">Turn your images into a PDF in one click. Free, no watermark.</p>
+
+  <!-- ===== Ad 1: above the tool ===== -->
+  <div class="ad-slot">Ad slot – top</div>
+
+  <section class="tool">
+    <!-- Step 1: pick images -->
+    <div id="stepPick">
+      <div class="drop" id="drop" tabindex="0" role="button" aria-label="Select images">
+        <strong>Select images</strong>
+        <span>or drop them here (JPG, PNG, WEBP)</span>
+      </div>
+      <input type="file" id="file" accept="image/jpeg,image/png,image/webp" multiple hidden>
+
+      <div class="list" id="list"></div>
+
+      <div id="settings" class="hidden">
+        <div class="opts">
+          <div>
+            <label for="size">Page size</label>
+            <select id="size">
+              <option value="a4">A4</option>
+              <option value="letter">US Letter</option>
+              <option value="fit">Same as image</option>
+            </select>
+          </div>
+          <div>
+            <label for="orient">Orientation</label>
+            <select id="orient">
+              <option value="auto">Auto (match image)</option>
+              <option value="p">Portrait</option>
+              <option value="l">Landscape</option>
+            </select>
+          </div>
+          <div>
+            <label for="margin">Margin</label>
+            <select id="margin">
+              <option value="0">None</option>
+              <option value="20" selected>Small</option>
+              <option value="40">Large</option>
+            </select>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-ghost" id="addMore">+ Add more</button>
+          <button class="btn btn-primary" id="convert">Convert to PDF</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: processing (ad shown here) -->
+    <div id="stepWork" class="hidden">
+      <div class="progress-wrap">
+        <strong id="workText">Creating your PDF…</strong>
+        <div class="progress"><div id="bar"></div></div>
+      </div>
+      <!-- ===== Ad 2: while processing ===== -->
+      <div class="ad-slot" style="min-height:250px">Ad slot – processing</div>
+    </div>
+
+    <!-- Step 3: download -->
+    <div id="stepDone" class="hidden">
+      <div class="done">
+        <div class="tick">✓</div>
+        <strong>Your PDF is ready!</strong>
+        <p id="doneInfo" style="color:var(--muted);margin:4px 0 14px"></p>
+        <div class="actions">
+          <button class="btn btn-primary" id="download">Download PDF</button>
+          <button class="btn btn-ghost" id="again">Start over</button>
+        </div>
+      </div>
+      <!-- ===== Ad 3: below download ===== -->
+      <div class="ad-slot">Ad slot – after download</div>
+    </div>
+
+    <p class="privacy">🔒 Your images are never uploaded. Everything runs in your browser.</p>
+  </section>
+
+  <article>
+    <h2>How to convert JPG to PDF</h2>
+    <ol>
+      <li><b>Select images:</b> click the box above and choose one or more images.</li>
+      <li><b>Arrange pages:</b> use ◀ ▶ to change the order and ✕ to remove an image.</li>
+      <li><b>Choose settings:</b> pick the page size, orientation and margin.</li>
+      <li><b>Convert:</b> click “Convert to PDF”, then download your file.</li>
+    </ol>
+
+    <h2>Frequently asked questions</h2>
+    <h3>Are my images uploaded to a server?</h3>
+    <p>No. Everything happens inside your own browser. Your images are never sent anywhere.</p>
+    <h3>How many images can I convert at once?</h3>
+    <p>There is no fixed limit. Very large or very many images may take a little longer on older phones.</p>
+    <h3>Is it really free?</h3>
+    <p>Yes. No account, no payment, and no watermark on your PDF.</p>
+    <h3>Which image formats are supported?</h3>
+    <p>JPG, JPEG, PNG and WEBP.</p>
+  </article>
+
+  <!-- ===== Ad 4: bottom of page ===== -->
+  <div class="ad-slot">Ad slot – bottom</div>
+</main>
+
+<footer>© <span id="yr"></span> SiteName · <a href="/privacy">Privacy Policy</a> · <a href="/about">About</a></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const files = [];           // {file, url}
+  let pdfBlob = null;
+  const MAX_SIDE = 3000;      // downscale huge images so phones don't run out of memory
+
+  $('yr').textContent = new Date().getFullYear();
+
+  const input = $('file'), drop = $('drop');
+  drop.onclick = () => input.click();
+  drop.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); } };
+  $('addMore').onclick = () => input.click();
+  input.onchange = () => { addFiles(input.files); input.value = ''; };
+
+  ['dragenter','dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave','drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('over'); }));
+  drop.addEventListener('drop', e => addFiles(e.dataTransfer.files));
+
+  function addFiles(list){
+    for (const f of list){
+      if (!/^image\/(jpeg|png|webp)$/.test(f.type)) continue;
+      files.push({file:f, url:URL.createObjectURL(f)});
+    }
+    render();
+  }
+
+  function render(){
+    const box = $('list');
+    box.innerHTML = '';
+    files.forEach((it, i) => {
+      const d = document.createElement('div');
+      d.className = 'item';
+      d.innerHTML = `<span class="num">${i+1}</span><img alt="">
+        <div class="bar">
+          <button title="Move left" data-a="l">◀</button>
+          <button title="Remove" data-a="x">✕</button>
+          <button title="Move right" data-a="r">▶</button>
+        </div>`;
+      d.querySelector('img').src = it.url;
+      d.querySelectorAll('button').forEach(b => b.onclick = () => move(i, b.dataset.a));
+      box.appendChild(d);
+    });
+    $('settings').classList.toggle('hidden', files.length === 0);
+  }
+
+  function move(i, a){
+    if (a === 'x'){ URL.revokeObjectURL(files[i].url); files.splice(i,1); }
+    else {
+      const j = a === 'l' ? i-1 : i+1;
+      if (j < 0 || j >= files.length) return;
+      [files[i], files[j]] = [files[j], files[i]];
+    }
+    render();
+  }
+
+  function loadImg(url){
+    return new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = url; });
+  }
+
+  function toJpeg(img){
+    let w = img.naturalWidth, h = img.naturalHeight;
+    const s = Math.min(1, MAX_SIDE / Math.max(w, h));
+    w = Math.round(w*s); h = Math.round(h*s);
+    const c = document.createElement('canvas');
+    c.width = w; c.height = h;
+    const ctx = c.getContext('2d');
+    ctx.fillStyle = '#fff'; ctx.fillRect(0,0,w,h);   // transparent PNG areas become white
+    ctx.drawImage(img, 0, 0, w, h);
+    return {data: c.toDataURL('image/jpeg', 0.92), w, h};
+  }
+
+  const SIZES = {a4:[595.28,841.89], letter:[612,792]}; // points
+
+  $('convert').onclick = async () => {
+    if (!files.length) return;
+    if (!window.jspdf){ alert('The page did not finish loading. Check your connection and try again.'); return; }
+    show('stepWork');
+    const size = $('size').value, orient = $('orient').value, m = +$('margin').value;
+    const { jsPDF } = window.jspdf;
+    let doc = null;
+    try {
+      for (let i = 0; i < files.length; i++){
+        $('workText').textContent = `Creating your PDF… (${i+1}/${files.length})`;
+        const img = await loadImg(files[i].url);
+        const j = toJpeg(img);
+        const landscapeImg = j.w > j.h;
+
+        let pw, ph;
+        if (size === 'fit'){ pw = j.w*0.75 + m*2; ph = j.h*0.75 + m*2; }
+        else {
+          [pw, ph] = SIZES[size];
+          const wantL = orient === 'l' || (orient === 'auto' && landscapeImg);
+          if (wantL) [pw, ph] = [ph, pw];
+        }
+        const fmt = [pw, ph], o = pw > ph ? 'l' : 'p';
+        if (!doc) doc = new jsPDF({unit:'pt', format:fmt, orientation:o, compress:true});
+        else doc.addPage(fmt, o);
+
+        const aw = pw - m*2, ah = ph - m*2;
+        const r = Math.min(aw / j.w, ah / j.h);
+        const dw = j.w*r, dh = j.h*r;
+        doc.addImage(j.data, 'JPEG', (pw-dw)/2, (ph-dh)/2, dw, dh, undefined, 'FAST');
+
+        $('bar').style.width = ((i+1)/files.length*100) + '%';
+        await new Promise(r => setTimeout(r, 0)); // let the UI update
+      }
+      pdfBlob = doc.output('blob');
+      const n = files.length;
+      $('doneInfo').textContent = `${n} page${n>1?'s':''} · ${(pdfBlob.size/1024/1024).toFixed(2)} MB`;
+      show('stepDone');
+    } catch (e){
+      console.error(e);
+      alert('One of the images could not be read. Please try a different image.');
+      show('stepPick');
+    }
+  };
+
+  $('download').onclick = () => {
+    if (!pdfBlob) return;
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(pdfBlob);
+    a.download = 'images-to-pdf.pdf';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  };
+
+  $('again').onclick = () => {
+    files.forEach(f => URL.revokeObjectURL(f.url));
+    files.length = 0; pdfBlob = null; $('bar').style.width = '0';
+    render(); show('stepPick');
+  };
+
+  function show(id){
+    ['stepPick','stepWork','stepDone'].forEach(s => $(s).classList.toggle('hidden', s !== id));
+  }
+})();
+</script>
+</body>
+</html>
