@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PDF to Excel Converter – Free, No Upload</title>
+<meta name="description" content="Convert PDF tables to an Excel spreadsheet (.xlsx) for free. Rows and columns are detected automatically. Files never leave your device. No sign-up.">
+<link rel="canonical" href="https://YOUR-DOMAIN.com/pdf-to-excel.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- AdSense script goes here after approval -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"Is my PDF uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. The PDF is read inside your browser and the Excel file is created on your device."}},
+ {"@type":"Question","name":"Why is my Excel file empty?","acceptedAnswer":{"@type":"Answer","text":"The PDF is probably a scanned image. This tool reads PDFs with selectable text, such as bank statements, invoices and reports exported from software."}},
+ {"@type":"Question","name":"Are numbers kept as numbers?","acceptedAnswer":{"@type":"Answer","text":"Yes. Values like 1,250.50 or (300) become real numbers in Excel, so you can add them up right away."}},
+ {"@type":"Question","name":"Can I get each page on a separate sheet?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose “One sheet per page” before converting."}}
+]}
+</script>
+<style>/* SiteName – shared styles for every page */
+:root{
+  --bg:#f6f7fb; --card:#ffffff; --text:#1c2230; --muted:#5d6577;
+  --line:#e3e6ee; --brand:#e5322d; --brand-dark:#c21f1a; --brand-soft:#fdecec;
+  --blue:#2563eb; --blue-soft:#e8effd; --green:#16a34a; --green-soft:#e6f6ec;
+  --ok:#16a34a; --radius:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#11141b; --card:#1a1f2a; --text:#e8ebf2; --muted:#9aa3b5;
+    --line:#2a3140; --brand:#ff5a52; --brand-dark:#ff7a73; --brand-soft:#2a1b1d;
+    --blue:#6b9bff; --blue-soft:#1a2236; --green:#3ccf74; --green-soft:#16271d;
+    color-scheme: dark;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+a{color:var(--brand)}
+img{max-width:100%}
+
+/* header & footer */
+header{background:var(--card);border-bottom:1px solid var(--line)}
+.nav{max-width:1040px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-weight:700;font-size:20px;text-decoration:none;color:var(--text);white-space:nowrap}
+.logo span{color:var(--brand)}
+.nav-links{display:flex;gap:16px;font-size:15px}
+.nav-links a{color:var(--text);text-decoration:none}
+.nav-links a:hover{color:var(--brand)}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:28px 16px}
+footer a{color:var(--muted)}
+
+main{max-width:1040px;margin:0 auto;padding:16px}
+h1{font-size:clamp(24px,5vw,34px);margin:16px 0 4px;text-align:center;text-wrap:balance}
+.sub{text-align:center;color:var(--muted);margin:0 0 20px}
+
+/* ad placeholders – replace inner text with AdSense code later */
+.ad-slot{background:repeating-linear-gradient(45deg,transparent,transparent 8px,rgba(127,127,127,.06) 8px,rgba(127,127,127,.06) 16px);
+  border:1px dashed var(--line);border-radius:10px;color:var(--muted);font-size:13px;
+  display:flex;align-items:center;justify-content:center;min-height:90px;margin:16px 0;text-align:center}
+.ad-tall{min-height:250px}
+
+/* tool box */
+.tool{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.drop{border:2px dashed var(--brand);background:var(--brand-soft);border-radius:var(--radius);
+  padding:32px 16px;text-align:center;cursor:pointer;transition:transform .15s}
+.drop.over{transform:scale(1.01);border-style:solid}
+.drop:focus-visible{outline:3px solid var(--brand);outline-offset:3px}
+.drop strong{display:block;font-size:18px;margin-bottom:4px}
+.btn{appearance:none;border:0;border-radius:10px;padding:12px 22px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
+.btn:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.btn-primary{background:var(--brand);color:#fff}
+.btn-primary:hover{background:var(--brand-dark)}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.hidden{display:none!important}
+
+/* file thumbnails */
+.list{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin:18px 0}
+.item{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--bg);min-width:0}
+.item img{width:100%;height:140px;object-fit:contain;display:block;background:#fff}
+.item .doc{height:140px;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:8px;text-align:center;font-size:13px;color:var(--muted);word-break:break-word}
+.item .doc b{font-size:28px;color:var(--brand)}
+.item .meta{font-size:12px;color:var(--muted);padding:2px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item .bar{display:flex;justify-content:space-between;align-items:center;padding:4px 6px}
+.item .bar button{border:0;background:transparent;color:var(--text);cursor:pointer;font-size:16px;padding:2px 6px;border-radius:6px}
+.item .bar button:hover{background:var(--line)}
+.num{position:absolute;top:6px;left:6px;background:var(--brand);color:#fff;font-size:12px;border-radius:999px;padding:0 8px}
+
+/* options */
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 18px}
+.opts label{font-size:14px;color:var(--muted);display:block;margin-bottom:4px}
+.opts select,.opts input[type=range]{width:100%}
+.opts select{padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);font:inherit}
+
+/* progress & result */
+.progress-wrap{text-align:center;padding:10px 0}
+.progress{height:10px;background:var(--line);border-radius:999px;overflow:hidden;margin:12px auto;max-width:420px}
+.progress div{height:100%;width:0;background:var(--brand);transition:width .2s}
+.done{text-align:center;padding:10px 0}
+.done .tick{font-size:44px;color:var(--ok);line-height:1.2}
+.results{display:grid;gap:8px;margin:14px 0;text-align:left}
+.res{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--bg)}
+.res img{width:48px;height:48px;object-fit:cover;border-radius:6px;flex:none;background:#fff}
+.res .info{flex:1;min-width:0;font-size:14px}
+.res .info div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.res .save{color:var(--green);font-weight:600;font-variant-numeric:tabular-nums}
+.res button{flex:none;padding:8px 14px}
+.privacy{font-size:13px;color:var(--muted);text-align:center;margin-top:12px}
+
+/* article / guide */
+article{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-top:20px}
+article h2{font-size:22px;margin-top:0}
+article h3{font-size:17px;margin-bottom:4px}
+article ol,article ul{padding-left:20px}
+article p,article li{max-width:70ch}
+
+/* homepage */
+.hero{text-align:center;padding:28px 0 8px}
+.hero h1{font-size:clamp(28px,6vw,44px);margin:0 0 8px}
+.hero p{color:var(--muted);font-size:17px;margin:0 auto;max-width:560px}
+.cat{margin:28px 0 10px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.card{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;text-decoration:none;color:var(--text);transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--brand);transform:translateY(-2px)}
+.card:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.ico{flex:none;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.ico.pdf{background:var(--brand-soft);color:var(--brand)}
+.ico.img{background:var(--blue-soft);color:var(--blue)}
+.card h3{margin:0 0 2px;font-size:16px}
+.card p{margin:0;font-size:14px;color:var(--muted)}
+.trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:32px}
+.trust div{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.trust b{display:block;margin-bottom:2px}
+.trust span{color:var(--muted);font-size:14px}
+
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+@media (max-width:480px){.nav-links{gap:12px;font-size:14px}}
+
+.preview{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0;max-height:360px}
+.preview table{border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums;min-width:100%}
+.preview td{border:1px solid var(--line);padding:4px 8px;white-space:nowrap;max-width:260px;overflow:hidden;text-overflow:ellipsis}
+.preview tr:first-child td{background:var(--bg);font-weight:600}
+.preview td.n{text-align:right}
+.preview-note{font-size:13px;color:var(--muted);margin:0}
+.filebox{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:10px;padding:12px;margin:16px 0;background:var(--bg)}
+.filebox b.ic{flex:none;width:44px;height:44px;border-radius:10px;background:var(--brand-soft);color:var(--brand);display:flex;align-items:center;justify-content:center;font-size:13px}
+.filebox .info{flex:1;min-width:0}
+.filebox .info div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.filebox .info small{color:var(--muted)}
+.xl{background:var(--green)}
+.xl:hover{background:var(--green);filter:brightness(.92)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="./">Site<span>Name</span></a>
+    <nav class="nav-links"><a href="./">All tools</a></nav>
+  </div>
+</header>
+
+<main>
+  <h1>PDF to Excel Converter</h1>
+  <p class="sub">Turn tables in a PDF into an editable Excel spreadsheet. Free, no sign-up.</p>
+
+  <div class="ad-slot">Ad slot – top</div>
+
+  <section class="tool">
+    <!-- Step 1 -->
+    <div id="stepPick">
+      <div class="drop" id="drop" tabindex="0" role="button" aria-label="Select a PDF file">
+        <strong>Select PDF file</strong>
+        <span>or drop it here</span>
+      </div>
+      <input type="file" id="file" accept="application/pdf,.pdf" hidden>
+
+      <div id="settings" class="hidden">
+        <div class="filebox">
+          <b class="ic">PDF</b>
+          <div class="info"><div id="fname"></div><small id="fsize"></small></div>
+          <button class="btn btn-ghost" id="change" style="padding:8px 14px">Change</button>
+        </div>
+        <div class="opts">
+          <div>
+            <label for="layout">Sheets</label>
+            <select id="layout">
+              <option value="one">All pages in one sheet</option>
+              <option value="each">One sheet per page</option>
+            </select>
+          </div>
+          <div>
+            <label for="nums">Numbers</label>
+            <select id="nums">
+              <option value="yes">Convert to real numbers</option>
+              <option value="no">Keep as text</option>
+            </select>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-primary" id="convert">Convert to Excel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div id="stepWork" class="hidden">
+      <div class="progress-wrap">
+        <strong id="workText">Reading your PDF…</strong>
+        <div class="progress"><div id="bar"></div></div>
+      </div>
+      <div class="ad-slot ad-tall">Ad slot – processing</div>
+    </div>
+
+    <!-- Step 3 -->
+    <div id="stepDone" class="hidden">
+      <div class="done">
+        <div class="tick">✓</div>
+        <strong>Your Excel file is ready!</strong>
+        <p id="doneInfo" class="sub" style="margin:4px 0 14px"></p>
+        <div class="actions">
+          <button class="btn btn-primary xl" id="download">Download Excel</button>
+          <button class="btn btn-ghost" id="again">Convert another PDF</button>
+        </div>
+      </div>
+      <div id="previewWrap">
+        <p class="preview-note" id="previewNote"></p>
+        <div class="preview"><table id="preview"></table></div>
+      </div>
+      <div class="ad-slot">Ad slot – after download</div>
+    </div>
+
+    <p id="err" class="privacy hidden" style="color:var(--brand)"></p>
+    <p class="privacy">🔒 Your PDF is never uploaded. Everything runs in your browser.</p>
+  </section>
+
+  <article>
+    <h2>How to convert PDF to Excel</h2>
+    <ol>
+      <li><b>Select your PDF:</b> click the box above and choose a file.</li>
+      <li><b>Choose options:</b> keep all pages in one sheet or put each page on its own sheet.</li>
+      <li><b>Convert:</b> click “Convert to Excel”, check the preview, then download the .xlsx file.</li>
+    </ol>
+    <h2>Best results</h2>
+    <ul>
+      <li>Works best with PDFs created by software: bank statements, invoices, price lists and reports.</li>
+      <li>Scanned PDFs are pictures of text, so there is nothing to read. Use a PDF with selectable text.</li>
+      <li>Complex layouts with merged cells may need small fixes in Excel afterwards.</li>
+    </ul>
+    <h2>Frequently asked questions</h2>
+    <h3>Is my PDF uploaded to a server?</h3>
+    <p>No. The PDF is read inside your browser and the Excel file is created on your device.</p>
+    <h3>Why is my Excel file empty?</h3>
+    <p>The PDF is probably a scanned image. This tool reads PDFs with selectable text, such as bank statements, invoices and reports exported from software.</p>
+    <h3>Are numbers kept as numbers?</h3>
+    <p>Yes. Values like 1,250.50 or (300) become real numbers in Excel, so you can add them up right away.</p>
+    <h3>Can I get each page on a separate sheet?</h3>
+    <p>Yes. Choose “One sheet per page” before converting.</p>
+  </article>
+
+  <div class="ad-slot">Ad slot – bottom</div>
+</main>
+
+<footer>© <span id="yr"></span> SiteName · <a href="privacy.html">Privacy Policy</a> · <a href="about.html">About</a></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+/* ---------- Table detection (pure functions) ---------- */
+// items: [{str, x, y, w, h}] in PDF points, y grows upward
+function itemsToRows(items){
+  items = items.filter(it => it.str && it.str.trim() !== '');
+  if (!items.length) return [];
+  // 1) group into lines by y
+  items.sort((a, b) => b.y - a.y || a.x - b.x);
+  const lines = [];
+  for (const it of items){
+    const tol = Math.max(2, it.h * 0.45);
+    const line = lines.find(l => Math.abs(l.y - it.y) <= tol);
+    if (line) line.items.push(it); else lines.push({y: it.y, items: [it]});
+  }
+  lines.sort((a, b) => b.y - a.y);
+
+  // 2) inside each line, join close items into cells
+  const rows = lines.map(l => {
+    const its = l.items.sort((a, b) => a.x - b.x);
+    const cells = [];
+    for (const it of its){
+      const last = cells[cells.length - 1];
+      const gap = last ? it.x - last.right : Infinity;
+      if (last && gap < Math.max(3, it.h * 0.9)){
+        last.text += (gap > it.h * 0.12 ? ' ' : '') + it.str;
+        last.right = Math.max(last.right, it.x + it.w);
+      } else {
+        cells.push({text: it.str, left: it.x, right: it.x + it.w});
+      }
+    }
+    cells.forEach(c => c.text = c.text.replace(/\s+/g, ' ').trim());
+    return cells;
+  });
+
+  // 3) find columns from rows that have 2+ cells
+  const spans = [];
+  rows.forEach(r => { if (r.length > 1) r.forEach(c => spans.push([c.left, c.right])); });
+  if (!spans.length) return rows.map(r => r.map(c => c.text));
+  spans.sort((a, b) => a[0] - b[0]);
+  const cols = [];
+  for (const [l, r] of spans){
+    const last = cols[cols.length - 1];
+    if (last && l <= last[1] + 1) last[1] = Math.max(last[1], r);
+    else cols.push([l, r]);
+  }
+
+  // 4) place each cell in its column
+  return rows.map(r => {
+    const out = new Array(cols.length).fill('');
+    r.forEach(c => {
+      if (r.length === 1){ // titles and notes go where they start
+        let i = cols.findIndex(([l, rr]) => c.left >= l - 2 && c.left <= rr);
+        if (i < 0) i = Math.max(0, cols.filter(([l]) => l <= c.left).length - 1);
+        out[i] = out[i] ? out[i] + ' ' + c.text : c.text; return;
+      }
+      let best = -1, bestOv = 0;
+      cols.forEach(([l, rr], i) => {
+        const ov = Math.min(rr, c.right) - Math.max(l, c.left);
+        if (ov > bestOv){ bestOv = ov; best = i; }
+      });
+      if (best < 0){ // no overlap: nearest column by left edge
+        let d = Infinity;
+        cols.forEach(([l], i) => { const dd = Math.abs(l - c.left); if (dd < d){ d = dd; best = i; } });
+      }
+      out[best] = out[best] ? out[best] + ' ' + c.text : c.text;
+    });
+    while (out.length && out[out.length - 1] === '') out.pop();
+    return out;
+  });
+}
+
+function toNumber(s){
+  const t = s.trim();
+  if (!/^\(?[-+]?[$€£৳₹]?\s?\d{1,3}(,\d{3})*(\.\d+)?\)?%?$|^\(?[-+]?[$€£৳₹]?\s?\d+(\.\d+)?\)?%?$/.test(t)) return null;
+  const neg = /^\(.*\)$/.test(t) || t.startsWith('-');
+  const pct = t.endsWith('%');
+  let n = parseFloat(t.replace(/[^\d.]/g, ''));
+  if (isNaN(n)) return null;
+  if (neg) n = -n;
+  if (pct) n = n / 100;
+  return n;
+}
+
+/* ---------- Page logic ---------- */
+(function(){
+  if (typeof document === 'undefined') return;
+  const $ = id => document.getElementById(id);
+  let file = null, outBlob = null, outName = 'converted.xlsx';
+  $('yr').textContent = new Date().getFullYear();
+  if (window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+  const input = $('file'), drop = $('drop');
+  drop.onclick = () => input.click();
+  drop.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); } };
+  $('change').onclick = () => input.click();
+  input.onchange = () => { pick(input.files[0]); input.value = ''; };
+  ['dragenter','dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave','drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('over'); }));
+  drop.addEventListener('drop', e => pick(e.dataTransfer.files[0]));
+
+  const kb = n => n < 1048576 ? (n/1024).toFixed(0) + ' KB' : (n/1048576).toFixed(2) + ' MB';
+  function showErr(m){ $('err').textContent = m || ''; $('err').classList.toggle('hidden', !m); }
+
+  function pick(f){
+    if (!f) return;
+    if (!(f.type === 'application/pdf' || /\.pdf$/i.test(f.name))){ showErr('Please choose a PDF file.'); return; }
+    showErr('');
+    file = f;
+    $('fname').textContent = f.name;
+    $('fsize').textContent = kb(f.size);
+    drop.classList.add('hidden');
+    $('settings').classList.remove('hidden');
+  }
+
+  $('convert').onclick = async () => {
+    if (!file) return;
+    if (!window.pdfjsLib || !window.XLSX){ showErr('The page did not finish loading. Check your connection and reload.'); return; }
+    showErr(''); show('stepWork');
+    const perPage = $('layout').value === 'each', numeric = $('nums').value === 'yes';
+    try {
+      const pdf = await pdfjsLib.getDocument({data: await file.arrayBuffer()}).promise;
+      const pages = [];
+      for (let p = 1; p <= pdf.numPages; p++){
+        $('workText').textContent = `Reading page ${p} of ${pdf.numPages}…`;
+        const page = await pdf.getPage(p);
+        const tc = await page.getTextContent();
+        const items = tc.items.map(it => ({
+          str: it.str, x: it.transform[4], y: it.transform[5],
+          w: it.width, h: Math.abs(it.height || it.transform[3]) || 10
+        }));
+        pages.push(itemsToRows(items));
+        $('bar').style.width = (p / pdf.numPages * 100) + '%';
+      }
+      const totalRows = pages.reduce((s, r) => s + r.length, 0);
+      if (!totalRows){
+        show('stepPick');
+        showErr('No text was found. This PDF looks like a scanned image, so there is nothing to convert.');
+        return;
+      }
+      const cell = s => { if (!numeric) return s; const n = toNumber(s); return n === null ? s : n; };
+      const wb = XLSX.utils.book_new();
+      const addSheet = (rows, name) => {
+        const ws = XLSX.utils.aoa_to_sheet(rows.map(r => r.map(cell)));
+        const widths = [];
+        rows.forEach(r => r.forEach((v, i) => widths[i] = Math.min(60, Math.max(widths[i] || 8, String(v).length + 2))));
+        ws['!cols'] = widths.map(w => ({wch: w}));
+        XLSX.utils.book_append_sheet(wb, ws, name);
+      };
+      let all = [];
+      if (perPage) pages.forEach((rows, i) => addSheet(rows.length ? rows : [['(empty page)']], 'Page ' + (i+1)));
+      else { pages.forEach((rows, i) => { all = all.concat(rows); if (i < pages.length - 1 && rows.length) all.push([]); }); addSheet(all, 'Sheet1'); }
+
+      const buf = XLSX.write(wb, {bookType:'xlsx', type:'array'});
+      outBlob = new Blob([buf], {type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+      outName = file.name.replace(/\.pdf$/i, '') + '.xlsx';
+      $('doneInfo').textContent = `${pdf.numPages} page${pdf.numPages > 1 ? 's' : ''} · ${totalRows} rows · ${kb(outBlob.size)}`;
+      renderPreview(perPage ? pages[0] : all);
+      $('previewNote').textContent = perPage ? 'Preview of page 1:' : 'Preview:';
+      show('stepDone');
+    } catch (e){
+      console.error(e);
+      show('stepPick');
+      showErr(e && e.name === 'PasswordException'
+        ? 'This PDF is password protected. Remove the password first, then try again.'
+        : 'This PDF could not be read. It may be damaged. Please try another file.');
+    }
+  };
+
+  function renderPreview(rows){
+    const t = $('preview'); t.innerHTML = '';
+    const max = Math.max(1, ...rows.slice(0, 30).map(r => r.length));
+    rows.slice(0, 30).forEach(r => {
+      const tr = document.createElement('tr');
+      for (let i = 0; i < max; i++){
+        const td = document.createElement('td');
+        td.textContent = r[i] || '';
+        if (toNumber(td.textContent) !== null) td.className = 'n';
+        tr.appendChild(td);
+      }
+      t.appendChild(tr);
+    });
+    if (rows.length > 30){
+      const tr = document.createElement('tr'), td = document.createElement('td');
+      td.colSpan = max; td.textContent = `… and ${rows.length - 30} more rows in the Excel file`;
+      td.style.color = 'var(--muted)'; td.style.fontWeight = '400';
+      tr.appendChild(td); t.appendChild(tr);
+    }
+  }
+
+  $('download').onclick = () => {
+    if (!outBlob) return;
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(outBlob); a.download = outName;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  };
+  $('again').onclick = () => {
+    file = null; outBlob = null; $('bar').style.width = '0'; showErr('');
+    drop.classList.remove('hidden'); $('settings').classList.add('hidden'); show('stepPick');
+  };
+  function show(id){ ['stepPick','stepWork','stepDone'].forEach(s => $(s).classList.toggle('hidden', s !== id)); }
+})();
+</script>
+</body>
+</html>
