@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Unlock PDF &amp; Excel – Remove Password from Bank Statements</title>
-<meta name="description" content="Remove the password from a PDF bank statement or a locked Excel file when you know the password. Get an unlocked PDF, or convert it straight to Excel, Word or JPG. Files never leave your device.">
+<meta name="description" content="Remove the password from your locked PDF bank statements or Excel files. Unlock many files at once and save them as one merged PDF or separately. Files never leave your device.">
 <link rel="canonical" href="https://YOUR-DOMAIN.com/unlock.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -129,31 +129,47 @@ article p,article li{max-width:70ch}
 <!-- AdSense script goes here after approval -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"Can I unlock many files at once?","acceptedAnswer":{"@type":"Answer","text":"Yes. Add several locked PDFs together. If they share one password, type it once. You can then save them as one merged PDF or as separate files in a ZIP."}},
  {"@type":"Question","name":"Where do I find the password of my bank statement?","acceptedAnswer":{"@type":"Answer","text":"Banks explain it in the email that comes with the statement. It is often a mix of your date of birth, part of your account number or your mobile number."}},
  {"@type":"Question","name":"Can this tool find a password I don't know?","acceptedAnswer":{"@type":"Answer","text":"No. You need the password to remove it. The tool removes the lock so you don't have to type it again every time you open the file."}},
- {"@type":"Question","name":"Are my files uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. The file and the password stay in your browser. Nothing is sent to a server."}},
- {"@type":"Question","name":"What locks can be removed?","acceptedAnswer":{"@type":"Answer","text":"The open password of PDF, Excel and Word files, the print, copy and edit restrictions of PDFs, and Protect Sheet and Protect Workbook locks in Excel."}}
+ {"@type":"Question","name":"Are my files uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. The files and the password stay in your browser. Nothing is sent to a server."}}
 ]}
 </script>
 <style>
-.filecard{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--bg);margin:0 0 14px}
-.filecard .ic{flex:none;width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;background:var(--brand-soft);color:var(--brand)}
-.filecard .info{flex:1;min-width:0}
-.filecard .info div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
-.filecard .info small{color:var(--muted)}
 .status{display:flex;gap:10px;align-items:flex-start;border-radius:10px;padding:10px 12px;margin:0 0 14px;font-size:14px}
 .status.lock{background:var(--brand-soft)}
 .status.open{background:var(--green-soft)}
 .status b{display:block}
+.frow{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--bg);flex-wrap:wrap}
+.frows{display:grid;gap:10px;margin:0 0 14px}
+.frow .ic{flex:none;width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;background:var(--brand-soft);color:var(--brand)}
+.frow .info{flex:1;min-width:0}
+.frow .info div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600;font-size:14px}
+.frow .info small{color:var(--muted)}
+.chip{flex:none;font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.chip.lock{background:var(--brand-soft);color:var(--brand)}
+.chip.ok{background:var(--green-soft);color:var(--green)}
+.chip.bad{background:var(--brand-soft);color:var(--brand)}
+.frow .rm{flex:none;border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:16px;padding:4px 8px;border-radius:6px}
+.frow .rm:hover{background:var(--line);color:var(--text)}
+.frow .rowpw{flex-basis:100%;display:flex;gap:8px}
+.frow .rowpw input{flex:1;min-width:0;padding:9px 11px;border-radius:9px;border:2px solid var(--brand);background:var(--card);color:var(--text);font:inherit;font-size:15px}
+.frow .rowpw input:focus{outline:none}
 .pw{display:flex;gap:8px;margin:0 0 6px}
 .pw input{flex:1;min-width:0;padding:12px;border-radius:10px;border:2px solid var(--line);background:var(--card);color:var(--text);font:inherit;font-size:16px}
 .pw input:focus{outline:none;border-color:var(--brand)}
 .pw input.bad{border-color:var(--brand)}
 .pw button{flex:none}
 .hint{font-size:13px;color:var(--muted);margin:0 0 14px}
-.field{margin:0 0 16px}
+.field{margin:0 0 14px}
 .field label{display:block;font-size:14px;color:var(--muted);margin-bottom:4px}
 .field select{width:100%;padding:11px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);font:inherit}
+.choice{display:flex;gap:8px;margin:0 0 16px;flex-wrap:wrap}
+.choice label{flex:1;min-width:150px;display:flex;gap:10px;align-items:flex-start;border:2px solid var(--line);border-radius:12px;padding:11px 13px;cursor:pointer;font-size:14px}
+.choice label.on{border-color:var(--brand);background:var(--brand-soft)}
+.choice input{margin-top:3px;accent-color:var(--brand)}
+.choice b{display:block}
+.choice small{color:var(--muted)}
 .tprev{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0;max-height:320px}
 .tprev table{border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums;min-width:100%}
 .tprev td{border:1px solid var(--line);padding:4px 8px;white-space:nowrap}
@@ -174,38 +190,43 @@ article p,article li{max-width:70ch}
 
 <main>
   <h1>Unlock PDF &amp; Excel</h1>
-  <p class="sub">Remove the password from bank statements and locked files. Then save it unlocked, or turn it into Excel, Word or JPG.</p>
+  <p class="sub">Remove the password from your locked bank statements. Unlock many at once, then save them as one merged PDF or separately.</p>
 
   <div class="ad-slot">Ad slot – top</div>
 
   <section class="tool">
     <div id="stepPick">
-      <div class="drop" id="drop" tabindex="0" role="button" aria-label="Select a locked file">
-        <strong>Select locked file</strong>
-        <span>PDF, Excel (.xlsx) or Word (.docx)</span>
+      <div class="drop" id="drop" tabindex="0" role="button" aria-label="Select locked files">
+        <strong id="dropTitle">Select locked files</strong>
+        <span>PDF (add several), Excel (.xlsx) or Word (.docx)</span>
       </div>
-      <input type="file" id="file" accept=".pdf,.xlsx,.xlsm,.docx,application/pdf" hidden>
+      <input type="file" id="file" accept=".pdf,.xlsx,.xlsm,.docx,application/pdf" multiple hidden>
 
       <div id="settings" class="hidden">
-        <div class="filecard">
-          <span class="ic" id="ftype">PDF</span>
-          <div class="info"><div id="fname"></div><small id="fsize"></small></div>
-          <button class="btn btn-ghost" id="change" style="padding:8px 14px">Change</button>
+        <div class="frows" id="list"></div>
+
+        <div id="addRow" class="actions hidden" style="justify-content:flex-start;margin:-4px 0 14px">
+          <button class="btn btn-ghost" id="addMore" style="padding:8px 14px">+ Add more PDFs</button>
         </div>
 
         <div class="status" id="status"></div>
 
         <div id="pwBox" class="hidden">
           <div class="pw">
-            <input type="password" id="pw" autocomplete="off" placeholder="Enter the file's password" aria-label="Password">
+            <input type="password" id="pw" autocomplete="off" placeholder="Enter the password" aria-label="Password">
             <button class="btn btn-ghost" id="showPw" type="button">Show</button>
           </div>
-          <p class="hint" id="pwHint">For bank statements, the password is explained in the bank's email. It is often your date of birth, part of your account number or your mobile number.</p>
+          <p class="hint" id="pwHint">For bank statements, the password is explained in the bank's email. It is often your date of birth, part of your account number or your mobile number. If your files share one password, this is used for all of them.</p>
         </div>
 
         <div class="field" id="outBox">
           <label for="out">What do you want?</label>
           <select id="out"></select>
+        </div>
+
+        <div class="choice hidden" id="mergeBox">
+          <label id="mLabelMerge"><input type="radio" name="combine" value="merge" checked><span><b>One merged PDF</b><small>All files joined into a single PDF, in the order above.</small></span></label>
+          <label id="mLabelSep"><input type="radio" name="combine" value="sep"><span><b>Separate files (ZIP)</b><small>Each file unlocked on its own, downloaded together as a ZIP.</small></span></label>
         </div>
 
         <div class="actions">
@@ -230,7 +251,7 @@ article p,article li{max-width:70ch}
         <ul class="removed" id="removed"></ul>
         <div class="actions">
           <button class="btn btn-primary" id="dl">Download</button>
-          <button class="btn btn-ghost" id="again">Unlock another file</button>
+          <button class="btn btn-ghost" id="again">Unlock more files</button>
         </div>
       </div>
       <div id="preview"></div>
@@ -239,34 +260,33 @@ article p,article li{max-width:70ch}
     </div>
 
     <p id="err" class="privacy hidden" style="color:var(--brand)"></p>
-    <p class="privacy">🔒 Your file and password never leave your device. Only unlock files that are yours or that you are allowed to open.</p>
+    <p class="privacy">🔒 Your files and password never leave your device. Only unlock files that are yours or that you are allowed to open.</p>
   </section>
 
   <article>
-    <h2>How to remove a password from a bank statement</h2>
+    <h2>How to unlock many bank statements at once</h2>
     <ol>
-      <li><b>Select the file:</b> your PDF statement, or a locked Excel or Word file.</li>
-      <li><b>Type the password:</b> the same one you use to open the file.</li>
-      <li><b>Choose the result:</b> an unlocked PDF, or convert it straight to Excel, Word, JPG or PNG.</li>
-      <li><b>Download:</b> the new file opens without asking for a password.</li>
+      <li><b>Add your files:</b> select several locked PDF statements together, or one Excel/Word file.</li>
+      <li><b>Type the password:</b> if the files share one password, type it once. For a file with a different password, a box appears on that file.</li>
+      <li><b>Choose the result:</b> one merged PDF, separate files in a ZIP, or convert straight to Excel, Word or images.</li>
+      <li><b>Download:</b> the new files open without asking for a password.</li>
     </ol>
     <h2>What this tool removes</h2>
     <ul>
       <li><b>Open password</b> of PDF, Excel and Word files, when you enter it.</li>
       <li><b>PDF restrictions</b> that block printing, copying text or editing.</li>
-      <li><b>Excel “Protect Sheet” and “Protect Workbook”</b> locks, so you can edit cells again.</li>
-      <li><b>Word editing restrictions</b> set with “Restrict Editing”.</li>
+      <li><b>Excel “Protect Sheet” and “Protect Workbook”</b> locks, and Word “Restrict Editing”.</li>
     </ul>
     <p>This tool does not guess or crack passwords. If you forgot the password of a bank statement, ask your bank to send it again.</p>
     <h2>Frequently asked questions</h2>
+    <h3>Can I unlock many files at once?</h3>
+    <p>Yes. Add several locked PDFs together. If they share one password, type it once. You can then save them as one merged PDF or as separate files in a ZIP.</p>
     <h3>Where do I find the password of my bank statement?</h3>
     <p>Banks explain it in the email that comes with the statement. It is often a mix of your date of birth, part of your account number or your mobile number.</p>
     <h3>Can this tool find a password I don't know?</h3>
     <p>No. You need the password to remove it. The tool removes the lock so you don't have to type it again every time you open the file.</p>
     <h3>Are my files uploaded?</h3>
-    <p>No. The file and the password stay in your browser. Nothing is sent to a server.</p>
-    <h3>What locks can be removed?</h3>
-    <p>The open password of PDF, Excel and Word files, the print, copy and edit restrictions of PDFs, and Protect Sheet and Protect Workbook locks in Excel.</p>
+    <p>No. The files and the password stay in your browser. Nothing is sent to a server.</p>
   </article>
 
   <div class="ad-slot">Ad slot – bottom</div>
@@ -817,133 +837,255 @@ const DOCX_PARTS = {
   };
   const LIBS = {pdf: ['pdflib'], excel: ['pdflib', 'pdfjs', 'xlsx'], word: ['pdflib', 'pdfjs', 'jszip'], jpg: ['pdflib', 'pdfjs', 'jszip'], png: ['pdflib', 'pdfjs', 'jszip'], xlsx: ['jszip'], docx: ['jszip']};
 
-  let file = null, bytes = null, kind = '', state = {}, outputs = [];
+  // each entry: {file, bytes, kind, st, plain, pw, done, error}
+  // st: 'locked' | 'open' | 'plain' | 'bad' | 'checking'
+  let items = [], groupKind = '', outputs = [];
+
   const input = $('file'), drop = $('drop');
   drop.onclick = () => input.click();
   drop.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); } };
-  $('change').onclick = () => input.click();
-  input.onchange = () => { pick(input.files[0]); input.value = ''; };
+  $('addMore').onclick = () => input.click();
+  input.onchange = () => { add(input.files); input.value = ''; };
   ['dragenter','dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('over'); }));
   ['dragleave','drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('over'); }));
-  drop.addEventListener('drop', e => pick(e.dataTransfer.files[0]));
+  drop.addEventListener('drop', e => add(e.dataTransfer.files));
   $('showPw').onclick = () => { const p = $('pw'); p.type = p.type === 'password' ? 'text' : 'password'; $('showPw').textContent = p.type === 'password' ? 'Show' : 'Hide'; };
   $('pw').addEventListener('keydown', e => { if (e.key === 'Enter') $('go').click(); });
   $('pw').addEventListener('input', () => $('pw').classList.remove('bad'));
-  $('out').onchange = () => LIBS[$('out').value].forEach(l => load(l).catch(() => {}));
+  $('out').onchange = () => { LIBS[$('out').value].forEach(l => load(l).catch(() => {})); updateMergeBox(); };
+  [...document.getElementsByName('combine')].forEach(r => r.onchange = updateMergeBox);
 
   const size = n => n < 1048576 ? (n/1024).toFixed(0) + ' KB' : (n/1048576).toFixed(2) + ' MB';
-  const base = () => file.name.replace(/\.[^.]+$/, '');
+  const baseName = f => f.name.replace(/\.[^.]+$/, '');
   function showErr(m){ $('err').textContent = m || ''; $('err').classList.toggle('hidden', !m); }
+  const kindOf = f => { const e = (f.name.split('.').pop() || '').toLowerCase(); return e === 'pdf' ? 'pdf' : (e === 'xlsx' || e === 'xlsm') ? 'xlsx' : e === 'docx' ? 'docx' : (e === 'xls' || e === 'doc') ? 'old' : ''; };
+
+  async function add(fileList){
+    showErr('');
+    const list = [...fileList];   // snapshot: input.value='' empties the live FileList during await
+    for (const f of list){
+      const k = kindOf(f);
+      if (k === 'old'){ showErr('Old .xls and .doc files are not supported. Save as .xlsx or .docx first.'); continue; }
+      if (!k){ showErr('Please choose a PDF, Excel (.xlsx) or Word (.docx) file.'); continue; }
+      if (!items.length) groupKind = k;
+      else if (k !== groupKind){
+        if (groupKind !== 'pdf' || k !== 'pdf'){ showErr('Please add files of the same type. Office files are unlocked one at a time.'); continue; }
+      }
+      if (groupKind !== 'pdf'){ items.forEach(it => {}); items = []; }   // office: single file only
+      const it = {file: f, bytes: new Uint8Array(await f.arrayBuffer()), kind: k, st: 'checking', pw: '', done: false, error: ''};
+      items.push(it);
+      if (groupKind !== 'pdf') break;
+    }
+    drop.classList.toggle('hidden', items.length > 0);
+    $('settings').classList.remove('hidden');
+    buildOut();
+    render();
+    inspectAll();
+  }
+
+  function buildOut(){
+    const cur = $('out').value;
+    $('out').innerHTML = ''; (OUT[groupKind] || OUT.pdf).forEach(([v, t]) => $('out').add(new Option(t, v)));
+    if (cur && [...$('out').options].some(o => o.value === cur)) $('out').value = cur;
+    $('outBox').classList.toggle('hidden', (OUT[groupKind] || []).length < 2);
+    LIBS[$('out').value].forEach(l => load(l).catch(() => {}));
+    updateMergeBox();
+  }
+
+  function updateMergeBox(){
+    const multiPdf = groupKind === 'pdf' && items.length > 1 && $('out').value === 'pdf';
+    $('mergeBox').classList.toggle('hidden', !multiPdf);
+    [...document.getElementsByName('combine')].forEach(r => r.closest('label').classList.toggle('on', r.checked));
+  }
+  const mergeChosen = () => (document.querySelector('input[name=combine]:checked') || {}).value === 'merge';
+
+  function render(){
+    const box = $('list'); box.innerHTML = '';
+    items.forEach((it, i) => {
+      const d = document.createElement('div'); d.className = 'frow';
+      const chip = it.st === 'checking' ? '<span class="chip">…</span>'
+        : it.st === 'locked' ? '<span class="chip lock">🔒 Locked</span>'
+        : it.st === 'bad' ? '<span class="chip bad">Can’t read</span>'
+        : '<span class="chip ok">🔓 Ready</span>';
+      d.innerHTML = `<span class="ic">${{pdf:'PDF',xlsx:'XLS',docx:'DOC'}[it.kind]}</span>
+        <div class="info"><div></div><small></small></div>${chip}
+        <button class="rm" title="Remove" aria-label="Remove">✕</button>`;
+      d.querySelector('.info div').textContent = it.file.name;
+      d.querySelector('.info small').textContent = size(it.file.size) + (it.error ? ' · ' + it.error : '');
+      if (it.error){ d.querySelector('.info small').style.color = 'var(--brand)'; }
+      d.querySelector('.rm').onclick = () => { items.splice(i, 1); if (!items.length) groupKind = ''; afterListChange(); };
+      if (it.st === 'locked' && it.showPw){
+        const pwr = document.createElement('div'); pwr.className = 'rowpw';
+        pwr.innerHTML = `<input type="password" autocomplete="off" placeholder="Password for this file">`;
+        const inp = pwr.querySelector('input'); inp.value = it.pw;
+        inp.oninput = () => { it.pw = inp.value; it.error = ''; };
+        inp.onkeydown = e => { if (e.key === 'Enter') $('go').click(); };
+        d.appendChild(pwr);
+      }
+      box.appendChild(d);
+    });
+    $('addRow').classList.toggle('hidden', groupKind !== 'pdf' || !items.length);
+  }
+
+  function afterListChange(){
+    if (!items.length){ $('again').click(); return; }
+    drop.classList.toggle('hidden', items.length > 0);
+    buildOut(); render(); refreshStatus();
+  }
+
+  async function inspectAll(){
+    $('go').disabled = true;
+    await Promise.all(LIBS[$('out').value].map(load)).catch(() => {});
+    for (const it of items) if (it.st === 'checking') await inspectOne(it);
+    render(); refreshStatus(); updateMergeBox();
+    $('go').disabled = false;
+  }
+
+  async function inspectOne(it){
+    if (it.kind === 'pdf'){
+      try { await load('pdflib'); } catch (_){ it.st = 'locked'; return; }
+      try {
+        const r = await UL.unlockPdf(it.bytes, '', PDFLib);
+        it.st = 'open'; it.plain = r.bytes; it.done = true;   // opens without a password; restrictions (if any) stripped
+      } catch (e){
+        if (e.code === 'NOT_ENCRYPTED'){ it.st = 'plain'; it.plain = it.bytes; it.done = true; }
+        else if (e.code === 'UNSUPPORTED'){ it.st = 'bad'; it.error = 'Certificate security — not supported'; }
+        else if (e.code === 'PASSWORD'){ it.st = 'locked'; }
+        else { it.st = 'bad'; it.error = 'Damaged or not a real PDF'; }
+      }
+      return;
+    }
+    if (UL.isOle(it.bytes)) it.st = 'locked';
+    else if (UL.isZip(it.bytes)){ it.st = 'open'; }
+    else { it.st = 'bad'; it.error = 'Could not read this file'; }
+  }
+
   function setStatus(type, title, text){
     $('status').className = 'status ' + type;
     $('status').innerHTML = `<span>${type === 'lock' ? '🔒' : '🔓'}</span><span><b></b><span></span></span>`;
     $('status').querySelector('b').textContent = title;
     $('status').querySelector('span span').textContent = text;
   }
-
-  async function pick(f){
-    if (!f) return;
-    showErr('');
-    const ext = (f.name.split('.').pop() || '').toLowerCase();
-    kind = ext === 'pdf' ? 'pdf' : (ext === 'xlsx' || ext === 'xlsm') ? 'xlsx' : ext === 'docx' ? 'docx' : '';
-    if (ext === 'xls' || ext === 'doc'){ showErr('Old .xls and .doc files are not supported. Open the file, save it as .xlsx or .docx, then try again.'); return; }
-    if (!kind){ showErr('Please choose a PDF, Excel (.xlsx) or Word (.docx) file.'); return; }
-    file = f; bytes = new Uint8Array(await f.arrayBuffer()); state = {};
-    $('fname').textContent = f.name; $('fsize').textContent = size(f.size);
-    $('ftype').textContent = {pdf: 'PDF', xlsx: 'XLS', docx: 'DOC'}[kind];
-    $('out').innerHTML = ''; OUT[kind].forEach(([v, t]) => $('out').add(new Option(t, v)));
-    $('outBox').classList.toggle('hidden', OUT[kind].length < 2);
-    $('pw').value = ''; $('pw').classList.remove('bad');
-    drop.classList.add('hidden'); $('settings').classList.remove('hidden');
-    setStatus('open', 'Checking the file…', '');
-    $('pwBox').classList.add('hidden'); $('go').disabled = true;
-    try { await inspect(); } catch (e){ console.error(e); }
-    $('go').disabled = false;
-    LIBS[$('out').value].forEach(l => load(l).catch(() => {}));
-  }
-
-  // find out which locks the file has, before asking for anything
-  async function inspect(){
-    if (kind === 'pdf'){
-      try { await load('pdflib'); } catch (_){ state.needPw = true; setStatus('lock', 'Locked PDF', 'Type the password you use to open this file.'); $('pwBox').classList.remove('hidden'); return; }
-      try {
-        const r = await UL.unlockPdf(bytes, '', PDFLib);
-        state = {needPw: false, restricted: true, plain: r.bytes};
-        setStatus('open', 'No open password', 'This PDF opens without a password, but printing, copying or editing is blocked. These limits will be removed.');
-      } catch (e){
-        if (e.code === 'NOT_ENCRYPTED'){ state = {needPw: false, notLocked: true, plain: bytes}; setStatus('open', 'This PDF is not locked', 'You can still convert it below.'); }
-        else if (e.code === 'UNSUPPORTED'){ state = {unsupported: true}; setStatus('lock', 'This PDF uses certificate security', 'It can only be opened with a digital certificate, which this tool does not support.'); }
-        else { state = {needPw: true}; setStatus('lock', 'Locked PDF', 'Type the password you use to open this file.'); $('pwBox').classList.remove('hidden'); setTimeout(() => $('pw').focus(), 50); }
-      }
-      return;
+  function refreshStatus(){
+    const locked = items.filter(it => it.st === 'locked').length;
+    const bad = items.filter(it => it.st === 'bad').length;
+    const needPw = locked > 0;
+    $('pwBox').classList.toggle('hidden', !needPw);
+    if (needPw){
+      setStatus('lock', locked === 1 ? 'Password needed' : `${locked} files need a password`,
+        items.length > 1 ? 'Type the shared password below. Files with a different password have their own box.' : 'Type the password you use to open this file.');
+      if (groupKind === 'pdf') $('pwHint').textContent = 'For bank statements, the password is in the bank\u2019s email. If your files share one password, this one is used for all of them.';
+      else $('pwHint').textContent = 'This is the password Excel or Word asks for when you open the file.';
+      setTimeout(() => { if (!$('pw').value) $('pw').focus(); }, 50);
+    } else if (bad === items.length){
+      setStatus('lock', 'These files could not be read', 'They may be damaged, or use a kind of protection this tool does not support.');
+    } else {
+      const n = items.length;
+      setStatus('open', n > 1 ? `${n} files ready` : 'No open password',
+        groupKind === 'pdf' ? 'No open password is needed. Any print, copy or edit limits will be removed.'
+        : groupKind === 'xlsx' ? 'Any sheet or workbook protection will be removed.' : 'Any editing restrictions will be removed.');
     }
-    if (UL.isOle(bytes)){
-      state = {needPw: true};
-      setStatus('lock', `Locked ${kind === 'xlsx' ? 'Excel' : 'Word'} file`, 'Type the password you use to open this file.');
-      $('pwHint').textContent = 'This is the password Excel or Word asks for when you open the file.';
-      $('pwBox').classList.remove('hidden'); setTimeout(() => $('pw').focus(), 50);
-    } else if (UL.isZip(bytes)){
-      state = {needPw: false};
-      setStatus('open', 'No open password', kind === 'xlsx' ? 'Any “Protect Sheet” or “Protect Workbook” locks will be removed so you can edit again.' : 'Any “Restrict Editing” lock will be removed so you can edit again.');
-    } else { state = {unsupported: true}; setStatus('lock', 'This file could not be read', 'It may be damaged, or it is not really a ' + kind.toUpperCase() + ' file.'); }
+    $('go').textContent = needPw ? 'Unlock' : 'Continue';
   }
+
+  const status = t => $('workText').textContent = t;
+  const bar = f => $('bar').style.width = Math.round(Math.min(1, f) * 100) + '%';
 
   $('go').onclick = async () => {
-    if (!file || state.unsupported) return;
-    const pw = $('pw').value, out = $('out').value;
-    if (state.needPw && !pw){ $('pw').classList.add('bad'); $('pw').focus(); showErr('Please type the password.'); return; }
+    const usable = items.filter(it => it.st !== 'bad');
+    if (!usable.length){ showErr('None of these files can be unlocked.'); return; }
+    const out = $('out').value;
     showErr(''); show('stepWork'); bar(0); status('Getting ready…');
     try { await Promise.all(LIBS[out].map(load)); }
     catch (_){ show('stepPick'); showErr('The tool could not load. Check your internet connection and try again.'); return; }
-    const removed = [];
-    try {
-      let plain;
-      if (kind === 'pdf'){
-        if (state.needPw){
-          status('Checking the password…');
-          try { plain = (await UL.unlockPdf(bytes, pw, PDFLib)).bytes; }
-          catch (e){
-            if (e.code === 'PASSWORD') throw e;
-            if (out === 'pdf') throw e;
-            plain = null;   // rebuild failed; conversions can still read it with the password
-          }
-          removed.push('Open password removed');
-        } else plain = state.plain;
-        if (state.restricted || state.needPw) removed.push('Print, copy and edit limits removed');
-        bar(.25);
-        outputs = out === 'pdf'
-          ? [{name: base() + '-unlocked.pdf', blob: new Blob([plain], {type: 'application/pdf'})}]
-          : await convertPdf(out, plain, pw);
-      } else {
-        let x = bytes;
-        if (state.needPw){
-          status('Checking the password…');
-          x = await UL.decryptOffice(bytes, pw, f => bar(f * .7));
-          removed.push('Open password removed');
-        }
-        status('Removing edit locks…');
-        const r = kind === 'xlsx' ? await UL.removeProtection(x, JSZip) : await removeWordProtection(x);
-        if (r.removed) removed.push(kind === 'xlsx' ? 'Sheet and workbook protection removed' : 'Editing restrictions removed');
-        const mime = kind === 'xlsx' ? 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' : 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-        outputs = [{name: base() + '-unlocked.' + (file.name.split('.').pop().toLowerCase()), blob: new Blob([r.bytes], {type: mime})}];
+
+    // 1) unlock every file (reuse what inspection already did)
+    const shared = $('pw').value;
+    let anyPwRemoved = false, anyRestrict = false, failed = 0;
+    for (let i = 0; i < usable.length; i++){
+      const it = usable[i];
+      status(`Unlocking ${i + 1} of ${usable.length}…`); bar(i / usable.length * .5);
+      if (it.done && it.plain){ if (it.st === 'open') anyRestrict = true; continue; }
+      const pw = it.pw || shared;
+      try {
+        if (it.kind === 'pdf'){ it.plain = (await UL.unlockPdf(it.bytes, pw, PDFLib)).bytes; it.done = true; anyPwRemoved = true; }
+        else { it.officePlain = await UL.decryptOffice(it.bytes, pw, f => bar(.1 + f * .3)); it.done = true; anyPwRemoved = true; }
+      } catch (e){
+        if (e && e.code === 'PASSWORD'){ it.error = 'Wrong password'; it.showPw = true; failed++; }
+        else { it.error = (e && e.message) || 'Could not unlock'; it.st = 'bad'; }
       }
-      if (!removed.length) removed.push('No locks were found, the file is ready to use');
+    }
+    if (failed){
+      show('stepPick'); render(); refreshStatus();
+      showErr(failed === 1 ? 'One file needs a different password. Fill the box on that file and try again.'
+                           : `${failed} files need a different password. Fill the boxes on those files and try again.`);
+      return;
+    }
+
+    // 2) build the output
+    try {
+      const removed = [];
+      if (anyPwRemoved) removed.push('Open password removed');
+      outputs = [];
+      if (groupKind !== 'pdf'){
+        const it = usable[0];
+        status('Removing edit locks…');
+        let x = it.officePlain || it.bytes;
+        const r = it.kind === 'xlsx' ? await UL.removeProtection(x, JSZip) : await removeWordProtection(x);
+        if (r.removed) removed.push(it.kind === 'xlsx' ? 'Sheet and workbook protection removed' : 'Editing restrictions removed');
+        const mime = it.kind === 'xlsx' ? 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' : 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+        outputs = [{name: baseName(it.file) + '-unlocked.' + it.file.name.split('.').pop().toLowerCase(), blob: new Blob([r.bytes], {type: mime})}];
+      } else if (out === 'pdf'){
+        if (anyRestrict || items.some(it => it.st === 'open')) removed.push('Print, copy and edit limits removed');
+        if (usable.length > 1 && mergeChosen()){
+          status('Merging into one PDF…'); bar(.6);
+          outputs = [{name: 'merged-unlocked.pdf', blob: await mergePdfs(usable.map(it => it.plain))}];
+        } else {
+          outputs = usable.map(it => ({name: baseName(it.file) + '-unlocked.pdf', blob: new Blob([it.plain], {type: 'application/pdf'}), label: it.file.name}));
+        }
+      } else {
+        // convert each unlocked PDF to the chosen format
+        for (let i = 0; i < usable.length; i++){
+          const it = usable[i];
+          status(`Converting ${i + 1} of ${usable.length}…`);
+          const part = await convertPdf(out, it.plain, baseName(it.file));
+          outputs.push(...part);
+          bar(.5 + .5 * (i + 1) / usable.length);
+        }
+        if (anyRestrict) removed.push('Restrictions removed');
+      }
+      if (!removed.length) removed.push('Files are ready to use');
       bar(1);
-      $('doneTitle').textContent = state.notLocked ? 'Done!' : 'Unlocked!';
-      $('doneInfo').textContent = outputs.length > 1 ? `${outputs.length} images · ${size(outputs.reduce((s, o) => s + o.blob.size, 0))}` : `${outputs[0].name} · ${size(outputs[0].blob.size)}`;
-      $('removed').innerHTML = ''; removed.forEach(t => { const li = document.createElement('li'); li.textContent = t; $('removed').appendChild(li); });
-      $('dl').textContent = outputs.length > 1 ? 'Download all (ZIP)' : 'Download ' + outputs[0].name.split('.').pop().toUpperCase();
-      renderResults();
-      show('stepDone');
+      finish(removed);
     } catch (e){
       console.error(e); show('stepPick');
-      if (e && e.code === 'PASSWORD'){
-        $('pw').classList.add('bad'); $('pw').select();
-        showErr('That password is not correct. Check capital letters and spaces, and the format the bank asked for.');
-      } else if (e && e.code === 'UNSUPPORTED') showErr('This file uses a kind of protection this tool does not support yet.');
-      else showErr(e && e.message && e.message.length > 25 ? e.message : 'This file could not be unlocked. It may be damaged. Please try another file.');
+      showErr(e && e.message && e.message.length > 25 ? e.message : 'These files could not be unlocked. Please try again.');
     }
   };
+
+  function finish(removed){
+    const total = outputs.reduce((s, o) => s + o.blob.size, 0);
+    $('doneTitle').textContent = 'Done!';
+    $('doneInfo').textContent = outputs.length > 1
+      ? `${outputs.length} files · ${size(total)}`
+      : `${outputs[0].name} · ${size(outputs[0].blob.size)}`;
+    $('removed').innerHTML = ''; removed.forEach(t => { const li = document.createElement('li'); li.textContent = t; $('removed').appendChild(li); });
+    $('dl').textContent = outputs.length > 1 ? 'Download all (ZIP)' : 'Download ' + outputs[0].name.split('.').pop().toUpperCase();
+    outputs.forEach(o => { if (/\.(jpg|png)$/i.test(o.name)) o.url = URL.createObjectURL(o.blob); });
+    renderResults();
+    show('stepDone');
+  }
+
+  async function mergePdfs(plains){
+    const { PDFDocument } = PDFLib;
+    const out = await PDFDocument.create();
+    for (const p of plains){
+      const src = await PDFDocument.load(p, {ignoreEncryption: true});
+      const pages = await out.copyPages(src, src.getPageIndices());
+      pages.forEach(pg => out.addPage(pg));
+    }
+    return new Blob([await out.save({useObjectStreams: false})], {type: 'application/pdf'});
+  }
 
   async function removeWordProtection(docx){
     const zip = await JSZip.loadAsync(docx), f = zip.file('word/settings.xml');
@@ -956,19 +1098,13 @@ const DOCX_PARTS = {
     return {bytes: await zip.generateAsync({type: 'uint8array', compression: 'DEFLATE'}), removed};
   }
 
-  /* ----- PDF conversions after unlocking ----- */
-  const status = t => $('workText').textContent = t;
-  const bar = f => $('bar').style.width = Math.round(Math.min(1, f) * 100) + '%';
-  async function openPdf(plain, pw){
-    pdfjsLib.GlobalWorkerOptions.workerSrc = PDF_WORKER;
-    return pdfjsLib.getDocument(plain ? {data: plain.slice()} : {data: bytes.slice(), password: pw}).promise;
-  }
-  async function convertPdf(out, plain, pw){
-    const pdf = await openPdf(plain, pw);
+  /* ----- convert one unlocked PDF ----- */
+  async function openPdf(plain){ pdfjsLib.GlobalWorkerOptions.workerSrc = PDF_WORKER; return pdfjsLib.getDocument({data: plain.slice()}).promise; }
+  async function convertPdf(out, plain, base){
+    const pdf = await openPdf(plain);
     if (out === 'jpg' || out === 'png'){
       const type = 'image/' + (out === 'jpg' ? 'jpeg' : 'png'), res = [];
       for (let p = 1; p <= pdf.numPages; p++){
-        status(`Converting page ${p} of ${pdf.numPages}…`);
         const page = await pdf.getPage(p);
         let vp = page.getViewport({scale: 2});
         if (vp.width * vp.height > 16e6) vp = page.getViewport({scale: 2 * Math.sqrt(16e6 / (vp.width * vp.height))});
@@ -976,57 +1112,46 @@ const DOCX_PARTS = {
         const ctx = c.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height);
         await page.render({canvasContext: ctx, viewport: vp}).promise;
         const blob = await new Promise(r => c.toBlob(r, type, .92));
-        res.push({name: `${base()}-page-${p}.${out}`, blob, label: 'Page ' + p, url: URL.createObjectURL(blob)});
-        c.width = c.height = 0; bar(.25 + .75 * p / pdf.numPages);
+        res.push({name: `${base}-page-${p}.${out}`, blob, label: `${base} · page ${p}`});
+        c.width = c.height = 0;
       }
       return res;
     }
-    const items = [];
+    const items2 = [];
     for (let p = 1; p <= pdf.numPages; p++){
-      status(`Reading page ${p} of ${pdf.numPages}…`);
       const tc = await (await pdf.getPage(p)).getTextContent();
-      items.push(tc.items.map(it => ({str: it.str, x: it.transform[4], y: it.transform[5], w: it.width, h: Math.abs(it.height || Math.hypot(it.transform[2], it.transform[3])) || 10})));
-      bar(.25 + .6 * p / pdf.numPages);
+      items2.push(tc.items.map(it => ({str: it.str, x: it.transform[4], y: it.transform[5], w: it.width, h: Math.abs(it.height || Math.hypot(it.transform[2], it.transform[3])) || 10})));
     }
-    const noText = () => { throw new Error('The file is unlocked, but it has no readable text (it is a scanned image). Choose “Unlocked PDF” or “JPG images” instead.'); };
+    const noText = () => { throw new Error('A file has no readable text (it is scanned). Choose “Unlocked PDF” or “JPG images” instead.'); };
     if (out === 'excel'){
-      const pages = items.map(itemsToRows), all = [];
+      const pages = items2.map(itemsToRows), all = [];
       pages.forEach((r, i) => { all.push(...r); if (i < pages.length - 1 && r.length) all.push([]); });
       if (!all.length) noText();
-      status('Creating your Excel file…');
       const cell = s => { const n = toNumber(s); return n === null ? s : n; };
       const ws = XLSX.utils.aoa_to_sheet(all.map(r => r.map(cell)));
       const w = []; all.forEach(r => r.forEach((v, i) => w[i] = Math.min(60, Math.max(w[i] || 8, String(v).length + 2))));
       ws['!cols'] = w.map(x => ({wch: x}));
       const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, 'Statement');
-      renderTable(all);
-      return [{name: base() + '.xlsx', blob: new Blob([XLSX.write(wb, {bookType: 'xlsx', type: 'array'})], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})}];
+      return [{name: base + '.xlsx', blob: new Blob([XLSX.write(wb, {bookType: 'xlsx', type: 'array'})], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})}];
     }
-    const pages = items.map(it => ({lines: pageToLines(it)}));
+    const pages = items2.map(it => ({lines: pageToLines(it)}));
     if (!pages.some(p => p.lines.length)) noText();
-    status('Creating your Word file…');
     const vp = (await pdf.getPage(1)).getViewport({scale: 1});
     const zip = new JSZip();
     Object.entries(DOCX_PARTS).forEach(([n, x]) => zip.file(n, x));
     zip.file('word/document.xml', docxXml(buildParagraphs(pages), vp.width, vp.height));
-    return [{name: base() + '.docx', blob: await zip.generateAsync({type: 'blob', mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', compression: 'DEFLATE'})}];
+    return [{name: base + '.docx', blob: await zip.generateAsync({type: 'blob', mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', compression: 'DEFLATE'})}];
   }
 
-  function renderTable(rows){
-    const box = $('preview'); box.innerHTML = '';
-    const wrap = document.createElement('div'); wrap.className = 'tprev';
-    const t = document.createElement('table'); wrap.appendChild(t);
-    const r30 = rows.slice(0, 30), max = Math.max(1, ...r30.map(r => r.length));
-    r30.forEach(r => { const tr = t.insertRow(); for (let i = 0; i < max; i++){ const td = tr.insertCell(); td.textContent = r[i] || ''; if (toNumber(td.textContent) !== null) td.className = 'n'; } });
-    box.appendChild(wrap);
-  }
   function renderResults(){
     const box = $('results'); box.innerHTML = '';
     if (outputs.length < 2) return;
     outputs.forEach(o => {
       const d = document.createElement('div'); d.className = 'res';
-      d.innerHTML = `<img alt=""><div class="info"><div></div><span></span></div><button class="btn btn-ghost">Download</button>`;
-      d.querySelector('img').src = o.url; d.querySelector('.info div').textContent = o.label;
+      const img = o.url ? `<img alt="">` : `<div class="res-ic" style="width:48px;height:48px;border-radius:6px;background:var(--brand-soft);color:var(--brand);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex:none">${o.name.split('.').pop().toUpperCase()}</div>`;
+      d.innerHTML = `${img}<div class="info"><div></div><span></span></div><button class="btn btn-ghost">Download</button>`;
+      if (o.url) d.querySelector('img').src = o.url;
+      d.querySelector('.info div').textContent = o.label || o.name;
       d.querySelector('.info span').textContent = size(o.blob.size);
       d.querySelector('button').onclick = () => save(o.blob, o.name);
       box.appendChild(d);
@@ -1040,12 +1165,15 @@ const DOCX_PARTS = {
   }
   $('dl').onclick = async () => {
     if (outputs.length === 1) return save(outputs[0].blob, outputs[0].name);
-    const zip = new JSZip(); outputs.forEach(o => zip.file(o.name, o.blob));
-    save(await zip.generateAsync({type: 'blob'}), base() + '-images.zip');
+    await load('jszip').catch(() => {});
+    if (!window.JSZip){ outputs.forEach(o => save(o.blob, o.name)); return; }
+    const zip = new JSZip(), used = {};
+    outputs.forEach(o => { let n = o.name; if (used[n]) n = n.replace(/(\.\w+)$/, `-${++used[n]}$1`); else used[n] = 1; zip.file(n, o.blob); });
+    save(await zip.generateAsync({type: 'blob'}), 'unlocked-files.zip');
   };
   $('again').onclick = () => {
     outputs.forEach(o => o.url && URL.revokeObjectURL(o.url)); outputs = [];
-    file = null; bytes = null; state = {}; $('preview').innerHTML = ''; $('results').innerHTML = '';
+    items = []; groupKind = ''; $('preview').innerHTML = ''; $('results').innerHTML = ''; $('pw').value = '';
     drop.classList.remove('hidden'); $('settings').classList.add('hidden'); showErr(''); show('stepPick');
   };
   function show(id){ ['stepPick','stepWork','stepDone'].forEach(s => $(s).classList.toggle('hidden', s !== id)); }
