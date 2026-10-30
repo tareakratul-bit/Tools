@@ -1,0 +1,1055 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unlock PDF &amp; Excel – Remove Password from Bank Statements</title>
+<meta name="description" content="Remove the password from a PDF bank statement or a locked Excel file when you know the password. Get an unlocked PDF, or convert it straight to Excel, Word or JPG. Files never leave your device.">
+<link rel="canonical" href="https://YOUR-DOMAIN.com/unlock.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>/* SiteName – shared styles for every page */
+:root{
+  --bg:#f6f7fb; --card:#ffffff; --text:#1c2230; --muted:#5d6577;
+  --line:#e3e6ee; --brand:#e5322d; --brand-dark:#c21f1a; --brand-soft:#fdecec;
+  --blue:#2563eb; --blue-soft:#e8effd; --green:#16a34a; --green-soft:#e6f6ec;
+  --ok:#16a34a; --radius:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#11141b; --card:#1a1f2a; --text:#e8ebf2; --muted:#9aa3b5;
+    --line:#2a3140; --brand:#ff5a52; --brand-dark:#ff7a73; --brand-soft:#2a1b1d;
+    --blue:#6b9bff; --blue-soft:#1a2236; --green:#3ccf74; --green-soft:#16271d;
+    color-scheme: dark;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+a{color:var(--brand)}
+img{max-width:100%}
+
+/* header & footer */
+header{background:var(--card);border-bottom:1px solid var(--line)}
+.nav{max-width:1040px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-weight:700;font-size:20px;text-decoration:none;color:var(--text);white-space:nowrap}
+.logo span{color:var(--brand)}
+.nav-links{display:flex;gap:16px;font-size:15px}
+.nav-links a{color:var(--text);text-decoration:none}
+.nav-links a:hover{color:var(--brand)}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:28px 16px}
+footer a{color:var(--muted)}
+
+main{max-width:1040px;margin:0 auto;padding:16px}
+h1{font-size:clamp(24px,5vw,34px);margin:16px 0 4px;text-align:center;text-wrap:balance}
+.sub{text-align:center;color:var(--muted);margin:0 0 20px}
+
+/* ad placeholders – replace inner text with AdSense code later */
+.ad-slot{background:repeating-linear-gradient(45deg,transparent,transparent 8px,rgba(127,127,127,.06) 8px,rgba(127,127,127,.06) 16px);
+  border:1px dashed var(--line);border-radius:10px;color:var(--muted);font-size:13px;
+  display:flex;align-items:center;justify-content:center;min-height:90px;margin:16px 0;text-align:center}
+.ad-tall{min-height:250px}
+
+/* tool box */
+.tool{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.drop{border:2px dashed var(--brand);background:var(--brand-soft);border-radius:var(--radius);
+  padding:32px 16px;text-align:center;cursor:pointer;transition:transform .15s}
+.drop.over{transform:scale(1.01);border-style:solid}
+.drop:focus-visible{outline:3px solid var(--brand);outline-offset:3px}
+.drop strong{display:block;font-size:18px;margin-bottom:4px}
+.btn{appearance:none;border:0;border-radius:10px;padding:12px 22px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
+.btn:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.btn-primary{background:var(--brand);color:#fff}
+.btn-primary:hover{background:var(--brand-dark)}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.hidden{display:none!important}
+
+/* file thumbnails */
+.list{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin:18px 0}
+.item{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--bg);min-width:0}
+.item img{width:100%;height:140px;object-fit:contain;display:block;background:#fff}
+.item .doc{height:140px;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:8px;text-align:center;font-size:13px;color:var(--muted);word-break:break-word}
+.item .doc b{font-size:28px;color:var(--brand)}
+.item .meta{font-size:12px;color:var(--muted);padding:2px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item .bar{display:flex;justify-content:space-between;align-items:center;padding:4px 6px}
+.item .bar button{border:0;background:transparent;color:var(--text);cursor:pointer;font-size:16px;padding:2px 6px;border-radius:6px}
+.item .bar button:hover{background:var(--line)}
+.num{position:absolute;top:6px;left:6px;background:var(--brand);color:#fff;font-size:12px;border-radius:999px;padding:0 8px}
+
+/* options */
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 18px}
+.opts label{font-size:14px;color:var(--muted);display:block;margin-bottom:4px}
+.opts select,.opts input[type=range]{width:100%}
+.opts select{padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);font:inherit}
+
+/* progress & result */
+.progress-wrap{text-align:center;padding:10px 0}
+.progress{height:10px;background:var(--line);border-radius:999px;overflow:hidden;margin:12px auto;max-width:420px}
+.progress div{height:100%;width:0;background:var(--brand);transition:width .2s}
+.done{text-align:center;padding:10px 0}
+.done .tick{font-size:44px;color:var(--ok);line-height:1.2}
+.results{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;margin:14px 0;text-align:left}
+.res{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--bg)}
+.res img{width:48px;height:48px;object-fit:cover;border-radius:6px;flex:none;background:#fff}
+.res .info{flex:1;min-width:0;font-size:14px}
+.res .info div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.res .save{color:var(--green);font-weight:600;font-variant-numeric:tabular-nums}
+.res button{flex:none;padding:8px 14px}
+.privacy{font-size:13px;color:var(--muted);text-align:center;margin-top:12px}
+
+/* article / guide */
+article{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-top:20px}
+article h2{font-size:22px;margin-top:0}
+article h3{font-size:17px;margin-bottom:4px}
+article ol,article ul{padding-left:20px}
+article p,article li{max-width:70ch}
+
+/* homepage */
+.hero{text-align:center;padding:28px 0 8px}
+.hero h1{font-size:clamp(28px,6vw,44px);margin:0 0 8px}
+.hero p{color:var(--muted);font-size:17px;margin:0 auto;max-width:560px}
+.cat{margin:28px 0 10px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.card{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;text-decoration:none;color:var(--text);transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--brand);transform:translateY(-2px)}
+.card:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.ico{flex:none;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.ico.pdf{background:var(--brand-soft);color:var(--brand)}
+.ico.img{background:var(--blue-soft);color:var(--blue)}
+.card h3{margin:0 0 2px;font-size:16px}
+.card p{margin:0;font-size:14px;color:var(--muted)}
+.trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:32px}
+.trust div{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.trust b{display:block;margin-bottom:2px}
+.trust span{color:var(--muted);font-size:14px}
+
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+@media (max-width:480px){.nav-links{gap:12px;font-size:14px}}
+</style>
+<!-- AdSense script goes here after approval -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"Where do I find the password of my bank statement?","acceptedAnswer":{"@type":"Answer","text":"Banks explain it in the email that comes with the statement. It is often a mix of your date of birth, part of your account number or your mobile number."}},
+ {"@type":"Question","name":"Can this tool find a password I don't know?","acceptedAnswer":{"@type":"Answer","text":"No. You need the password to remove it. The tool removes the lock so you don't have to type it again every time you open the file."}},
+ {"@type":"Question","name":"Are my files uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. The file and the password stay in your browser. Nothing is sent to a server."}},
+ {"@type":"Question","name":"What locks can be removed?","acceptedAnswer":{"@type":"Answer","text":"The open password of PDF, Excel and Word files, the print, copy and edit restrictions of PDFs, and Protect Sheet and Protect Workbook locks in Excel."}}
+]}
+</script>
+<style>
+.filecard{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--bg);margin:0 0 14px}
+.filecard .ic{flex:none;width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;background:var(--brand-soft);color:var(--brand)}
+.filecard .info{flex:1;min-width:0}
+.filecard .info div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+.filecard .info small{color:var(--muted)}
+.status{display:flex;gap:10px;align-items:flex-start;border-radius:10px;padding:10px 12px;margin:0 0 14px;font-size:14px}
+.status.lock{background:var(--brand-soft)}
+.status.open{background:var(--green-soft)}
+.status b{display:block}
+.pw{display:flex;gap:8px;margin:0 0 6px}
+.pw input{flex:1;min-width:0;padding:12px;border-radius:10px;border:2px solid var(--line);background:var(--card);color:var(--text);font:inherit;font-size:16px}
+.pw input:focus{outline:none;border-color:var(--brand)}
+.pw input.bad{border-color:var(--brand)}
+.pw button{flex:none}
+.hint{font-size:13px;color:var(--muted);margin:0 0 14px}
+.field{margin:0 0 16px}
+.field label{display:block;font-size:14px;color:var(--muted);margin-bottom:4px}
+.field select{width:100%;padding:11px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);font:inherit}
+.tprev{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0;max-height:320px}
+.tprev table{border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums;min-width:100%}
+.tprev td{border:1px solid var(--line);padding:4px 8px;white-space:nowrap}
+.tprev tr:first-child td{background:var(--bg);font-weight:600}
+.tprev td.n{text-align:right}
+.removed{list-style:none;padding:0;margin:0 auto 14px;max-width:360px;text-align:left;font-size:14px}
+.removed li::before{content:"✓ ";color:var(--green);font-weight:700}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="./">Site<span>Name</span></a>
+    <nav class="nav-links"><a href="./">All tools</a></nav>
+  </div>
+</header>
+
+<main>
+  <h1>Unlock PDF &amp; Excel</h1>
+  <p class="sub">Remove the password from bank statements and locked files. Then save it unlocked, or turn it into Excel, Word or JPG.</p>
+
+  <div class="ad-slot">Ad slot – top</div>
+
+  <section class="tool">
+    <div id="stepPick">
+      <div class="drop" id="drop" tabindex="0" role="button" aria-label="Select a locked file">
+        <strong>Select locked file</strong>
+        <span>PDF, Excel (.xlsx) or Word (.docx)</span>
+      </div>
+      <input type="file" id="file" accept=".pdf,.xlsx,.xlsm,.docx,application/pdf" hidden>
+
+      <div id="settings" class="hidden">
+        <div class="filecard">
+          <span class="ic" id="ftype">PDF</span>
+          <div class="info"><div id="fname"></div><small id="fsize"></small></div>
+          <button class="btn btn-ghost" id="change" style="padding:8px 14px">Change</button>
+        </div>
+
+        <div class="status" id="status"></div>
+
+        <div id="pwBox" class="hidden">
+          <div class="pw">
+            <input type="password" id="pw" autocomplete="off" placeholder="Enter the file's password" aria-label="Password">
+            <button class="btn btn-ghost" id="showPw" type="button">Show</button>
+          </div>
+          <p class="hint" id="pwHint">For bank statements, the password is explained in the bank's email. It is often your date of birth, part of your account number or your mobile number.</p>
+        </div>
+
+        <div class="field" id="outBox">
+          <label for="out">What do you want?</label>
+          <select id="out"></select>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="go">Unlock</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="stepWork" class="hidden">
+      <div class="progress-wrap">
+        <strong id="workText">Unlocking…</strong>
+        <div class="progress"><div id="bar"></div></div>
+      </div>
+      <div class="ad-slot ad-tall">Ad slot – processing</div>
+    </div>
+
+    <div id="stepDone" class="hidden">
+      <div class="done">
+        <div class="tick">✓</div>
+        <strong id="doneTitle">Unlocked!</strong>
+        <p id="doneInfo" class="sub" style="margin:4px 0 10px"></p>
+        <ul class="removed" id="removed"></ul>
+        <div class="actions">
+          <button class="btn btn-primary" id="dl">Download</button>
+          <button class="btn btn-ghost" id="again">Unlock another file</button>
+        </div>
+      </div>
+      <div id="preview"></div>
+      <div class="results" id="results"></div>
+      <div class="ad-slot">Ad slot – after download</div>
+    </div>
+
+    <p id="err" class="privacy hidden" style="color:var(--brand)"></p>
+    <p class="privacy">🔒 Your file and password never leave your device. Only unlock files that are yours or that you are allowed to open.</p>
+  </section>
+
+  <article>
+    <h2>How to remove a password from a bank statement</h2>
+    <ol>
+      <li><b>Select the file:</b> your PDF statement, or a locked Excel or Word file.</li>
+      <li><b>Type the password:</b> the same one you use to open the file.</li>
+      <li><b>Choose the result:</b> an unlocked PDF, or convert it straight to Excel, Word, JPG or PNG.</li>
+      <li><b>Download:</b> the new file opens without asking for a password.</li>
+    </ol>
+    <h2>What this tool removes</h2>
+    <ul>
+      <li><b>Open password</b> of PDF, Excel and Word files, when you enter it.</li>
+      <li><b>PDF restrictions</b> that block printing, copying text or editing.</li>
+      <li><b>Excel “Protect Sheet” and “Protect Workbook”</b> locks, so you can edit cells again.</li>
+      <li><b>Word editing restrictions</b> set with “Restrict Editing”.</li>
+    </ul>
+    <p>This tool does not guess or crack passwords. If you forgot the password of a bank statement, ask your bank to send it again.</p>
+    <h2>Frequently asked questions</h2>
+    <h3>Where do I find the password of my bank statement?</h3>
+    <p>Banks explain it in the email that comes with the statement. It is often a mix of your date of birth, part of your account number or your mobile number.</p>
+    <h3>Can this tool find a password I don't know?</h3>
+    <p>No. You need the password to remove it. The tool removes the lock so you don't have to type it again every time you open the file.</p>
+    <h3>Are my files uploaded?</h3>
+    <p>No. The file and the password stay in your browser. Nothing is sent to a server.</p>
+    <h3>What locks can be removed?</h3>
+    <p>The open password of PDF, Excel and Word files, the print, copy and edit restrictions of PDFs, and Protect Sheet and Protect Workbook locks in Excel.</p>
+  </article>
+
+  <div class="ad-slot">Ad slot – bottom</div>
+</main>
+
+<footer>© <span id="yr"></span> SiteName · <a href="privacy.html">Privacy Policy</a> · <a href="about.html">About</a></footer>
+
+<script>
+/* ===== Unlock engine: PDF (RC4 / AES-128 / AES-256) and Office (Standard / Agile) =====
+   Needs the password. It never guesses passwords. */
+const UL = (() => {
+  const subtle = globalThis.crypto.subtle;
+  const cat = (...a) => { const n = a.reduce((s, x) => s + x.length, 0), o = new Uint8Array(n); let p = 0; for (const x of a){ o.set(x, p); p += x.length; } return o; };
+  const eq = (a, b, n) => { for (let i = 0; i < n; i++) if (a[i] !== b[i]) return false; return true; };
+  const le32 = n => new Uint8Array([n & 255, (n >>> 8) & 255, (n >>> 16) & 255, (n >>> 24) & 255]);
+  const utf8 = s => new TextEncoder().encode(s);
+  const PASSWORD = () => Object.assign(new Error('Wrong password'), {code: 'PASSWORD'});
+
+  /* --- MD5 (not in WebCrypto) --- */
+  function md5(bytes){
+    const K = new Int32Array(64), S = [7,12,17,22,5,9,14,20,4,11,16,23,6,10,15,21];
+    for (let i = 0; i < 64; i++) K[i] = Math.floor(Math.abs(Math.sin(i + 1)) * 4294967296);
+    const len = bytes.length, nb = ((len + 8) >> 6) + 1, w = new Int32Array(nb * 16);
+    for (let i = 0; i < len; i++) w[i >> 2] |= bytes[i] << ((i % 4) * 8);
+    w[len >> 2] |= 0x80 << ((len % 4) * 8);
+    w[nb * 16 - 2] = len * 8; w[nb * 16 - 1] = Math.floor(len / 536870912);
+    let a0 = 0x67452301, b0 = 0xefcdab89 | 0, c0 = 0x98badcfe | 0, d0 = 0x10325476;
+    for (let j = 0; j < nb * 16; j += 16){
+      let a = a0, b = b0, c = c0, d = d0;
+      for (let i = 0; i < 64; i++){
+        let f, g;
+        if (i < 16){ f = (b & c) | (~b & d); g = i; }
+        else if (i < 32){ f = (d & b) | (~d & c); g = (5 * i + 1) % 16; }
+        else if (i < 48){ f = b ^ c ^ d; g = (3 * i + 5) % 16; }
+        else { f = c ^ (b | ~d); g = (7 * i) % 16; }
+        const t = d; d = c; c = b;
+        const x = (a + f + K[i] + w[j + g]) | 0, s = S[(i >> 4) * 4 + (i % 4)];
+        b = (b + ((x << s) | (x >>> (32 - s)))) | 0; a = t;
+      }
+      a0 = (a0 + a) | 0; b0 = (b0 + b) | 0; c0 = (c0 + c) | 0; d0 = (d0 + d) | 0;
+    }
+    const out = new Uint8Array(16);
+    [a0, b0, c0, d0].forEach((v, i) => { for (let k = 0; k < 4; k++) out[i * 4 + k] = (v >>> (k * 8)) & 255; });
+    return out;
+  }
+
+  function rc4(key, data){
+    const s = new Uint8Array(256); for (let i = 0; i < 256; i++) s[i] = i;
+    for (let i = 0, j = 0; i < 256; i++){ j = (j + s[i] + key[i % key.length]) & 255; [s[i], s[j]] = [s[j], s[i]]; }
+    const out = new Uint8Array(data.length);
+    for (let k = 0, i = 0, j = 0; k < data.length; k++){
+      i = (i + 1) & 255; j = (j + s[i]) & 255; [s[i], s[j]] = [s[j], s[i]];
+      out[k] = data[k] ^ s[(s[i] + s[j]) & 255];
+    }
+    return out;
+  }
+
+  const sha = async (alg, data) => new Uint8Array(await subtle.digest(alg, data));
+  const aesKey = (k, use) => subtle.importKey('raw', k, 'AES-CBC', false, [use]);
+  async function aesEncNoPad(key, iv, data){
+    const r = new Uint8Array(await subtle.encrypt({name: 'AES-CBC', iv}, await aesKey(key, 'encrypt'), data));
+    return r.subarray(0, data.length);
+  }
+  // CBC decrypt that also works when the data has no PKCS#7 padding
+  async function aesDec(key, iv, data, padded){
+    const k = await aesKey(key, 'decrypt');
+    if (padded){ try { return new Uint8Array(await subtle.decrypt({name: 'AES-CBC', iv}, k, data)); } catch (_){ /* fall through */ } }
+    if (!data.length) return data;
+    const n = data.length - (data.length % 16), body = data.subarray(0, n);
+    const last = n >= 16 ? body.subarray(n - 16) : iv;
+    const extra = (await aesEncNoPad(key, last, new Uint8Array(16).fill(16)));
+    const out = new Uint8Array(await subtle.decrypt({name: 'AES-CBC', iv}, k, cat(body, extra)));
+    if (!padded) return out;
+    const p = out[out.length - 1];
+    return p >= 1 && p <= 16 ? out.subarray(0, out.length - p) : out;
+  }
+  // ECB decrypt via one CBC pass: D(Ci) = P'i xor C(i-1)
+  async function aesEcbDec(key, data){
+    const out = await aesDec(key, new Uint8Array(16), data, false);
+    for (let i = 16; i < out.length; i++) out[i] ^= data[i - 16];
+    return out;
+  }
+
+  /* ===================== PDF ===================== */
+  const PAD = new Uint8Array([0x28,0xBF,0x4E,0x5E,0x4E,0x75,0x8A,0x41,0x64,0x00,0x4E,0x56,0xFF,0xFA,0x01,0x08,0x2E,0x2E,0x00,0xB6,0xD0,0x68,0x3E,0x80,0x2F,0x0C,0xA9,0xFE,0x64,0x53,0x69,0x7A]);
+  function pad32(pw){
+    const b = [...pw].map(c => c.charCodeAt(0)).every(c => c < 256) ? new Uint8Array([...pw].map(c => c.charCodeAt(0))) : utf8(pw);
+    return cat(b.subarray(0, 32), PAD.subarray(0, Math.max(0, 32 - b.length)));
+  }
+  function keyR4(pw32, E){
+    let h = md5(cat(pw32, E.O.subarray(0, 32), le32(E.P), E.id0, E.R >= 4 && !E.encMeta ? new Uint8Array([255,255,255,255]) : new Uint8Array(0)));
+    if (E.R >= 3) for (let i = 0; i < 50; i++) h = md5(h.subarray(0, E.n));
+    return h.subarray(0, E.n);
+  }
+  function userOkR4(key, E){
+    if (E.R === 2) return eq(rc4(key, PAD), E.U, 32);
+    let x = rc4(key, md5(cat(PAD, E.id0)));
+    for (let i = 1; i <= 19; i++) x = rc4(key.map(b => b ^ i), x);
+    return eq(x, E.U, 16);
+  }
+  function keyFromOwnerR4(pw, E){
+    let h = md5(pad32(pw));
+    if (E.R >= 3) for (let i = 0; i < 50; i++) h = md5(h);
+    const ok = h.subarray(0, E.n);
+    let x = E.O.subarray(0, 32);
+    if (E.R === 2) x = rc4(ok, x);
+    else for (let i = 19; i >= 0; i--) x = rc4(ok.map(b => b ^ i), x);
+    return keyR4(x, E);
+  }
+  // ISO 32000-2 algorithm 2.B (R6); R5 is a single SHA-256
+  async function hashR6(pw, salt, udata, R){
+    let K = await sha('SHA-256', cat(pw, salt, udata));
+    if (R === 5) return K;
+    for (let round = 0; ; round++){
+      const one = cat(pw, K, udata), K1 = new Uint8Array(one.length * 64);
+      for (let i = 0; i < 64; i++) K1.set(one, i * one.length);
+      const E = await aesEncNoPad(K.subarray(0, 16), K.subarray(16, 32), K1);
+      let m = 0; for (let i = 0; i < 16; i++) m += E[i];
+      K = await sha(['SHA-256', 'SHA-384', 'SHA-512'][m % 3], E);
+      if (round >= 63 && E[E.length - 1] <= round - 31) break;
+    }
+    return K.subarray(0, 32);
+  }
+  async function keyR6(password, E){
+    const pw = utf8(password.normalize('NFKC')).subarray(0, 127), U = E.U, O = E.O, U48 = U.subarray(0, 48);
+    if (eq(await hashR6(pw, U.subarray(32, 40), new Uint8Array(0), E.R), U, 32))
+      return aesDec(await hashR6(pw, U.subarray(40, 48), new Uint8Array(0), E.R), new Uint8Array(16), E.UE, false);
+    if (eq(await hashR6(pw, O.subarray(32, 40), U48, E.R), O, 32))
+      return aesDec(await hashR6(pw, O.subarray(40, 48), U48, E.R), new Uint8Array(16), E.OE, false);
+    return null;
+  }
+
+  // Unlock a PDF. Returns {bytes, openPassword:boolean}. Throws code PASSWORD / NOT_ENCRYPTED / UNSUPPORTED.
+  async function unlockPdf(bytes, password, PDFLib){
+    const { PDFDocument, PDFName, PDFDict, PDFArray, PDFRawStream, PDFString, PDFHexString, PDFRef, PDFObjectStreamParser, PDFParser } = PDFLib;
+    // read the file without unpacking compressed object groups yet (they are still encrypted)
+    const held = []; let lastRef = null;
+    const origFor = PDFObjectStreamParser.forStream, origHdr = PDFParser.prototype.parseIndirectObjectHeader;
+    PDFParser.prototype.parseIndirectObjectHeader = function(){ return (lastRef = origHdr.call(this)); };
+    PDFObjectStreamParser.forStream = (raw, tick) => { held.push({raw, ref: lastRef, tick}); return {parseIntoContext: async () => {}}; };
+    let doc;
+    try { doc = await PDFDocument.load(bytes, {ignoreEncryption: true, updateMetadata: false, throwOnInvalidObject: false}); }
+    finally { PDFObjectStreamParser.forStream = origFor; PDFParser.prototype.parseIndirectObjectHeader = origHdr; }
+
+    const ctx = doc.context, tr = ctx.trailerInfo;
+    if (!tr.Encrypt){
+      for (const h of held) await origFor(h.raw, h.tick).parseIntoContext();
+      throw Object.assign(new Error('Not encrypted'), {code: 'NOT_ENCRYPTED'});
+    }
+    const encRef = tr.Encrypt instanceof PDFRef ? tr.Encrypt : null;
+    const enc = ctx.lookup(tr.Encrypt, PDFDict);
+    const get = k => enc.get(PDFName.of(k));
+    const num = k => { const v = get(k); return v ? v.asNumber() : undefined; };
+    const bin = v => v ? v.asBytes() : new Uint8Array(0);
+    const filter = get('Filter');
+    if (filter && filter.asString() !== '/Standard') throw Object.assign(new Error('Certificate security'), {code: 'UNSUPPORTED'});
+    const ids = tr.ID ? ctx.lookup(tr.ID, PDFArray) : null;
+    const V = num('V') || 0, R = num('R');
+    const em = get('EncryptMetadata');
+    const E = {V, R, O: bin(get('O')), U: bin(get('U')), OE: bin(get('OE')), UE: bin(get('UE')), P: num('P') | 0,
+               id0: ids && ids.size() ? ids.get(0).asBytes() : new Uint8Array(0), encMeta: !(em && em.toString() === 'false')};
+
+    // which cipher is used for strings and streams
+    let stm = V >= 4 ? 'StdCF' : 'RC4', str = stm, cfm = {};
+    if (V >= 4){
+      const cf = get('CF') ? ctx.lookup(get('CF'), PDFDict) : null;
+      const nm = k => { const v = get(k); return v ? v.asString().slice(1) : 'Identity'; };
+      stm = nm('StmF'); str = nm('StrF');
+      if (cf) for (const [k, v] of cf.entries()){
+        const d = ctx.lookup(v, PDFDict), m = d.get(PDFName.of('CFM'));
+        const l = d.get(PDFName.of('Length'));
+        cfm[k.asString().slice(1)] = {m: m ? m.asString().slice(1) : 'None', len: l ? l.asNumber() : 0};
+      }
+    }
+    const method = name => name === 'Identity' ? 'None' : V >= 4 ? (cfm[name] || {m: 'None'}).m : 'V2';
+    E.n = R >= 5 ? 32 : V === 1 ? 5 : V >= 4 ? 16 : Math.max(5, Math.min(16, (num('Length') || 40) / 8));
+    if (V >= 4 && cfm[stm] && cfm[stm].len) E.n = cfm[stm].len > 32 ? cfm[stm].len / 8 : cfm[stm].len;
+    if (R >= 5) E.n = 32;
+
+    // check the password and get the file key
+    let key = null, openPassword = true;
+    if (R >= 5){
+      key = await keyR6('', E);
+      if (key) openPassword = false; else key = await keyR6(password, E);
+    } else if (R >= 2 && R <= 4){
+      const k0 = keyR4(pad32(''), E);
+      if (userOkR4(k0, E)){ key = k0; openPassword = false; }
+      else {
+        const k1 = keyR4(pad32(password), E);
+        if (userOkR4(k1, E)) key = k1;
+        else { const k2 = keyFromOwnerR4(password, E); if (userOkR4(k2, E)) key = k2; }
+      }
+    } else throw Object.assign(new Error('Unknown security'), {code: 'UNSUPPORTED'});
+    if (!key) throw PASSWORD();
+
+    const objKey = (ref, aes) => R >= 5 ? key : md5(cat(key, new Uint8Array([ref.objectNumber & 255, (ref.objectNumber >> 8) & 255, (ref.objectNumber >> 16) & 255, ref.generationNumber & 255, (ref.generationNumber >> 8) & 255]), aes ? utf8('sAlT') : new Uint8Array(0))).subarray(0, Math.min(E.n + 5, 16));
+    async function dec(data, ref, m){
+      if (m === 'None' || !data.length) return data;
+      if (m === 'V2') return rc4(objKey(ref, false), data);
+      if (data.length < 16) return new Uint8Array(0);
+      return aesDec(objKey(ref, true), data.subarray(0, 16), data.subarray(16), true);
+    }
+    const sm = method(stm), stM = method(str);
+    async function walk(obj, ref){
+      if (obj instanceof PDFString || obj instanceof PDFHexString){
+        const b = await dec(obj.asBytes(), ref, stM);
+        return PDFHexString.of([...b].map(x => x.toString(16).padStart(2, '0')).join(''));
+      }
+      if (obj instanceof PDFArray){ for (let i = 0; i < obj.size(); i++) obj.set(i, await walk(obj.get(i), ref)); return obj; }
+      if (obj instanceof PDFDict){
+        if (obj.get(PDFName.of('Type')) === PDFName.of('Sig')) return obj;   // signatures stay as they are
+        for (const [k, v] of obj.entries()) obj.set(k, await walk(v, ref));
+        return obj;
+      }
+      return obj;
+    }
+    async function decStream(s, ref){
+      await walk(s.dict, ref);
+      const t = s.dict.get(PDFName.of('Type'));
+      if (t === PDFName.of('XRef')) return s.contents;
+      if (t === PDFName.of('Metadata') && !E.encMeta) return s.contents;
+      const f = s.dict.get(PDFName.of('Filter'));
+      if (f === PDFName.of('Crypt') || (f instanceof PDFArray && f.size() && f.get(0) === PDFName.of('Crypt'))) return s.contents;
+      return dec(s.contents, ref, sm);
+    }
+
+    for (const [ref, obj] of ctx.enumerateIndirectObjects()){
+      if (encRef && ref === encRef) continue;
+      if (obj instanceof PDFRawStream){
+        const c = await decStream(obj, ref);
+        ctx.assign(ref, PDFRawStream.of(obj.dict, c));
+      } else await walk(obj, ref);
+    }
+    // now unpack the object groups that were held back
+    for (const h of held){
+      const c = await dec(h.raw.contents, h.ref, sm);
+      await origFor(PDFRawStream.of(h.raw.dict, c), h.tick).parseIntoContext();
+    }
+    if (encRef) ctx.delete(encRef);
+    delete tr.Encrypt;
+    const out = await doc.save({useObjectStreams: false, addDefaultPage: false, updateFieldAppearances: false});
+    return {bytes: out, openPassword};
+  }
+
+  /* ===================== Office (xlsx / docx) ===================== */
+  // minimal Compound File reader: returns {name: bytes} for top-level streams
+  function cfb(bytes){
+    const dv = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+    const u32 = o => dv.getUint32(o, true), u16 = o => dv.getUint16(o, true);
+    const ss = 1 << u16(30), mss = 1 << u16(32), cutoff = u32(56);
+    const sec = id => (id + 1) * ss;
+    const difat = [];
+    for (let i = 0; i < 109; i++){ const v = u32(76 + i * 4); if (v < 0xFFFFFFFA) difat.push(v); }
+    for (let d = u32(68), n = u32(72); n-- > 0 && d < 0xFFFFFFFA; ){
+      const per = ss / 4 - 1;
+      for (let i = 0; i < per; i++){ const v = u32(sec(d) + i * 4); if (v < 0xFFFFFFFA) difat.push(v); }
+      d = u32(sec(d) + per * 4);
+    }
+    const fat = [];
+    for (const s of difat) for (let i = 0; i < ss / 4; i++) fat.push(u32(sec(s) + i * 4));
+    const chain = (start, table) => { const c = []; for (let s = start, g = 0; s < 0xFFFFFFFA && g < 1e7; s = table[s], g++) c.push(s); return c; };
+    const read = (start, size) => { const out = new Uint8Array(size); let p = 0; for (const s of chain(start, fat)){ if (p >= size) break; const n = Math.min(ss, size - p); out.set(bytes.subarray(sec(s), sec(s) + n), p); p += n; } return out; };
+    const dirSecs = chain(u32(48), fat), dir = [];
+    for (const s of dirSecs) for (let i = 0; i < ss / 128; i++){
+      const o = sec(s) + i * 128, nl = u16(o + 64);
+      let name = ''; for (let k = 0; k < Math.max(0, nl / 2 - 1); k++) name += String.fromCharCode(u16(o + k * 2));
+      dir.push({name, type: bytes[o + 66], start: u32(o + 116), size: u32(o + 120)});
+    }
+    const root = dir[0];
+    const miniFat = []; for (const s of chain(u32(60), fat)) for (let i = 0; i < ss / 4; i++) miniFat.push(u32(sec(s) + i * 4));
+    const miniStream = read(root.start, root.size);
+    const readMini = (start, size) => { const out = new Uint8Array(size); let p = 0; for (const s of chain(start, miniFat)){ if (p >= size) break; const n = Math.min(mss, size - p); out.set(miniStream.subarray(s * mss, s * mss + n), p); p += n; } return out; };
+    const res = {};
+    for (const e of dir) if (e.type === 2) res[e.name] = e.size < cutoff ? readMini(e.start, e.size) : read(e.start, e.size);
+    return res;
+  }
+  const isOle = b => b[0] === 0xD0 && b[1] === 0xCF && b[2] === 0x11 && b[3] === 0xE0;
+  const isZip = b => b[0] === 0x50 && b[1] === 0x4B;
+  const utf16 = s => { const o = new Uint8Array(s.length * 2); for (let i = 0; i < s.length; i++){ o[i * 2] = s.charCodeAt(i) & 255; o[i * 2 + 1] = s.charCodeAt(i) >> 8; } return o; };
+  const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+  const HASH = {'SHA1': 'SHA-1', 'SHA-1': 'SHA-1', 'SHA256': 'SHA-256', 'SHA-256': 'SHA-256', 'SHA384': 'SHA-384', 'SHA-384': 'SHA-384', 'SHA512': 'SHA-512', 'SHA-512': 'SHA-512'};
+  const fit = (b, n, fill) => { const o = new Uint8Array(n).fill(fill); o.set(b.subarray(0, n)); return o; };
+
+  async function spin(alg, salt, pw, count, onProgress){
+    let h = await sha(alg, cat(salt, utf16(pw)));
+    for (let i = 0; i < count; i++){
+      h = await sha(alg, cat(le32(i), h));
+      if (onProgress && i % 5000 === 0) onProgress(i / count);
+    }
+    return h;
+  }
+
+  // Decrypt a password-protected Office file. Returns the plain .xlsx/.docx bytes.
+  async function decryptOffice(bytes, password, onProgress){
+    const s = cfb(bytes), info = s['EncryptionInfo'], pkg = s['EncryptedPackage'];
+    if (!info || !pkg) throw Object.assign(new Error('Not an encrypted Office file'), {code: 'NOT_OFFICE'});
+    const vMaj = info[0] | (info[1] << 8), vMin = info[2] | (info[3] << 8);
+    const size = new DataView(pkg.buffer, pkg.byteOffset).getUint32(0, true);
+    const data = pkg.subarray(8);
+
+    if (vMaj === 4 && vMin === 4){   // Agile (Excel 2010 and later)
+      const xml = new TextDecoder().decode(info.subarray(8));
+      const doc = new DOMParser().parseFromString(xml, 'application/xml');
+      const kd = doc.getElementsByTagNameNS('*', 'keyData')[0];
+      const ek = doc.getElementsByTagNameNS('*', 'encryptedKey')[0];
+      const A = (el, a) => el.getAttribute(a);
+      const alg = HASH[A(ek, 'hashAlgorithm')], kb = +A(ek, 'keyBits') / 8, hs = +A(ek, 'hashSize');
+      const H = await spin(alg, b64(A(ek, 'saltValue')), password, +A(ek, 'spinCount'), onProgress);
+      const kfor = async blk => fit(await sha(alg, cat(H, blk)), kb, 0x36);
+      const iv0 = fit(b64(A(ek, 'saltValue')), +A(ek, 'blockSize'), 0x36);
+      const B = h => new Uint8Array(h.match(/../g).map(x => parseInt(x, 16)));
+      const vi = await aesDec(await kfor(B('fea7d2763b4b9e79')), iv0, b64(A(ek, 'encryptedVerifierHashInput')), false);
+      const vh = await aesDec(await kfor(B('d7aa0f6d3061344e')), iv0, b64(A(ek, 'encryptedVerifierHashValue')), false);
+      const calc = await sha(alg, vi.subarray(0, +A(ek, 'saltSize')));
+      if (!eq(calc, vh, hs)) throw PASSWORD();
+      const secret = (await aesDec(await kfor(B('146e0be7abacd0d6')), iv0, b64(A(ek, 'encryptedKeyValue')), false)).subarray(0, +A(kd, 'keyBits') / 8);
+      const kSalt = b64(A(kd, 'saltValue')), kAlg = HASH[A(kd, 'hashAlgorithm')], bs = +A(kd, 'blockSize');
+      const out = new Uint8Array(data.length);
+      for (let off = 0, i = 0; off < data.length; off += 4096, i++){
+        const seg = data.subarray(off, Math.min(off + 4096, data.length));
+        const iv = fit(await sha(kAlg, cat(kSalt, le32(i))), bs, 0x36);
+        out.set(await aesDec(secret, iv, seg.subarray(0, seg.length - seg.length % 16), false), off);
+      }
+      return out.subarray(0, size);
+    }
+
+    if ((vMaj === 3 || vMaj === 4) && vMin === 2){   // Standard (Excel 2007, LibreOffice)
+      const dv = new DataView(info.buffer, info.byteOffset, info.byteLength);
+      const hSize = dv.getUint32(8, true), h = 12;
+      const algId = dv.getUint32(h + 8, true), keyBits = dv.getUint32(h + 16, true) || 128;
+      if (algId === 0x6801) throw Object.assign(new Error('RC4 Office encryption'), {code: 'UNSUPPORTED'});
+      const v = 12 + hSize, saltSize = dv.getUint32(v, true);
+      const salt = info.subarray(v + 4, v + 4 + saltSize);
+      const encVer = info.subarray(v + 20, v + 36), encHash = info.subarray(v + 40, v + 72);
+      const Hn = await spin('SHA-1', salt, password, 50000, onProgress);
+      const Hf = await sha('SHA-1', cat(Hn, le32(0)));
+      const x = c => { const b = new Uint8Array(64).fill(c); for (let i = 0; i < 20; i++) b[i] ^= Hf[i]; return b; };
+      const key = cat(await sha('SHA-1', x(0x36)), await sha('SHA-1', x(0x5c))).subarray(0, keyBits / 8);
+      const ver = await aesEcbDec(key, encVer), vh = await aesEcbDec(key, encHash);
+      if (!eq(await sha('SHA-1', ver), vh, 20)) throw PASSWORD();
+      return (await aesEcbDec(key, data.subarray(0, data.length - data.length % 16))).subarray(0, size);
+    }
+    throw Object.assign(new Error('Unknown Office encryption ' + vMaj + '.' + vMin), {code: 'UNSUPPORTED'});
+  }
+
+  // Remove "Protect Sheet" and "Protect Workbook" locks from an .xlsx
+  async function removeProtection(xlsx, JSZip){
+    const zip = await JSZip.loadAsync(xlsx);
+    let removed = 0;
+    for (const name of Object.keys(zip.files)){
+      if (!/^xl\/(workbook\.xml|worksheets\/sheet\d*\.xml|chartsheets\/sheet\d*\.xml)$/.test(name)) continue;
+      const xml = await zip.file(name).async('string');
+      const out = xml.replace(/<(sheetProtection|workbookProtection|fileSharing)\b[^>]*?(\/>|>[\s\S]*?<\/\1>)/g, () => { removed++; return ''; });
+      if (out !== xml) zip.file(name, out);
+    }
+    const bytes = await zip.generateAsync({type: 'uint8array', compression: 'DEFLATE'});
+    return {bytes, removed};
+  }
+
+  return {unlockPdf, decryptOffice, removeProtection, isOle, isZip, cfb, md5};
+})();
+
+function itemsToRows(items){
+  items = items.filter(it => it.str && it.str.trim() !== '');
+  if (!items.length) return [];
+  // 1) group into lines by y
+  items.sort((a, b) => b.y - a.y || a.x - b.x);
+  const lines = [];
+  for (const it of items){
+    const tol = Math.max(2, it.h * 0.45);
+    const line = lines.find(l => Math.abs(l.y - it.y) <= tol);
+    if (line) line.items.push(it); else lines.push({y: it.y, items: [it]});
+  }
+  lines.sort((a, b) => b.y - a.y);
+
+  // 2) inside each line, join close items into cells
+  const rows = lines.map(l => {
+    const its = l.items.sort((a, b) => a.x - b.x);
+    const cells = [];
+    for (const it of its){
+      const last = cells[cells.length - 1];
+      const gap = last ? it.x - last.right : Infinity;
+      if (last && gap < Math.max(3, it.h * 0.9)){
+        last.text += (gap > it.h * 0.12 ? ' ' : '') + it.str;
+        last.right = Math.max(last.right, it.x + it.w);
+      } else {
+        cells.push({text: it.str, left: it.x, right: it.x + it.w});
+      }
+    }
+    cells.forEach(c => c.text = c.text.replace(/\s+/g, ' ').trim());
+    return cells;
+  });
+
+  // 3) find columns from rows that have 2+ cells
+  const spans = [];
+  rows.forEach(r => { if (r.length > 1) r.forEach(c => spans.push([c.left, c.right])); });
+  if (!spans.length) return rows.map(r => r.map(c => c.text));
+  spans.sort((a, b) => a[0] - b[0]);
+  const cols = [];
+  for (const [l, r] of spans){
+    const last = cols[cols.length - 1];
+    if (last && l <= last[1] + 1) last[1] = Math.max(last[1], r);
+    else cols.push([l, r]);
+  }
+
+  // 4) place each cell in its column
+  return rows.map(r => {
+    const out = new Array(cols.length).fill('');
+    r.forEach(c => {
+      if (r.length === 1){ // titles and notes go where they start
+        let i = cols.findIndex(([l, rr]) => c.left >= l - 2 && c.left <= rr);
+        if (i < 0) i = Math.max(0, cols.filter(([l]) => l <= c.left).length - 1);
+        out[i] = out[i] ? out[i] + ' ' + c.text : c.text; return;
+      }
+      let best = -1, bestOv = 0;
+      cols.forEach(([l, rr], i) => {
+        const ov = Math.min(rr, c.right) - Math.max(l, c.left);
+        if (ov > bestOv){ bestOv = ov; best = i; }
+      });
+      if (best < 0){ // no overlap: nearest column by left edge
+        let d = Infinity;
+        cols.forEach(([l], i) => { const dd = Math.abs(l - c.left); if (dd < d){ d = dd; best = i; } });
+      }
+      out[best] = out[best] ? out[best] + ' ' + c.text : c.text;
+    });
+    while (out.length && out[out.length - 1] === '') out.pop();
+    return out;
+  });
+}
+
+function toNumber(s){
+  const t = s.trim();
+  if (!/^\(?[-+]?[$€£৳₹]?\s?\d{1,3}(,\d{3})*(\.\d+)?\)?%?$|^\(?[-+]?[$€£৳₹]?\s?\d+(\.\d+)?\)?%?$/.test(t)) return null;
+  const neg = /^\(.*\)$/.test(t) || t.startsWith('-');
+  const pct = t.endsWith('%');
+  let n = parseFloat(t.replace(/[^\d.]/g, ''));
+  if (isNaN(n)) return null;
+  if (neg) n = -n;
+  if (pct) n = n / 100;
+  return n;
+}
+function pageToLines(items){
+  items = items.filter(it => it.str && it.str.trim() !== '');
+  items.sort((a, b) => b.y - a.y || a.x - b.x);
+  const lines = [];
+  for (const it of items){
+    const line = lines.find(l => Math.abs(l.y - it.y) <= Math.max(2, it.h * 0.45));
+    if (line) line.items.push(it); else lines.push({y: it.y, items: [it]});
+  }
+  lines.sort((a, b) => b.y - a.y);
+  return lines.map(l => {
+    const its = l.items.sort((a, b) => a.x - b.x);
+    let text = '', right = -Infinity;
+    for (const it of its){
+      const gap = it.x - right;
+      if (text){
+        if (gap > it.h * 2.5) text += '\t';
+        else if (gap > it.h * 0.12 && !/\s$/.test(text) && !/^\s/.test(it.str)) text += ' ';
+      }
+      text += it.str;
+      right = Math.max(right, it.x + it.w);
+    }
+    const size = Math.round(Math.max(...its.map(i => i.h)) * 2) / 2;
+    return {y: l.y, left: its[0].x, right, size, text: text.replace(/ {2,}/g, ' ').trim()};
+  });
+}
+
+function buildParagraphs(pages){
+  // the most common text size is the body size
+  const count = {};
+  pages.forEach(p => p.lines.forEach(l => count[l.size] = (count[l.size] || 0) + l.text.length));
+  const body = +Object.keys(count).sort((a, b) => count[b] - count[a])[0] || 11;
+
+  return pages.map(p => {
+    const paras = [];
+    const maxRight = Math.max(...p.lines.map(l => l.right), 0);
+    let cur = null, prev = null;
+    for (const l of p.lines){
+      const heading = l.size >= body * 1.2;
+      const gap = prev ? prev.y - l.y : 0;
+      const sameStyle = cur && cur.heading === heading && Math.abs(cur.size - l.size) < 1;
+      const shortPrev = prev && prev.right < maxRight - Math.max(40, l.size * 4) && /[.:!?।]$/.test(prev.text);
+      const join = cur && sameStyle && gap <= l.size * 1.75 && !shortPrev && !l.text.includes('\t') && !prev.text.includes('\t')
+                   && !/^([•\-–▪◦●]|\d+[.)])\s/.test(l.text);
+      if (join){
+        cur.text = /[A-Za-z]-$/.test(cur.text) ? cur.text.slice(0, -1) + l.text : cur.text + ' ' + l.text;
+      } else {
+        cur = {text: l.text, size: l.size, heading};
+        paras.push(cur);
+      }
+      prev = l;
+    }
+    return paras;
+  });
+}
+
+const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+                 .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F￾￿]/g, '');
+
+function docxXml(paraPages, pageW, pageH){
+  const font = '<w:rFonts w:ascii="Calibri" w:hAnsi="Calibri" w:cs="Nirmala UI" w:eastAsia="Calibri"/>';
+  const run = (text, sz, bold) => text.split('\t').map((part, i) =>
+    (i ? '<w:r><w:tab/></w:r>' : '') +
+    `<w:r><w:rPr>${font}${bold ? '<w:b/>' : ''}<w:sz w:val="${sz}"/><w:szCs w:val="${sz}"/></w:rPr><w:t xml:space="preserve">${esc(part)}</w:t></w:r>`).join('');
+  let body = '';
+  paraPages.forEach((paras, pi) => {
+    paras.forEach((p, i) => {
+      const sz = Math.min(144, Math.max(12, Math.round(p.size * 2)));
+      const brk = pi > 0 && i === 0 ? '<w:pageBreakBefore/>' : '';
+      body += `<w:p><w:pPr>${brk}<w:spacing w:after="${p.heading ? 160 : 120}" w:line="276" w:lineRule="auto"/></w:pPr>${run(p.text, sz, p.heading)}</w:p>`;
+    });
+    if (!paras.length && pi > 0) body += '<w:p><w:pPr><w:pageBreakBefore/></w:pPr></w:p>';
+  });
+  const tw = n => Math.round(n * 20);
+  return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>' + body +
+    `<w:sectPr><w:pgSz w:w="${tw(pageW)}" w:h="${tw(pageH)}"${pageW > pageH ? ' w:orient="landscape"' : ''}/>` +
+    '<w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134" w:header="567" w:footer="567" w:gutter="0"/></w:sectPr>' +
+    '</w:body></w:document>';
+}
+
+const DOCX_PARTS = {
+  '[Content_Types].xml': '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>',
+  '_rels/.rels': '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>'
+};
+
+(function(){
+  const $ = id => document.getElementById(id);
+  $('yr').textContent = new Date().getFullYear();
+
+  const CDN = {
+    pdflib: 'https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js',
+    jszip:  'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js',
+    pdfjs:  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',
+    xlsx:   'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js'
+  };
+  const PDF_WORKER = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  const loaded = {};
+  const load = k => loaded[k] || (loaded[k] = new Promise((res, rej) => {
+    const s = document.createElement('script'); s.src = CDN[k]; s.onload = res;
+    s.onerror = () => { delete loaded[k]; rej(new Error('LOAD')); }; document.head.appendChild(s);
+  }));
+
+  const OUT = {
+    pdf:  [['pdf', 'Unlocked PDF'], ['excel', 'Excel (.xlsx) – best for statements'], ['word', 'Word (.docx)'], ['jpg', 'JPG images'], ['png', 'PNG images']],
+    xlsx: [['xlsx', 'Unlocked Excel (.xlsx)']],
+    docx: [['docx', 'Unlocked Word (.docx)']]
+  };
+  const LIBS = {pdf: ['pdflib'], excel: ['pdflib', 'pdfjs', 'xlsx'], word: ['pdflib', 'pdfjs', 'jszip'], jpg: ['pdflib', 'pdfjs', 'jszip'], png: ['pdflib', 'pdfjs', 'jszip'], xlsx: ['jszip'], docx: ['jszip']};
+
+  let file = null, bytes = null, kind = '', state = {}, outputs = [];
+  const input = $('file'), drop = $('drop');
+  drop.onclick = () => input.click();
+  drop.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); } };
+  $('change').onclick = () => input.click();
+  input.onchange = () => { pick(input.files[0]); input.value = ''; };
+  ['dragenter','dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave','drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('over'); }));
+  drop.addEventListener('drop', e => pick(e.dataTransfer.files[0]));
+  $('showPw').onclick = () => { const p = $('pw'); p.type = p.type === 'password' ? 'text' : 'password'; $('showPw').textContent = p.type === 'password' ? 'Show' : 'Hide'; };
+  $('pw').addEventListener('keydown', e => { if (e.key === 'Enter') $('go').click(); });
+  $('pw').addEventListener('input', () => $('pw').classList.remove('bad'));
+  $('out').onchange = () => LIBS[$('out').value].forEach(l => load(l).catch(() => {}));
+
+  const size = n => n < 1048576 ? (n/1024).toFixed(0) + ' KB' : (n/1048576).toFixed(2) + ' MB';
+  const base = () => file.name.replace(/\.[^.]+$/, '');
+  function showErr(m){ $('err').textContent = m || ''; $('err').classList.toggle('hidden', !m); }
+  function setStatus(type, title, text){
+    $('status').className = 'status ' + type;
+    $('status').innerHTML = `<span>${type === 'lock' ? '🔒' : '🔓'}</span><span><b></b><span></span></span>`;
+    $('status').querySelector('b').textContent = title;
+    $('status').querySelector('span span').textContent = text;
+  }
+
+  async function pick(f){
+    if (!f) return;
+    showErr('');
+    const ext = (f.name.split('.').pop() || '').toLowerCase();
+    kind = ext === 'pdf' ? 'pdf' : (ext === 'xlsx' || ext === 'xlsm') ? 'xlsx' : ext === 'docx' ? 'docx' : '';
+    if (ext === 'xls' || ext === 'doc'){ showErr('Old .xls and .doc files are not supported. Open the file, save it as .xlsx or .docx, then try again.'); return; }
+    if (!kind){ showErr('Please choose a PDF, Excel (.xlsx) or Word (.docx) file.'); return; }
+    file = f; bytes = new Uint8Array(await f.arrayBuffer()); state = {};
+    $('fname').textContent = f.name; $('fsize').textContent = size(f.size);
+    $('ftype').textContent = {pdf: 'PDF', xlsx: 'XLS', docx: 'DOC'}[kind];
+    $('out').innerHTML = ''; OUT[kind].forEach(([v, t]) => $('out').add(new Option(t, v)));
+    $('outBox').classList.toggle('hidden', OUT[kind].length < 2);
+    $('pw').value = ''; $('pw').classList.remove('bad');
+    drop.classList.add('hidden'); $('settings').classList.remove('hidden');
+    setStatus('open', 'Checking the file…', '');
+    $('pwBox').classList.add('hidden'); $('go').disabled = true;
+    try { await inspect(); } catch (e){ console.error(e); }
+    $('go').disabled = false;
+    LIBS[$('out').value].forEach(l => load(l).catch(() => {}));
+  }
+
+  // find out which locks the file has, before asking for anything
+  async function inspect(){
+    if (kind === 'pdf'){
+      try { await load('pdflib'); } catch (_){ state.needPw = true; setStatus('lock', 'Locked PDF', 'Type the password you use to open this file.'); $('pwBox').classList.remove('hidden'); return; }
+      try {
+        const r = await UL.unlockPdf(bytes, '', PDFLib);
+        state = {needPw: false, restricted: true, plain: r.bytes};
+        setStatus('open', 'No open password', 'This PDF opens without a password, but printing, copying or editing is blocked. These limits will be removed.');
+      } catch (e){
+        if (e.code === 'NOT_ENCRYPTED'){ state = {needPw: false, notLocked: true, plain: bytes}; setStatus('open', 'This PDF is not locked', 'You can still convert it below.'); }
+        else if (e.code === 'UNSUPPORTED'){ state = {unsupported: true}; setStatus('lock', 'This PDF uses certificate security', 'It can only be opened with a digital certificate, which this tool does not support.'); }
+        else { state = {needPw: true}; setStatus('lock', 'Locked PDF', 'Type the password you use to open this file.'); $('pwBox').classList.remove('hidden'); setTimeout(() => $('pw').focus(), 50); }
+      }
+      return;
+    }
+    if (UL.isOle(bytes)){
+      state = {needPw: true};
+      setStatus('lock', `Locked ${kind === 'xlsx' ? 'Excel' : 'Word'} file`, 'Type the password you use to open this file.');
+      $('pwHint').textContent = 'This is the password Excel or Word asks for when you open the file.';
+      $('pwBox').classList.remove('hidden'); setTimeout(() => $('pw').focus(), 50);
+    } else if (UL.isZip(bytes)){
+      state = {needPw: false};
+      setStatus('open', 'No open password', kind === 'xlsx' ? 'Any “Protect Sheet” or “Protect Workbook” locks will be removed so you can edit again.' : 'Any “Restrict Editing” lock will be removed so you can edit again.');
+    } else { state = {unsupported: true}; setStatus('lock', 'This file could not be read', 'It may be damaged, or it is not really a ' + kind.toUpperCase() + ' file.'); }
+  }
+
+  $('go').onclick = async () => {
+    if (!file || state.unsupported) return;
+    const pw = $('pw').value, out = $('out').value;
+    if (state.needPw && !pw){ $('pw').classList.add('bad'); $('pw').focus(); showErr('Please type the password.'); return; }
+    showErr(''); show('stepWork'); bar(0); status('Getting ready…');
+    try { await Promise.all(LIBS[out].map(load)); }
+    catch (_){ show('stepPick'); showErr('The tool could not load. Check your internet connection and try again.'); return; }
+    const removed = [];
+    try {
+      let plain;
+      if (kind === 'pdf'){
+        if (state.needPw){
+          status('Checking the password…');
+          try { plain = (await UL.unlockPdf(bytes, pw, PDFLib)).bytes; }
+          catch (e){
+            if (e.code === 'PASSWORD') throw e;
+            if (out === 'pdf') throw e;
+            plain = null;   // rebuild failed; conversions can still read it with the password
+          }
+          removed.push('Open password removed');
+        } else plain = state.plain;
+        if (state.restricted || state.needPw) removed.push('Print, copy and edit limits removed');
+        bar(.25);
+        outputs = out === 'pdf'
+          ? [{name: base() + '-unlocked.pdf', blob: new Blob([plain], {type: 'application/pdf'})}]
+          : await convertPdf(out, plain, pw);
+      } else {
+        let x = bytes;
+        if (state.needPw){
+          status('Checking the password…');
+          x = await UL.decryptOffice(bytes, pw, f => bar(f * .7));
+          removed.push('Open password removed');
+        }
+        status('Removing edit locks…');
+        const r = kind === 'xlsx' ? await UL.removeProtection(x, JSZip) : await removeWordProtection(x);
+        if (r.removed) removed.push(kind === 'xlsx' ? 'Sheet and workbook protection removed' : 'Editing restrictions removed');
+        const mime = kind === 'xlsx' ? 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' : 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+        outputs = [{name: base() + '-unlocked.' + (file.name.split('.').pop().toLowerCase()), blob: new Blob([r.bytes], {type: mime})}];
+      }
+      if (!removed.length) removed.push('No locks were found, the file is ready to use');
+      bar(1);
+      $('doneTitle').textContent = state.notLocked ? 'Done!' : 'Unlocked!';
+      $('doneInfo').textContent = outputs.length > 1 ? `${outputs.length} images · ${size(outputs.reduce((s, o) => s + o.blob.size, 0))}` : `${outputs[0].name} · ${size(outputs[0].blob.size)}`;
+      $('removed').innerHTML = ''; removed.forEach(t => { const li = document.createElement('li'); li.textContent = t; $('removed').appendChild(li); });
+      $('dl').textContent = outputs.length > 1 ? 'Download all (ZIP)' : 'Download ' + outputs[0].name.split('.').pop().toUpperCase();
+      renderResults();
+      show('stepDone');
+    } catch (e){
+      console.error(e); show('stepPick');
+      if (e && e.code === 'PASSWORD'){
+        $('pw').classList.add('bad'); $('pw').select();
+        showErr('That password is not correct. Check capital letters and spaces, and the format the bank asked for.');
+      } else if (e && e.code === 'UNSUPPORTED') showErr('This file uses a kind of protection this tool does not support yet.');
+      else showErr(e && e.message && e.message.length > 25 ? e.message : 'This file could not be unlocked. It may be damaged. Please try another file.');
+    }
+  };
+
+  async function removeWordProtection(docx){
+    const zip = await JSZip.loadAsync(docx), f = zip.file('word/settings.xml');
+    let removed = 0;
+    if (f){
+      const xml = await f.async('string');
+      const out = xml.replace(/<w:(documentProtection|writeProtection)\b[^>]*?(\/>|>[\s\S]*?<\/w:\1>)/g, () => { removed++; return ''; });
+      if (removed) zip.file('word/settings.xml', out);
+    }
+    return {bytes: await zip.generateAsync({type: 'uint8array', compression: 'DEFLATE'}), removed};
+  }
+
+  /* ----- PDF conversions after unlocking ----- */
+  const status = t => $('workText').textContent = t;
+  const bar = f => $('bar').style.width = Math.round(Math.min(1, f) * 100) + '%';
+  async function openPdf(plain, pw){
+    pdfjsLib.GlobalWorkerOptions.workerSrc = PDF_WORKER;
+    return pdfjsLib.getDocument(plain ? {data: plain.slice()} : {data: bytes.slice(), password: pw}).promise;
+  }
+  async function convertPdf(out, plain, pw){
+    const pdf = await openPdf(plain, pw);
+    if (out === 'jpg' || out === 'png'){
+      const type = 'image/' + (out === 'jpg' ? 'jpeg' : 'png'), res = [];
+      for (let p = 1; p <= pdf.numPages; p++){
+        status(`Converting page ${p} of ${pdf.numPages}…`);
+        const page = await pdf.getPage(p);
+        let vp = page.getViewport({scale: 2});
+        if (vp.width * vp.height > 16e6) vp = page.getViewport({scale: 2 * Math.sqrt(16e6 / (vp.width * vp.height))});
+        const c = document.createElement('canvas'); c.width = Math.floor(vp.width); c.height = Math.floor(vp.height);
+        const ctx = c.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height);
+        await page.render({canvasContext: ctx, viewport: vp}).promise;
+        const blob = await new Promise(r => c.toBlob(r, type, .92));
+        res.push({name: `${base()}-page-${p}.${out}`, blob, label: 'Page ' + p, url: URL.createObjectURL(blob)});
+        c.width = c.height = 0; bar(.25 + .75 * p / pdf.numPages);
+      }
+      return res;
+    }
+    const items = [];
+    for (let p = 1; p <= pdf.numPages; p++){
+      status(`Reading page ${p} of ${pdf.numPages}…`);
+      const tc = await (await pdf.getPage(p)).getTextContent();
+      items.push(tc.items.map(it => ({str: it.str, x: it.transform[4], y: it.transform[5], w: it.width, h: Math.abs(it.height || Math.hypot(it.transform[2], it.transform[3])) || 10})));
+      bar(.25 + .6 * p / pdf.numPages);
+    }
+    const noText = () => { throw new Error('The file is unlocked, but it has no readable text (it is a scanned image). Choose “Unlocked PDF” or “JPG images” instead.'); };
+    if (out === 'excel'){
+      const pages = items.map(itemsToRows), all = [];
+      pages.forEach((r, i) => { all.push(...r); if (i < pages.length - 1 && r.length) all.push([]); });
+      if (!all.length) noText();
+      status('Creating your Excel file…');
+      const cell = s => { const n = toNumber(s); return n === null ? s : n; };
+      const ws = XLSX.utils.aoa_to_sheet(all.map(r => r.map(cell)));
+      const w = []; all.forEach(r => r.forEach((v, i) => w[i] = Math.min(60, Math.max(w[i] || 8, String(v).length + 2))));
+      ws['!cols'] = w.map(x => ({wch: x}));
+      const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, 'Statement');
+      renderTable(all);
+      return [{name: base() + '.xlsx', blob: new Blob([XLSX.write(wb, {bookType: 'xlsx', type: 'array'})], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})}];
+    }
+    const pages = items.map(it => ({lines: pageToLines(it)}));
+    if (!pages.some(p => p.lines.length)) noText();
+    status('Creating your Word file…');
+    const vp = (await pdf.getPage(1)).getViewport({scale: 1});
+    const zip = new JSZip();
+    Object.entries(DOCX_PARTS).forEach(([n, x]) => zip.file(n, x));
+    zip.file('word/document.xml', docxXml(buildParagraphs(pages), vp.width, vp.height));
+    return [{name: base() + '.docx', blob: await zip.generateAsync({type: 'blob', mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', compression: 'DEFLATE'})}];
+  }
+
+  function renderTable(rows){
+    const box = $('preview'); box.innerHTML = '';
+    const wrap = document.createElement('div'); wrap.className = 'tprev';
+    const t = document.createElement('table'); wrap.appendChild(t);
+    const r30 = rows.slice(0, 30), max = Math.max(1, ...r30.map(r => r.length));
+    r30.forEach(r => { const tr = t.insertRow(); for (let i = 0; i < max; i++){ const td = tr.insertCell(); td.textContent = r[i] || ''; if (toNumber(td.textContent) !== null) td.className = 'n'; } });
+    box.appendChild(wrap);
+  }
+  function renderResults(){
+    const box = $('results'); box.innerHTML = '';
+    if (outputs.length < 2) return;
+    outputs.forEach(o => {
+      const d = document.createElement('div'); d.className = 'res';
+      d.innerHTML = `<img alt=""><div class="info"><div></div><span></span></div><button class="btn btn-ghost">Download</button>`;
+      d.querySelector('img').src = o.url; d.querySelector('.info div').textContent = o.label;
+      d.querySelector('.info span').textContent = size(o.blob.size);
+      d.querySelector('button').onclick = () => save(o.blob, o.name);
+      box.appendChild(d);
+    });
+  }
+  function save(blob, name){
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  }
+  $('dl').onclick = async () => {
+    if (outputs.length === 1) return save(outputs[0].blob, outputs[0].name);
+    const zip = new JSZip(); outputs.forEach(o => zip.file(o.name, o.blob));
+    save(await zip.generateAsync({type: 'blob'}), base() + '-images.zip');
+  };
+  $('again').onclick = () => {
+    outputs.forEach(o => o.url && URL.revokeObjectURL(o.url)); outputs = [];
+    file = null; bytes = null; state = {}; $('preview').innerHTML = ''; $('results').innerHTML = '';
+    drop.classList.remove('hidden'); $('settings').classList.add('hidden'); showErr(''); show('stepPick');
+  };
+  function show(id){ ['stepPick','stepWork','stepDone'].forEach(s => $(s).classList.toggle('hidden', s !== id)); }
+})();
+</script>
+</body>
+</html>
