@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>File Converter – PDF, Word, Excel and Image Converter Online</title>
-<meta name="description" content="Free online file converter. Convert PDF to Word, Excel or JPG, and images to PDF, Word, JPG, PNG or WEBP. Pick the formats from the menu. Files never leave your device.">
+<title>File Converter – Convert PDF, Word, Excel, JPG, PNG, WEBP</title>
+<meta name="description" content="Free online file converter. Convert PDF to Word, Excel or JPG, Word and Excel to PDF, and images to PDF, Word, JPG, PNG or WEBP. Files never leave your device.">
 <link rel="canonical" href="https://YOUR-DOMAIN.com/converter.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -129,7 +129,7 @@ article p,article li{max-width:70ch}
 <!-- AdSense script goes here after approval -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
- {"@type":"Question","name":"Which conversions are supported?","acceptedAnswer":{"@type":"Answer","text":"PDF to Word, Excel, JPG and PNG. Images (JPG, PNG, WEBP) to PDF, Word, JPG, PNG and WEBP."}},
+ {"@type":"Question","name":"Which conversions are supported?","acceptedAnswer":{"@type":"Answer","text":"PDF to Word, Excel, JPG, PNG and WEBP. Word and Excel to PDF. Images (JPG, PNG, WEBP) to PDF, Word and each other."}},
  {"@type":"Question","name":"Are my files uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Every conversion runs inside your browser, so your files stay on your device."}},
  {"@type":"Question","name":"Can it read Bangla text from images?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose Image to Word and set the text language to Bangla or English + Bangla."}}
 ]}
@@ -235,10 +235,12 @@ article p,article li{max-width:70ch}
     <ul class="supported">
       <li><a href="#pdf-word">PDF → Word</a><br><span class="note">Editable .docx with paragraphs and headings</span></li>
       <li><a href="#pdf-excel">PDF → Excel</a><br><span class="note">Tables into rows and columns</span></li>
-      <li><a href="#pdf-jpg">PDF → JPG / PNG</a><br><span class="note">Every page as an image</span></li>
-      <li><a href="#image-pdf">Image → PDF</a><br><span class="note">Many photos into one PDF</span></li>
-      <li><a href="#image-word">Image → Word</a><br><span class="note">Reads English and Bangla text</span></li>
-      <li><a href="#image-webp">Image → JPG / PNG / WEBP</a><br><span class="note">Change format and size</span></li>
+      <li><a href="#pdf-jpg">PDF → JPG / PNG / WEBP</a><br><span class="note">Every page as an image</span></li>
+      <li><a href="#jpg-pdf">Image → PDF</a><br><span class="note">Many photos into one PDF</span></li>
+      <li><a href="#jpg-word">Image → Word</a><br><span class="note">Reads English and Bangla text</span></li>
+      <li><a href="#jpg-webp">JPG / PNG / WEBP → each other</a><br><span class="note">Change format and size</span></li>
+      <li><a href="#word-pdf">Word → PDF</a><br><span class="note">Text, tables and pictures kept</span></li>
+      <li><a href="#excel-pdf">Excel → PDF</a><br><span class="note">Every sheet, wide sheets in landscape</span></li>
     </ul>
     <h2>How to use the converter</h2>
     <ol>
@@ -248,7 +250,7 @@ article p,article li{max-width:70ch}
     </ol>
     <h2>Frequently asked questions</h2>
     <h3>Which conversions are supported?</h3>
-    <p>PDF to Word, Excel, JPG and PNG. Images (JPG, PNG, WEBP) to PDF, Word, JPG, PNG and WEBP.</p>
+    <p>PDF to Word, Excel, JPG, PNG and WEBP. Word and Excel to PDF. Images (JPG, PNG, WEBP) to PDF, Word and each other.</p>
     <h3>Are my files uploaded?</h3>
     <p>No. Every conversion runs inside your browser, so your files stay on your device.</p>
     <h3>Can it read Bangla text from images?</h3>
@@ -447,6 +449,8 @@ function ocrToLines(lines){
     pdfjs: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',
     jspdf: 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
     xlsx:  'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js',
+    h2c:   'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js',
+    mammoth: 'https://cdn.jsdelivr.net/npm/mammoth@1.6.0/mammoth.browser.min.js',
     jszip: 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js',
     tess:  'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js'
   };
@@ -462,25 +466,37 @@ function ocrToLines(lines){
     return loaded[key];
   }
 
+  // the same list is used for both menus
+  const FORMATS = {pdf: 'PDF', word: 'Word', excel: 'Excel', jpg: 'JPG', png: 'PNG', webp: 'WEBP'};
+  const isImg = f => /^image\/(jpeg|png|webp)$/.test(f.type) || /\.(jpe?g|png|webp)$/i.test(f.name);
+  const IMG = {accept: 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp', multiple: true, test: isImg, group: 'image', what: 'images', hint: 'JPG, PNG, WEBP'};
   const FROM = {
-    pdf:   {label: 'PDF', accept: 'application/pdf,.pdf', multiple: false, test: f => f.type === 'application/pdf' || /\.pdf$/i.test(f.name)},
-    image: {label: 'Image (JPG, PNG, WEBP)', accept: 'image/jpeg,image/png,image/webp', multiple: true, test: f => /^image\/(jpeg|png|webp)$/.test(f.type)}
+    pdf:   {accept: 'application/pdf,.pdf', multiple: false, test: f => f.type === 'application/pdf' || /\.pdf$/i.test(f.name), group: 'pdf', what: 'PDF file', hint: 'PDF'},
+    word:  {accept: '.docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document', multiple: false, test: f => /\.docx$/i.test(f.name), group: 'word', what: 'Word file', hint: '.docx'},
+    excel: {accept: '.xlsx,.xls,.csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/csv', multiple: false, test: f => /\.(xlsx|xls|csv)$/i.test(f.name), group: 'excel', what: 'Excel file', hint: '.xlsx, .xls, .csv'},
+    jpg: IMG, png: IMG, webp: IMG
   };
+  // what each group can become (anything missing shows as unavailable)
   const TO = {
     pdf: {
-      word:  {label: 'Word (.docx)',  libs: ['pdfjs','jszip'], note: 'Text, paragraphs and headings are kept. Images and designs are not copied. Scanned PDFs cannot be read.'},
-      excel: {label: 'Excel (.xlsx)', libs: ['pdfjs','xlsx'],  note: 'Best for bank statements, invoices and reports made by software.'},
-      jpg:   {label: 'JPG images',    libs: ['pdfjs','jszip'], note: 'Every page becomes one image.'},
-      png:   {label: 'PNG images',    libs: ['pdfjs','jszip'], note: 'Every page becomes one image. PNG is sharper for text but larger.'}
+      word:  {libs: ['pdfjs','jszip'], note: 'Text, paragraphs and headings are kept. Images and designs are not copied. Scanned PDFs cannot be read.'},
+      excel: {libs: ['pdfjs','xlsx'],  note: 'Best for bank statements, invoices and reports made by software.'},
+      jpg:   {libs: ['pdfjs','jszip'], note: 'Every page becomes one image.'},
+      png:   {libs: ['pdfjs','jszip'], note: 'Every page becomes one image. PNG is sharper for text but larger.'},
+      webp:  {libs: ['pdfjs','jszip'], note: 'Every page becomes one image. WEBP gives the smallest files.'}
     },
+    word:  { pdf: {libs: ['mammoth','h2c','jspdf'], note: 'Text, tables and pictures are kept. Fonts may look slightly different from Word.'} },
+    excel: { pdf: {libs: ['xlsx','h2c','jspdf'],    note: 'Every sheet is added to the PDF. Wide sheets are placed on landscape pages.'} },
     image: {
-      pdf:  {label: 'PDF',                      libs: ['jspdf'],         note: 'All images go into one PDF, in the order shown.'},
-      word: {label: 'Word (.docx, reads text)', libs: ['tess','jszip'],  note: 'Each image becomes one page. The first time downloads a language pack of a few MB.'},
-      jpg:  {label: 'JPG',  libs: ['jszip'], note: ''},
-      png:  {label: 'PNG',  libs: ['jszip'], note: ''},
-      webp: {label: 'WEBP', libs: ['jszip'], note: 'WEBP gives the smallest files and works on all modern browsers.'}
+      pdf:  {libs: ['jspdf'],        note: 'All images go into one PDF, in the order shown.'},
+      word: {libs: ['tess','jszip'], note: 'Reads the text in the image. Each image becomes one page. The first time downloads a language pack of a few MB.'},
+      jpg:  {libs: ['jszip'], note: ''},
+      png:  {libs: ['jszip'], note: ''},
+      webp: {libs: ['jszip'], note: 'WEBP gives the smallest files and works on all modern browsers.'}
     }
   };
+  const group = () => FROM[fromSel.value].group;
+  const canDo = (from, to) => from !== to && !!TO[FROM[from].group][to];
   const OPTS = {
     'pdf-excel':  `<div><label for="o_sheet">Sheets</label><select id="o_sheet"><option value="one">All pages in one sheet</option><option value="each">One sheet per page</option></select></div>`,
     'pdf-jpg':    `<div><label for="o_scale">Image quality</label><select id="o_scale"><option value="1.5">Normal</option><option value="2" selected>High</option><option value="3">Very high (printing)</option></select></div>`,
@@ -491,47 +507,61 @@ function ocrToLines(lines){
                    <div><label for="o_w">Max width</label><select id="o_w"><option value="0">Keep original size</option><option value="1920">1920 px</option><option value="1280">1280 px</option><option value="800">800 px</option></select></div>`,
     'image-png':  `<div><label for="o_w">Max width</label><select id="o_w"><option value="0">Keep original size</option><option value="1920">1920 px</option><option value="1280">1280 px</option><option value="800">800 px</option></select></div>`
   };
-  OPTS['pdf-png'] = OPTS['pdf-jpg'];
+  OPTS['pdf-png'] = OPTS['pdf-webp'] = OPTS['pdf-jpg'];
   OPTS['image-webp'] = OPTS['image-jpg'];
 
   const fromSel = $('from'), toSel = $('to'), input = $('file'), drop = $('drop');
   let files = [], outputs = [], plain = '';
 
-  Object.entries(FROM).forEach(([k, v]) => fromSel.add(new Option(v.label, k)));
-  function fillTo(keep){
-    toSel.innerHTML = '';
-    Object.entries(TO[fromSel.value]).forEach(([k, v]) => toSel.add(new Option(v.label, k)));
-    if (keep && TO[fromSel.value][keep]) toSel.value = keep;
+  Object.entries(FORMATS).forEach(([k, v]) => { fromSel.add(new Option(v, k)); toSel.add(new Option(v, k)); });
+  // keep the same list in "Convert to"; grey out what this file type cannot become
+  function refreshTo(prefer){
+    const from = fromSel.value;
+    [...toSel.options].forEach(o => {
+      const ok = canDo(from, o.value);
+      o.disabled = !ok;
+      o.textContent = FORMATS[o.value] + (o.value === from ? ' (same type)' : ok ? '' : ' (not available)');
+    });
+    for (const c of [prefer, toSel.value, ...Object.keys(FORMATS)]) if (c && canDo(from, c)){ toSel.value = c; break; }
   }
-  function key(){ return fromSel.value + '-' + toSel.value; }
+  const key = () => group() + '-' + toSel.value;
 
   function applyPair(){
-    const f = FROM[fromSel.value], t = TO[fromSel.value][toSel.value];
+    const f = FROM[fromSel.value], t = TO[f.group][toSel.value];
     input.accept = f.accept; input.multiple = f.multiple;
-    $('dropTitle').textContent = f.multiple ? 'Select images' : 'Select PDF file';
-    $('dropHint').textContent = f.multiple ? 'or drop them here (JPG, PNG, WEBP)' : 'or drop it here';
+    $('dropTitle').textContent = 'Select ' + f.what;
+    $('dropHint').textContent = `or drop ${f.multiple ? 'them' : 'it'} here (${f.hint})`;
     $('opts').innerHTML = OPTS[key()] || '';
     $('opts').classList.toggle('hidden', !OPTS[key()]);
     $('note').textContent = t.note; $('note').classList.toggle('hidden', !t.note);
-    $('convert').textContent = 'Convert to ' + t.label.replace(/ \(.*\)/, '').replace(' images', '');
+    $('convert').textContent = 'Convert to ' + FORMATS[toSel.value];
     $('addMore').classList.toggle('hidden', !f.multiple);
     const q = $('o_q'); if (q) q.oninput = () => $('o_qv').textContent = q.value + '%';
     t.libs.forEach(l => load(l).catch(() => {}));   // start loading early
-    try { history.replaceState(null, '', '#' + key()); } catch (_){}
+    try { history.replaceState(null, '', '#' + fromSel.value + '-' + toSel.value); } catch (_){}
   }
-  fromSel.onchange = () => { clearFiles(); fillTo(toSel.value); applyPair(); };
+  fromSel.onchange = () => {
+    const prevGroup = files.length && files[0].group;
+    if (prevGroup !== group()) clearFiles();
+    refreshTo(); applyPair();
+  };
   toSel.onchange = applyPair;
 
-  // open with a preset like converter.html#pdf-word
-  const h = location.hash.slice(1).split('-');
-  if (FROM[h[0]]) fromSel.value = h[0];
-  fillTo(h[1]); applyPair();
+  // open with a preset like converter.html#pdf-word (old #image-x links still work)
+  function fromHash(){
+    let [a, b] = location.hash.slice(1).split('-');
+    if (a === 'image') a = 'jpg';
+    if (!FORMATS[a] || !canDo(a, b)) return false;
+    if (a === fromSel.value && b === toSel.value) return true;
+    if (FROM[a].group !== group()) clearFiles();
+    fromSel.value = a; refreshTo(b); applyPair();
+    return true;
+  }
+  if (!fromHash()){ fromSel.value = 'pdf'; refreshTo('word'); applyPair(); }
   window.addEventListener('hashchange', () => {
-    const p = location.hash.slice(1).split('-');
-    if (FROM[p[0]] && TO[p[0]][p[1]] && key() !== p.join('-')){
-      if (p[0] !== fromSel.value){ fromSel.value = p[0]; clearFiles(); }
-      fillTo(p[1]); applyPair(); window.scrollTo({top: 0, behavior: 'smooth'});
-    }
+    if (!fromHash()) return;
+    showErr(''); show('stepPick');   // files of the same type stay, so one file can be converted again
+    window.scrollTo({top: 0, behavior: 'smooth'});
   });
 
   /* files */
@@ -552,9 +582,10 @@ function ocrToLines(lines){
     for (const file of list){
       if (!f.test(file)){ bad++; continue; }
       if (!f.multiple) clearFiles();
-      files.push({file, url: f.multiple ? URL.createObjectURL(file) : null});
+      files.push({file, group: f.group, url: f.group === 'image' ? URL.createObjectURL(file) : null});
     }
-    showErr(bad ? (f.multiple ? 'Some files were skipped. Only JPG, PNG and WEBP images can be used here.' : 'Please choose a PDF file, or change “Convert from”.') : '');
+    showErr(bad ? (f.multiple ? 'Some files were skipped. Only JPG, PNG and WEBP images can be used here.'
+                             : `Please choose a ${f.what} (${f.hint}), or change “Convert from”.`) : '');
     render();
   }
   function clearFiles(){ files.forEach(x => x.url && URL.revokeObjectURL(x.url)); files = []; render(); }
@@ -564,7 +595,7 @@ function ocrToLines(lines){
       const d = document.createElement('div');
       d.className = 'item';
       d.innerHTML = (files.length > 1 ? `<span class="num">${i+1}</span>` : '') +
-        (it.url ? '<img alt="">' : '<div class="doc"><b>PDF</b><span></span></div>') +
+        (it.url ? '<img alt="">' : `<div class="doc"><b>${{pdf:'PDF', word:'DOC', excel:'XLS'}[it.group]}</b><span></span></div>`) +
         `<div class="meta"></div><div class="bar"><button title="Move left" data-a="l">◀</button><button title="Remove" data-a="x">✕</button><button title="Move right" data-a="r">▶</button></div>`;
       if (it.url) d.querySelector('img').src = it.url; else d.querySelector('.doc span').textContent = it.file.name;
       d.querySelector('.meta').textContent = size(it.file.size);
@@ -663,6 +694,37 @@ function ocrToLines(lines){
       return {outputs: out, info: `${out.length} images · ${size(out.reduce((s, o) => s + o.blob.size, 0))}`};
     },
     'pdf-png'(){ return RUN['pdf-jpg']('image/png', 'png'); },
+    'pdf-webp'(){ return RUN['pdf-jpg']('image/webp', 'webp'); },
+
+    async 'word-pdf'(){
+      const file = files[0].file;
+      status('Reading your Word file…');
+      const r = await mammoth.convertToHtml({arrayBuffer: await file.arrayBuffer()});
+      if (!r.value.replace(/<[^>]+>/g, '').trim() && !/<img/i.test(r.value)) throw new Error('This Word file looks empty, so there is nothing to convert.');
+      bar(.3);
+      const css = 'h1{font-size:24px}h2{font-size:20px}h3{font-size:17px}p{margin:0 0 10px}img{max-width:100%;height:auto}' +
+                  'table{border-collapse:collapse;margin:8px 0}td,th{border:1px solid #999;padding:4px 8px;vertical-align:top}';
+      const pdf = await htmlToPdf(`<style>${css}</style>${r.value}`, f => bar(.3 + f * .7));
+      return {outputs: [{name: baseName(file) + '.pdf', blob: pdf.blob}], info: `${pdf.pages} page${pdf.pages > 1 ? 's' : ''} · ${size(pdf.blob.size)}`};
+    },
+    async 'excel-pdf'(){
+      const file = files[0].file;
+      status('Reading your spreadsheet…');
+      const wb = XLSX.read(await file.arrayBuffer(), {type: 'array'});
+      const esc2 = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+      let html = '<style>h3{font-size:15px;margin:0 0 8px}table{border-collapse:collapse;font-size:12px;margin-bottom:24px}td{border:1px solid #999;padding:3px 6px;white-space:nowrap}</style>';
+      let sheets = 0;
+      wb.SheetNames.forEach(n => {
+        const ws = wb.Sheets[n];
+        if (!ws || !ws['!ref']) return;
+        sheets++;
+        html += (wb.SheetNames.length > 1 ? `<h3>${esc2(n)}</h3>` : '') + XLSX.utils.sheet_to_html(ws, {header: '', footer: ''});
+      });
+      if (!sheets) throw new Error('This spreadsheet looks empty, so there is nothing to convert.');
+      bar(.3);
+      const pdf = await htmlToPdf(html, f => bar(.3 + f * .7));
+      return {outputs: [{name: baseName(file) + '.pdf', blob: pdf.blob}], info: `${sheets} sheet${sheets > 1 ? 's' : ''} · ${pdf.pages} page${pdf.pages > 1 ? 's' : ''} · ${size(pdf.blob.size)}`};
+    },
 
     async 'image-pdf'(){
       const { jsPDF } = window.jspdf, SIZES = {a4: [595.28, 841.89], letter: [612, 792]};
@@ -721,6 +783,49 @@ function ocrToLines(lines){
     'image-webp'(){ return RUN['image-jpg']('image/webp', 'webp'); }
   };
 
+  // lay out HTML on an A4-wide sheet, take a picture of it, cut it into pages
+  async function htmlToPdf(html, onProgress){
+    status('Laying out the pages…');
+    const box = document.createElement('div');
+    box.style.cssText = 'position:absolute;left:-20000px;top:0;width:794px;padding:56px;box-sizing:border-box;background:#fff;color:#000;' +
+      'font:14px/1.5 Calibri,Arial,"Nirmala UI","Noto Sans Bengali",sans-serif';
+    box.innerHTML = html;
+    document.body.appendChild(box);
+    const imgs = [...box.querySelectorAll('img')];
+    await Promise.all(imgs.map(im => im.complete ? 0 : new Promise(r => { im.onload = im.onerror = r; })));
+    const width = Math.max(794, Math.ceil(box.scrollWidth));
+    box.style.width = width + 'px';
+    const scale = Math.min(2, 4000 / width);
+    let canvas;
+    try { canvas = await html2canvas(box, {scale, backgroundColor: '#ffffff', windowWidth: width, logging: false}); }
+    finally { box.remove(); }
+    onProgress(.5);
+
+    const landscape = width > 900;
+    const [pw, ph] = landscape ? [841.89, 595.28] : [595.28, 841.89];
+    const pxPerPt = canvas.width / pw, pageH = Math.floor(ph * pxPerPt);
+    const ctx = canvas.getContext('2d');
+    const blankRow = y => { const d = ctx.getImageData(0, y, canvas.width, 1).data; for (let i = 0; i < d.length; i += 16) if (d[i] < 245 || d[i+1] < 245 || d[i+2] < 245) return false; return true; };
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({unit: 'pt', format: [pw, ph], orientation: landscape ? 'l' : 'p', compress: true});
+    let y = 0, pages = 0;
+    while (y < canvas.height - 2){
+      let end = Math.min(y + pageH, canvas.height);
+      if (end < canvas.height){   // move the cut up to an empty line so text is not split
+        for (let t = end; t > end - pageH * .25; t--) if (blankRow(t)){ end = t; break; }
+      }
+      const slice = document.createElement('canvas');
+      slice.width = canvas.width; slice.height = end - y;
+      const sc = slice.getContext('2d'); sc.fillStyle = '#fff'; sc.fillRect(0, 0, slice.width, slice.height);
+      sc.drawImage(canvas, 0, y, canvas.width, end - y, 0, 0, canvas.width, end - y);
+      if (pages) doc.addPage([pw, ph], landscape ? 'l' : 'p');
+      doc.addImage(slice.toDataURL('image/jpeg', .9), 'JPEG', 0, 0, pw, (end - y) / pxPerPt, undefined, 'FAST');
+      pages++; y = end;
+      status(`Creating page ${pages}…`); onProgress(.5 + .5 * y / canvas.height); await tick();
+    }
+    return {blob: doc.output('blob'), pages};
+  }
+
   function drawImage(url, maxSide, type, q, widthOnly){
     return new Promise((res, rej) => {
       const im = new Image();
@@ -743,7 +848,7 @@ function ocrToLines(lines){
   /* ----- run ----- */
   $('convert').onclick = async () => {
     if (!files.length) return;
-    const k = key(), t = TO[fromSel.value][toSel.value];
+    const k = key(), t = TO[group()][toSel.value];
     showErr(''); show('stepWork'); bar(0); status('Getting ready…');
     outputs.forEach(o => o.url && URL.revokeObjectURL(o.url)); outputs = []; plain = '';
     try {
